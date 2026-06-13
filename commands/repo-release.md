@@ -65,8 +65,34 @@ Show the release URL when done.
 
 ---
 
+## Humaniser rules
+
+Release notes and tag messages must read as if a developer wrote them, not a language model. Apply these rules to all output:
+
+**Banned punctuation**
+- No em dashes (—). Use a comma, a full stop, or rewrite the sentence.
+- No mid-sentence colons as dramatic pauses — colons introduce lists, nothing else.
+
+**Banned words and phrases**
+- delve, leverage, utilise (use "use"), empower, facilitate, foster
+- robust, seamless, cutting-edge, game-changing, comprehensive
+- it's worth noting, it's important to note, please note that
+- in order to (use "to"), additionally / furthermore / moreover as openers
+- certainly, absolutely (as response openers)
+- any variation of "as an AI" — never reference being an agent or model
+
+**Style rules**
+- Short sentences. Split anything past ~20 words.
+- Active voice throughout.
+- No padding — release notes that say nothing useful are worse than no release notes.
+- Commit and tag messages: imperative mood, no trailing full stop. "Fix config path" not "Fixed the config path."
+- No trailing summary paragraph restating what the notes already said.
+
+---
+
 ## Ground rules
 
 - Confirm the version number and target commit with the user before tagging
 - Never push without the user seeing what will be tagged
-- Do not add Co-Authored-By trailers to any commits
+- Never tag or push unless the user explicitly says to proceed
+- Do not add Co-Authored-By trailers, AI attribution lines, or any agent signatures to commits or tag messages — keep authorship clean

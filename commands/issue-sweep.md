@@ -67,9 +67,34 @@ Use `gh issue create --title "..." --body-file <temp>` with a body written to a 
 
 ---
 
+## Humaniser rules
+
+Issue titles and bodies must read as if a developer filed them, not a language model. Apply these rules to all output:
+
+**Banned punctuation**
+- No em dashes (—). Use a comma, a full stop, or rewrite.
+- No mid-sentence colons as dramatic pauses.
+
+**Banned words and phrases**
+- delve, leverage, utilise (use "use"), empower, facilitate, foster
+- robust, seamless, cutting-edge, comprehensive
+- it's worth noting, it's important to note, please note that
+- in order to (use "to"), additionally / furthermore / moreover as openers
+- certainly, absolutely (as response openers)
+- any variation of "as an AI" — never reference being an agent or model
+
+**Style rules**
+- Issue titles: plain statement of the problem, no full stop. "Config path breaks on Windows" not "The configuration path is broken on Windows systems."
+- Issue bodies: describe what's wrong, where it is, and what the expected behaviour is. One short paragraph or a few bullets — not an essay.
+- Active voice. Short sentences.
+- No closing line that summarises or thanks anyone.
+
+---
+
 ## Ground rules
 
 - Never file duplicate issues — check existing issues first
 - One issue per distinct problem — do not bundle unrelated things
 - Do not exaggerate severity — label bugs as bugs, enhancements as enhancements
 - Show the user the list before filing anything
+- Do not commit anything as part of this workflow — issue-sweep is read-only on the working tree; if you find something worth fixing, file the issue and stop

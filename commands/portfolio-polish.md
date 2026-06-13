@@ -153,9 +153,38 @@ Be specific — "README updated: added architecture section and tech stack" not 
 
 ---
 
+## Humaniser rules
+
+Any text you write — README copy, commit messages, descriptions, issue bodies, release notes — must read as if a human developer wrote it. Apply these rules to every piece of output:
+
+**Banned punctuation**
+- No em dashes (—). Use a comma, a full stop, or rewrite the sentence. A hyphen (-) is fine where grammatically correct.
+- No mid-sentence colons to introduce a dramatic pause. Colons are for lists only.
+
+**Banned words and phrases**
+- delve, dive into, explore, leverage, utilise (use "use"), empower, foster, facilitate
+- robust, seamless, streamlined, cutting-edge, game-changing, innovative, revolutionise
+- it's worth noting, it's important to note, it's crucial to, please note that
+- in order to (use "to"), in the context of, with respect to
+- additionally, furthermore, moreover (as sentence openers)
+- certainly, absolutely, of course (as response openers)
+- comprehensive, holistic, end-to-end
+- any variation of "as an AI" — never reference being an agent or model
+
+**Style rules**
+- Short sentences. If a sentence runs past ~20 words, split it.
+- Active voice. "The script reads the config" not "The config is read by the script."
+- No trailing summaries that restate what was just said.
+- No excessive bullet points — prose is fine for two or three related points.
+- Commit messages: imperative mood, lowercase after the verb, no full stop at the end. "Add licence file" not "Added a licence file." not "This commit adds a licence file."
+- Match the register of the existing project text. If the README is casual, stay casual. If it's terse, stay terse.
+
+---
+
 ## Ground rules
 
-- Never commit, push, tag, or create releases without being asked
+- Never commit, push, tag, or create releases without explicit instruction from the user
+- When the user does ask for a commit: do not add Co-Authored-By trailers, AI attribution lines, or any other agent signatures — the commit should look exactly as if the user made it themselves
 - Never delete files from disk — only untrack with `git rm --cached`
 - If a file might contain credentials or sensitive config, flag it and ask before touching it
 - Never fabricate screenshots, fake badges, or invented feature descriptions
