@@ -19,10 +19,14 @@ Then detect which agents are present. Run these checks:
 - `.github/` exists → GitHub Copilot
 - `.windsurfrules` exists → Windsurf
 - `CLAUDE.md` or `.claude/` exists → Claude Code (project)
+- `AGENTS.md` exists → OpenCode or Codex (both read this file; write once, covers both)
+- `opencode.json` exists → OpenCode (project-level config)
 
 **Global signals:**
 - `~/.claude/` exists → Claude Code (global)
 - `~/.cursor/` exists → Cursor (global)
+- `~/.config/opencode/` exists → OpenCode (global)
+- `~/.codex/` exists → OpenAI Codex (global; instructions go in `~/.codex/instructions.md`)
 - Ask the user which agents to target if nothing is detectable
 
 If the user is running this inside an agent right now, that agent is always a target.
@@ -90,6 +94,9 @@ Write the content to each confirmed target file.
 - **.github/copilot-instructions.md** (Copilot): append under a `## Behaviour` heading if it exists; create it if not
 - **.windsurfrules** (Windsurf): same approach as .cursorrules
 - **.zed/settings.json** (Zed): add under `"assistant"` → `"default_profile"` → `"extra_instructions"` key; read the existing file first to avoid clobbering other settings
+- **AGENTS.md** (OpenCode / Codex): append under a `## Behaviour` heading if it exists; create it if not — both agents read this file so one entry covers both
+- **~/.codex/instructions.md** (Codex global): create the directory if missing, then write or append the tone rules
+- **~/.config/opencode/config.json** (OpenCode global): read the existing file first; add or update the `"instructions"` key with the tone rules — do not overwrite other keys
 
 If a file already has a tone/behaviour section from a previous run of this command, replace that section rather than appending a duplicate.
 
