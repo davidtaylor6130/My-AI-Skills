@@ -1,8 +1,8 @@
-# claude-commands
+# agent-commands
 
-A collection of custom slash commands for [Claude Code](https://claude.ai/code) — drop them into `~/.claude/commands/` and use them across any project.
+A collection of custom slash commands / prompt files for AI coding agents (Claude Code, Cursor, Copilot, Zed, etc.) — drop them into your agent's commands directory and use them across any project.
 
-These are prompt-driven commands that guide Claude through multi-step workflows: cleaning up repos, filing issues, cutting releases. Each one is a single `.md` file you own and can edit.
+These are prompt-driven commands that guide an AI agent through multi-step workflows: cleaning up repos, filing issues, cutting releases. Each one is a single `.md` file you own and can edit.
 
 ---
 
@@ -11,24 +11,28 @@ These are prompt-driven commands that guide Claude through multi-step workflows:
 **Global (available in every project):**
 ```bash
 # Clone the repo
-git clone https://github.com/davidtaylor6130/claude-commands.git
+git clone https://github.com/davidtaylor6130/agent-commands.git
 
-# Copy commands into your Claude user directory
-cp claude-commands/commands/*.md ~/.claude/commands/
+# Copy commands into your agent's commands directory
+# Claude Code: ~/.claude/commands/
+# Cursor: ~/.cursor/commands/
+# VS Code Copilot: ~/.vscode/copilot/commands/
+# Zed: ~/.config/zed/commands/
+cp agent-commands/commands/*.md <your-agent-commands-dir>/
 ```
 
 **Single command:**
 ```bash
-curl -o ~/.claude/commands/portfolio-polish.md \
-  https://raw.githubusercontent.com/davidtaylor6130/claude-commands/main/commands/portfolio-polish.md
+curl -o <your-agent-commands-dir>/portfolio-polish.md \
+  https://raw.githubusercontent.com/davidtaylor6130/agent-commands/main/commands/portfolio-polish.md
 ```
 
-**Windows:**
+**Windows (PowerShell):**
 ```powershell
-Copy-Item "claude-commands\commands\*.md" "$env:USERPROFILE\.claude\commands\"
+Copy-Item "agent-commands\commands\*.md" "<your-agent-commands-dir>\"
 ```
 
-> `~/.claude/commands/` is created automatically by Claude Code. If it doesn't exist yet, create it manually.
+> Create the commands directory manually if it doesn't exist. Check your agent's documentation for the exact path.
 
 **Prerequisites:** all three commands use the [GitHub CLI](https://cli.github.com/) (`gh`) for issues, releases, and repo metadata. Install it and run `gh auth login` once before using them.
 
@@ -65,11 +69,11 @@ Searches inline markers, reviews recent commits for hints, categorises findings 
 
 ## How custom commands work
 
-Each file in `~/.claude/commands/` becomes a slash command named after the file (without `.md`). When you type `/portfolio-polish` in Claude Code, it reads that file and follows the instructions in the context of your current project.
+Each file in your agent's commands directory becomes a slash command named after the file (without `.md`). When you type `/portfolio-polish` in your agent, it reads that file and follows the instructions in the context of your current project.
 
 They are plain markdown — open any of them, edit the instructions, and they change immediately. No rebuild, no restart.
 
-**Project-level commands** (only available in one repo) go in `.claude/commands/` inside that repo instead.
+**Project-level commands** (only available in one repo) go in a `.commands/` or `.<agent>/commands/` folder inside that repo instead (check your agent's documentation).
 
 ---
 
