@@ -1,4 +1,6 @@
-# agent-commands
+[![MIT License](https://img.shields.io/badge/licence-MIT-blue.svg)](LICENSE)
+
+# My-AI-Skills
 
 A collection of custom slash commands / prompt files for AI coding agents (Claude Code, Cursor, Copilot, Zed, etc.) — drop them into your agent's commands directory and use them across any project.
 
@@ -11,25 +13,25 @@ These are prompt-driven commands that guide an AI agent through multi-step workf
 **Global (available in every project):**
 ```bash
 # Clone the repo
-git clone https://github.com/davidtaylor6130/agent-commands.git
+git clone https://github.com/davidtaylor6130/My-AI-Skills.git
 
 # Copy commands into your agent's commands directory
 # Claude Code: ~/.claude/commands/
 # Cursor: ~/.cursor/commands/
 # VS Code Copilot: ~/.vscode/copilot/commands/
 # Zed: ~/.config/zed/commands/
-cp agent-commands/commands/*.md <your-agent-commands-dir>/
+cp My-AI-Skills/commands/*.md <your-agent-commands-dir>/
 ```
 
 **Single command:**
 ```bash
 curl -o <your-agent-commands-dir>/portfolio-polish.md \
-  https://raw.githubusercontent.com/davidtaylor6130/agent-commands/main/commands/portfolio-polish.md
+  https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/commands/portfolio-polish.md
 ```
 
 **Windows (PowerShell):**
 ```powershell
-Copy-Item "agent-commands\commands\*.md" "<your-agent-commands-dir>\"
+Copy-Item "My-AI-Skills\commands\*.md" "<your-agent-commands-dir>\"
 ```
 
 > Create the commands directory manually if it doesn't exist. Check your agent's documentation for the exact path.
@@ -84,6 +86,13 @@ PRs welcome. Keep each command self-contained in a single `.md` file. Commands s
 - Confirm with the user before any destructive or irreversible action
 - Work across different tech stacks without hardcoded assumptions
 - Include a **Ground rules** section at the bottom
+
+---
+
+## Known issues / Status
+
+- Commands are tested primarily with Claude Code; behaviour in Cursor and other agents may vary
+- No automated tests — commands are prompt files, so validation is manual
 
 ---
 
