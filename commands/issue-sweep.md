@@ -9,7 +9,7 @@ You are helping the user identify problems, gaps, and improvements in their code
 Run in parallel:
 - `git log --oneline -20`
 - `gh issue list --state all --limit 200 --json number,title,state` — avoid duplicating open issues or re-filing ones already closed
-- Read `AGENTS.md`, `CLAUDE.md`, or any known-issues docs
+- Read `AGENTS.md`, `CLAUDE.md`, or any known-issues docs (check your agent's conventions)
 
 ---
 

@@ -11,7 +11,7 @@ Run in parallel:
 - `git status --short` and `git log --oneline -5` — confirm the tree is clean and see where HEAD is
 - `git remote get-url origin` — confirm remote
 - `gh issue list --state open --limit 100 --json number,title,labels` — open issues to include in release notes
-- Read `AGENTS.md`, `CHANGELOG.md`, or any notes file if present — extract known issues
+- Read `AGENTS.md`, `CLAUDE.md`, `CHANGELOG.md`, or any notes file if present — extract known issues
 
 Then, once you know the most recent tag, get the full set of commits the release will cover:
 - `git log <last-tag>..HEAD --oneline` (or `git log --oneline` for a first release)
