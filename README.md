@@ -67,6 +67,33 @@ Searches inline markers, reviews recent commits for hints, categorises findings 
 
 **Use when:** you know there's debt in the codebase but it's not tracked anywhere.
 
+### `/set-tone`
+Writes agent behaviour and tone preferences to the right config file for whichever agent(s) you use.
+
+Detects Claude Code, Cursor, Copilot, Zed, and Windsurf. Asks whether you want global or project-level scope, shows you what it will write, then puts the rules in the correct place for each agent. Covers: no sycophancy, challenge bad ideas directly, no AI vocabulary, concise output.
+
+**Use when:** setting up a new machine, onboarding a new agent, or enforcing consistent behaviour across tools.
+
+---
+
+## Other skills I use
+
+> Placeholder — add your own entries here.
+
+| Skill | Source | What it does |
+|-------|--------|--------------|
+| | | |
+
+---
+
+## MCP services
+
+> Placeholder — add your own entries here.
+
+| Service | What it does |
+|---------|--------------|
+| | |
+
 ---
 
 ## How custom commands work
