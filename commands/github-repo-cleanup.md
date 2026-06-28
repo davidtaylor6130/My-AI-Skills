@@ -1,25 +1,32 @@
-# Portfolio Polish — GitHub Repo Cleanup Skill
+---
+name: github-repo-cleanup
+description: Clean up a GitHub repository to portfolio-ready standards — repo metadata, .gitignore, README audit, licence, release tagging, issue hygiene. Use when the user wants to clean up their GitHub repo for a portfolio or public audience. Requires a public or accessible GitHub repository and gh CLI with appropriate permissions.
+---
+
+# Github Repo Cleanup — Clean Up & Polish a Repository
 
 You are helping the user clean up and polish a GitHub repository to portfolio-ready standards. Work through each section below in order. Be decisive — make reasonable calls without asking unless something genuinely requires owner input (e.g. choosing a licence type, whether a file is sensitive).
+
+Before any commit, push, tag, or release, show all proposed commands/text for user review. Do not execute irreversible actions without explicit confirmation.
 
 ---
 
 ## Step 0 — Gather context
 
 Run these in parallel before doing anything:
+- `gh auth status --show-token` — verify gh CLI is authenticated; if invalid/expired, stop and ask the user to run `gh auth login` before proceeding
+- If `gh` is not on PATH, locate it with `where gh` or check common install locations (`/usr/local/bin/gh`, `C:\Program Files\GitHub CLI\gh.exe`)
 - `git log --oneline -10` — understand the project history
-- `git remote get-url origin` — confirm the GitHub remote
+- `git remote get-url origin` — confirm the GitHub remote; if no remote URL exists, note this and skip all gh steps below — output manual commands where applicable
 - Read `README.md` if it exists
-- `gh repo view --json name,description,repositoryTopics,visibility,licenseInfo` — check GitHub metadata
+- `gh repo view --json name,description,repositoryTopics,visibility,licenseInfo` — check GitHub metadata (skip if no remote)
 - `git ls-files` — spot tracked clutter
-
-If `gh` is not on PATH, locate it with `where gh` or check common install locations (`/usr/local/bin/gh`, `C:\Program Files\GitHub CLI\gh.exe`).
 
 ---
 
 ## Step 1 — Repo metadata (GitHub)
 
-Check and fix each item. Use `gh repo edit` to apply changes.
+Check and fix each item. Use `gh repo edit` to apply changes. If gh fails at any point, output the exact command for the user to run manually rather than proceeding without it.
 
 **Description**
 - Must be a single clear sentence: what the project does, for whom, in what context.
@@ -31,7 +38,7 @@ Check and fix each item. Use `gh repo edit` to apply changes.
 - Must include the platform/OS if relevant (`windows`, `linux`, `macos`, `cross-platform`)
 - Must include the domain (`ai`, `llm`, `game-dev`, `web`, `cli`, `devtools`, etc.)
 - Must include key dependencies or tech that someone would search for
-- Remove generic noise topics that add no search value
+- Remove generic noise topics that add no search value (e.g. 'hello-world', 'first-repo', 'learning-project', 'work-in-progress')
 - Aim for 6–12 topics total
 
 **Visibility**
@@ -97,7 +104,7 @@ Write in the user's existing voice — match the tone of what's already there. N
 Check `git ls-files LICENSE*`.
 
 - If missing: ask the user which licence to use. Suggest MIT for general open-source portfolio work, Apache 2.0 if there are patent concerns, GPL if they want copyleft. Pick one based on the project type and ask to confirm.
-- Once decided: create the `LICENSE` file with the correct year and the user's name.
+- Once decided: draft the full `LICENSE` text with the correct year and the user's name, present it to the user for review, and do not write it until explicitly confirmed.
 - Add a licence badge to the README header.
 
 ---
@@ -110,7 +117,7 @@ Check `git tag -l`.
 - If a tag exists but has no GitHub Release: suggest creating one with `gh release create`.
 - Release notes must include: what the project is, any version numbering rationale if non-standard, and a known issues section.
 
-Tagging and releasing push to the remote — always confirm with the user before doing either (see ground rules). If they have the `/repo-release` command installed, point them at it instead; it handles versioning and release notes properly.
+Tagging and releasing push to the remote — always confirm with the user before doing either (see ground rules). If gh fails during this step, output the exact command for the user to run manually rather than proceeding without it. Release tagging is handled separately by `version-tag-release` when needed — skip this step unless you're releasing outside that flow.
 
 ---
 
@@ -120,7 +127,9 @@ Run `gh issue list --state open --limit 100 --json number,title,labels`.
 
 - Confirm known bugs and missing features are tracked as issues
 - Issues should have labels (`bug`, `enhancement`, `question`, `documentation`)
-- Close any issues that evidence in recent commits shows are already resolved
+- Flag any issues that evidence in recent commits shows may be resolved to the user with commit references. Do not auto-close — let the user decide.
+
+If gh fails during this step, output the exact command for the user to run manually rather than proceeding without it.
 
 ---
 
@@ -137,7 +146,7 @@ Run `gh issue list --state open --limit 100 --json number,title,labels`.
 Output a checklist of everything done, everything that needs the user's input, and anything skipped with a reason:
 
 ```
-## Portfolio Polish Report — <repo name>
+## Github Repo Cleanup Report — <repo name>
 
 ### Done
 - [x] ...
@@ -153,38 +162,9 @@ Be specific — "README updated: added architecture section and tech stack" not 
 
 ---
 
-## Humaniser rules
-
-Any text you write — README copy, commit messages, descriptions, issue bodies, release notes — must read as if a human developer wrote it. Apply these rules to every piece of output:
-
-**Banned punctuation**
-- No em dashes (—). Use a comma, a full stop, or rewrite the sentence. A hyphen (-) is fine where grammatically correct.
-- No mid-sentence colons to introduce a dramatic pause. Colons are for lists only.
-
-**Banned words and phrases**
-- delve, dive into, explore, leverage, utilise (use "use"), empower, foster, facilitate
-- robust, seamless, streamlined, cutting-edge, game-changing, innovative, revolutionise
-- it's worth noting, it's important to note, it's crucial to, please note that
-- in order to (use "to"), in the context of, with respect to
-- additionally, furthermore, moreover (as sentence openers)
-- certainly, absolutely, of course (as response openers)
-- comprehensive, holistic, end-to-end
-- any variation of "as an AI" — never reference being an agent or model
-
-**Style rules**
-- Short sentences. If a sentence runs past ~20 words, split it.
-- Active voice. "The script reads the config" not "The config is read by the script."
-- No trailing summaries that restate what was just said.
-- No excessive bullet points — prose is fine for two or three related points.
-- Commit messages: imperative mood, lowercase after the verb, no full stop at the end. "Add licence file" not "Added a licence file." not "This commit adds a licence file."
-- Match the register of the existing project text. If the README is casual, stay casual. If it's terse, stay terse.
-
----
-
 ## Ground rules
 
-- Never commit, push, tag, or create releases without explicit instruction from the user
-- When the user does ask for a commit: do not add Co-Authored-By trailers, AI attribution lines, or any other agent signatures — the commit should look exactly as if the user made it themselves
+- Never commit, push, tag, or create releases without being asked
 - Never delete files from disk — only untrack with `git rm --cached`
 - If a file might contain credentials or sensitive config, flag it and ask before touching it
 - Never fabricate screenshots, fake badges, or invented feature descriptions
