@@ -34,19 +34,23 @@ Suggest the next logical version number based on existing tags:
 - No tags yet → suggest `v0.1.0`
 - Existing tags → suggest the next logical increment (semver, date-based, or custom scheme)
 
-Confirm before proceeding — do not ask an open-ended question about what version to use.
+Use `question` tool with version options to confirm — do not ask an open-ended question.
 
 ---
 
 ## Step 2 — Confirm target commit
 
-Default to the latest commit on the current branch. Ask the user if they want to tag a different commit. Show the commit hash and message for confirmation.
+Default to the latest commit on the current branch. Use `question` tool to confirm target commit — show hash and message, offer option to pick a different commit.
 
 Check the commit has been pushed (`git branch -r --contains <commit>`). If it only exists locally, confirm with the user before pushing the branch — a GitHub release pointing at an unpushed commit is the most common way this flow fails.
 
 ---
 
-## Step 3 — Write release notes
+## Step 3 — Audit README
+
+Read README.md. Check for stale version numbers, outdated feature lists, broken badges, or missing changes since last release. Use `question` tool to propose README updates. If changes needed, apply and commit before proceeding.
+
+## Step 4 — Write release notes
 
 Release notes must include:
 
@@ -62,9 +66,11 @@ If a `CHANGELOG.md` exists, append an entry for this release using the project's
 
 ---
 
-## Step 4 — Create tag and GitHub release
+## Step 5 — Create tag and GitHub release
 
-Ask the user whether to include or omit `Co-Authored-By` trailers in the release notes text. Respect their preference rather than enforcing a default.
+Show user the release notes. Use `question` tool to approve or edit. Ask whether to include or omit `Co-Authored-By` trailers.
+
+Use `question` tool to confirm tag, push, and release before running any of these:
 
 1. `git tag -a <version> <commit> -m "<version> — <short title>"` — annotated, so the tag records who/when
 2. `git push origin <version>`
@@ -78,6 +84,6 @@ Show the release URL when done. If any command fails, show the exact output and 
 
 ## Ground rules
 
-- Confirm the version number and target commit with the user before tagging
-- Never push without the user seeing what will be tagged
+- Use `question` tool to confirm version number and target commit before tagging
+- Use `question` tool before any push — user must approve what will be tagged
 - Respect the user's preference for Co-Authored-By trailers — ask whether to include or omit them

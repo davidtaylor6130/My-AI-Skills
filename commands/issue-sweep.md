@@ -48,8 +48,8 @@ Group everything found into:
 
 ## Step 4 — Confirm before filing
 
-Show the user the full list grouped by category. Ask:
-- Which ones to file as issues (default: all bugs, then user decides on the rest)
+Show the user the full list grouped by category. Use `question` tool with approval options:
+- Which issues to file (default: all bugs, then user decides on the rest)
 - Any to skip or merge together
 
 ---
@@ -58,12 +58,9 @@ Show the user the full list grouped by category. Ask:
 
 First run `gh label list` — `gh issue create` fails if you pass a label that doesn't exist in the repo. Only use labels that exist (or create missing standard ones with `gh label create` after asking).
 
-For each confirmed issue, create a GitHub issue with:
-- Clear title: describes the problem, not the fix
-- Body: what the problem is, where in the code (file:line if known), what the expected vs actual behaviour is, any relevant context
-- Label: `bug`, `enhancement`, `question`, or `documentation`
+For each confirmed issue, draft title + body and use `question` tool to get user approval before filing.
 
-Use `gh issue create --title "..." --body-file <temp>` with a body written to a temp file to avoid shell quoting problems. Show each URL as it's created.
+Once approved, use `gh issue create --title "..." --body-file <temp>` with a body written to a temp file to avoid shell quoting problems. Show each URL as it's created.
 
 ---
 
