@@ -61,6 +61,34 @@ Use it when you know there's debt in the codebase but it's not tracked anywhere.
 
 ---
 
+### `/fix-github-issue`
+End-to-end workflow for fixing a GitHub issue: ask for issue number, create branch, investigate, plan, implement fix, test, confirm commit, confirm PR, open in browser. Every write gated by user approval.
+
+Use it when you want a structured, user-controlled path from issue to pull request.
+
+---
+
+### `/obsidian-save`
+Saves notes, ideas, or summaries to your Obsidian vault using the PARA method. Auto-classifies into Projects/Areas/Resources/Archives, creates frontmatter with tags, and adds cross-links to related folder pages.
+
+Use it when you want to capture something to your knowledge base without manually choosing a location.
+
+---
+
+### `/obsidian-read`
+Fast note reading and searching in your Obsidian vault. Returns only useful info or "nothing found" via subagent. Searches across folders, frontmatter tags, and content.
+
+Use it when you say "read this", "what do I have on [topic]", or "find notes about".
+
+---
+
+### `/security-audit`
+Comprehensive pre-release security audit for code repositories. Checks for API key leaks, hardcoded secrets, insecure configurations, exposed credentials, missing `.gitignore` entries, personal/sensitive directory references (Obsidian vaults, iCloud drives, local data stores), and anything that looks bad for public release (profanity, unfinished work, outdated copyright years, sloppy folder names, etc.). Reports findings by severity (CRITICAL/WARNING/INFO) with exact remediation steps.
+
+Use it when you're about to release, deploy, or push anything publicly — especially portfolio projects or open-source repos.
+
+---
+
 ## Agents
 
 These are opencode agent definition files (`~/.config/opencode/agents/` or project-level). They define specialised AI assistant behaviour with specific tool access and constraints.
@@ -83,6 +111,13 @@ Use it when you need analysis or review but don't want the agent to touch any fi
 A web research agent that uses SearXNG MCP search plus Puppeteer screenshots. The usual place you'd open a browser, except done from the terminal.
 
 Use it for researching documentation, checking API behaviour, or gathering information about tools and services without editing files.
+
+---
+
+### `obsidian-agent.md`
+Obsidian vault agent for browsing, searching, and exploring your Second Brain. Combines `obsidian-save` and `quick-read` skills with read/grep/glob/bash tools for cross-folder topic search, folder browsing, note counts, and cross-referencing connections.
+
+Use it for "find everything about X", multi-folder exploration, vault structure overview, or deep folder analysis. For single-note save/read, use the quick-save or quick-read commands instead.
 
 ---
 
@@ -116,4 +151,3 @@ PRs welcome. Keep each command self-contained in a single `.md` file. Commands s
 ## Licence
 
 MIT — David Taylor
-ENDOFFILE && echo "README updated"
