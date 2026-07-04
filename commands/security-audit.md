@@ -720,7 +720,7 @@ Provide the exact lines to add.
 
 This skill should be run:
 1. **After** portfolio-polish (github-repo-cleanup) completes — it may have added/modified files that need checking
-2. **Before** repo-release (version-tag-release) creates the release — nothing gets released until all CRITICAL issues are resolved
+2. **Before** repo-release (github-version-tag-release) creates the release — nothing gets released until all CRITICAL issues are resolved
 3. If any CRITICAL issue is found, STOP and ask the user to fix it before proceeding with the release
 
 Flow: `portfolio-polish → security-audit → (fix criticals) → release`

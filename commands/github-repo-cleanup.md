@@ -117,7 +117,7 @@ Check `git tag -l`.
 - If a tag exists but has no GitHub Release: suggest creating one with `gh release create`.
 - Release notes must include: what the project is, any version numbering rationale if non-standard, and a known issues section.
 
-Tagging and releasing push to the remote — always confirm with the user before doing either (see ground rules). If gh fails during this step, output the exact command for the user to run manually rather than proceeding without it. Release tagging is handled separately by `version-tag-release` when needed — skip this step unless you're releasing outside that flow.
+Tagging and releasing push to the remote — always confirm with the user before doing either (see ground rules). If gh fails during this step, output the exact command for the user to run manually rather than proceeding without it. Release tagging is handled separately by `github-version-tag-release` when needed — skip this step unless you're releasing outside that flow.
 
 ---
 

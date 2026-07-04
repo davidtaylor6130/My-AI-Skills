@@ -1,4 +1,9 @@
-# Issue Sweep — Audit Code and File GitHub Issues
+---
+name: github-issue-sweep
+description: Audit codebase for problems (TODO/FIXME/HACK) and file GitHub Issues. Scans markers, reviews commit hints, categorises findings, confirms with user, then files via gh CLI.
+---
+
+# GitHub Issue Sweep — Audit Code and File GitHub Issues
 
 You are helping the user identify problems, gaps, and improvements in their codebase and turn them into well-written GitHub Issues.
 
@@ -94,4 +99,4 @@ Issue titles and bodies must read as if a developer filed them, not a language m
 - One issue per distinct problem — do not bundle unrelated things
 - Do not exaggerate severity — label bugs as bugs, enhancements as enhancements
 - Show the user the list before filing anything
-- Do not commit anything as part of this workflow — issue-sweep is read-only on the working tree; if you find something worth fixing, file the issue and stop
+- Do not commit anything as part of this workflow — github-issue-sweep is read-only on the working tree; if you find something worth fixing, file the issue and stop
