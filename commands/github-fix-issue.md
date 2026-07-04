@@ -1,6 +1,11 @@
-# Fix GitHub Issue
+---
+name: github-fix-issue
+description: End-to-end GitHub issue fix workflow. Ask → Branch → Investigate → Plan → Approve → Fix → Test → Confirm Commit → Confirm PR → Browser.
+---
 
-End-to-end workflow. Ask → Branch → Investigate → Plan → Approve → Fix → Test → Confirm Commit → Confirm PR → Browser.
+# GitHub Fix Issue
+
+Workflow: ask → branch → investigate → plan → approve → fix → test → confirm commit → confirm PR → browser.
 
 ---
 

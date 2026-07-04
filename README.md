@@ -47,24 +47,31 @@ Use it when preparing a repo to show employers or making a side project public.
 
 ---
 
-### `/version-tag-release`
+### `/github-version-tag-release`
 Walks you through tagging a release and writing proper release notes instead of just listing file changes. Finds the version number, confirms the target commit, writes notes from recent commits and open issues, then creates the git tag and GitHub release.
 
 Use it when shipping a version and want release notes that actually say something useful.
 
 ---
 
-### `/issue-sweep`
+### `/github-issue-sweep`
 Scans your codebase for TODOs, FIXMEs, and deferred work, files them as GitHub Issues. Searches inline markers (`TODO`, `FIXME`, `HACK`, `XXX`), checks recent commits for hints of untracked debt, categorises findings by type, confirms the list with you, then files each one properly labelled.
 
 Use it when you know there's debt in the codebase but it's not tracked anywhere.
 
 ---
 
-### `/fix-github-issue`
+### `/github-fix-issue`
 End-to-end workflow for fixing a GitHub issue: ask for issue number, create branch, investigate, plan, implement fix, test, confirm commit, confirm PR, open in browser. Every write gated by user approval.
 
 Use it when you want a structured, user-controlled path from issue to pull request.
+
+---
+
+### `/github-create-pr`
+Creates a PR from current branch commits. Extracts issue references from commit messages, sanity-checks what's actually fixed vs just mentioned, confirms with you at every step, then creates PR and opens in browser.
+
+Use it when you have commits ready and need a PR created with proper issue linking.
 
 ---
 
