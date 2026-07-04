@@ -7,7 +7,7 @@ description: Clean up a GitHub repository to portfolio-ready standards — repo 
 
 You are helping the user clean up and polish a GitHub repository to portfolio-ready standards. Work through each section below in order. Be decisive — make reasonable calls without asking unless something genuinely requires owner input (e.g. choosing a licence type, whether a file is sensitive).
 
-Before any commit, push, tag, or release, show all proposed commands/text for user review. Do not execute irreversible actions without explicit confirmation.
+Before any commit, push, tag, or release, use `question` tool for user approval. Never execute irreversible actions without explicit confirmation via `question` tool.
 
 ---
 
@@ -26,7 +26,7 @@ Run these in parallel before doing anything:
 
 ## Step 1 — Repo metadata (GitHub)
 
-Check and fix each item. Use `gh repo edit` to apply changes. If gh fails at any point, output the exact command for the user to run manually rather than proceeding without it.
+Check and fix each item. Use `gh repo edit` to apply changes. Before running any `gh repo edit`, use `question` tool to show proposed changes and get approval. If gh fails at any point, output the exact command for the user to run manually rather than proceeding without it.
 
 **Description**
 - Must be a single clear sentence: what the project does, for whom, in what context.
