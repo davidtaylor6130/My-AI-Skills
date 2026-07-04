@@ -143,7 +143,7 @@ PRs welcome. Keep each command self-contained in a single `.md` file. Commands s
 
 ## Known issues / Status
 
-- Commands are tested primarily with Claude Code; behaviour in Cursor and other agents may vary
+- Commands are tested primarily with OpenCode; behaviour in Cursor and other agents may vary
 - No automated tests. Commands are prompt files, so validation is manual
 
 ---
