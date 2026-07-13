@@ -61,11 +61,14 @@ Show the user the full list grouped by category. Use `question` tool with approv
 
 ## Step 5 — File the issues
 
-First run `gh label list` — `gh issue create` fails if you pass a label that doesn't exist in the repo. Only use labels that exist (or create missing standard ones with `gh label create` after asking).
+First run `gh label list` — `gh issue create` fails if you pass a label that doesn't exist in the repo. Only use labels that exist (or create missing standard ones with `gh label create` after asking). **Every issue MUST get at least one label** — never file an unlabeled issue.
 
 For each confirmed issue, draft title + body and use `question` tool to get user approval before filing.
 
 Once approved, use `gh issue create --title "..." --body-file <temp>` with a body written to a temp file to avoid shell quoting problems. Show each URL as it's created.
+
+> [!CRITICAL]
+> The temp file MUST contain **real newlines**, never the literal two characters `\n`. In a bash double-quoted string `"...\n..."`, `\n` is NOT turned into a newline — `gh` stores the literal text `Problem\n\n...` and GitHub renders it as one mangled line with no Markdown formatting. Write the body with the Write tool or `printf` to a file, then pass `--body-file`. Same rule applies to `gh issue edit --body-file` and `gh pr create --body-file`.
 
 ---
 

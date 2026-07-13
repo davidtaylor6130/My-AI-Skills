@@ -7,6 +7,30 @@ description: Create one or more GitHub issues from a description. Checks for exi
 
 Workflow: parse description → check duplicates → report existing or create.
 
+> [!CRITICAL]
+> **Never pass a multi-line body with `\n` inside a bash double-quoted string.**
+> In bash, `"...\n..."` keeps `\n` as the literal two characters `\` + `n`. `gh` then stores the literal text `Problem\n\n...` and GitHub renders it as one unbroken line of escaped text — headings (`##`) and bullet lists never appear. This is the #1 way issue bodies get silently mangled.
+>
+> **Always write the body to a temp file with real newlines, then use `--body-file`:**
+> ```bash
+> # write the body (real newlines) to a file, e.g. via the Write tool or printf
+> gh issue create --title "<title>" --body-file /tmp/issue_body.md --label "<label1,label2>"
+> ```
+> Same rule applies to `gh issue edit --body-file <file>` and `gh pr create --body-file <file>`.
+> Note: `gh issue edit` has **no** `--label` flag — use `--add-label <name>` (and create missing labels first with `gh label create`).
+
+## Labels are MANDATORY
+
+Every created issue MUST have at least one label. Do not skip this.
+
+1. Before creating, check which labels already exist: `gh label list --json name`.
+2. Pick labels that fit (e.g. `bug`, `enhancement`, `ui`, `provider`, `reliability`, `tool-call`, `accessibility`, `goal-loop`, `acp-runtime`, `refactor`, `documentation`).
+3. If a fitting label does not exist, create it first: `gh label create "<name>"` (optionally `--description "..." --color "..."`).
+4. Pass labels at creation: `gh issue create --title "..." --body-file /tmp/issue_body.md --label "bug,ui"`.
+5. If you forgot at creation, retro-fit with `gh issue edit <number> --add-label "bug,ui"`.
+
+An issue with no labels is incomplete — always confirm labels are present before reporting success.
+
 ---
 
 ## Step 1 — Parse user description
@@ -61,10 +85,10 @@ Use `question` tool:
 - "Add my description as a comment to #42 instead"
 - "Cancel"
 
-**No duplicates:** Create each issue:
+**No duplicates:** Create each issue. Write the body (with real newlines) to a temp file first, then pass it with `--body-file` — do NOT inline `\n` in a double-quoted string:
 
 ```bash
-gh issue create --title "<title>" --body "<body>" --label "<label1,label2>"
+gh issue create --title "<title>" --body-file /tmp/issue_body.md --label "<label1,label2>"
 ```
 
 If multiple issues, create them one at a time.
