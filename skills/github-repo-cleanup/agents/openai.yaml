@@ -1,0 +1,4 @@
+interface:
+  display_name: "GitHub Repo Cleanup"
+  short_description: "Polish a repository for release"
+  default_prompt: "Use $github-repo-cleanup to audit and polish this GitHub repository."

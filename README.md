@@ -1,159 +1,88 @@
 [![MIT License](https://img.shields.io/badge/licence-MIT-blue.svg)](LICENSE)
 
-# My-AI-Skills
+# My AI Skills
 
-Custom slash commands and agent files for AI coding agents (Claude Code, Cursor, Copilot, Zed). Drop them into your agent's commands directory and use them in any project.
+Reusable AI skills and specialist agent definitions. Skills follow the standard
+`skills/<name>/SKILL.md` layout; agent definitions live in `agents/`.
 
-Each command is a single `.md` file that tells an AI how to do something step by step: clean up repos, file issues, cut releases, automate tasks. You own the files. Edit them directly.
+## Install
 
----
+Clone the repository:
 
-## Installation
-
-**Commands (slash commands):**
 ```bash
-# Clone the repo
 git clone https://github.com/davidtaylor6130/My-AI-Skills.git
-
-# Copy commands into your agent's commands directory
-cp My-AI-Skills/commands/*.md <your-agent-commands-dir>/
 ```
 
-**Single command:**
+Install one skill for Codex:
+
 ```bash
-curl -o <your-agent-commands-dir>/github-repo-cleanup.md \
-  https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/commands/github-repo-cleanup.md
+cp -R My-AI-Skills/skills/<skill-name> ~/.codex/skills/
 ```
 
-**Agents (opencode):** Copy files into `~/.config/opencode/agents/` or a project's agent config.
+Install every skill:
 
-**Windows (PowerShell):**
-```powershell
-Copy-Item "My-AI-Skills\commands\*.md" "<your-agent-commands-dir>\"
+```bash
+cp -R My-AI-Skills/skills/* ~/.codex/skills/
 ```
 
-You may need to create the commands directory yourself. Check your agent's docs for the exact path.
+Agent definitions are separate. Copy the required file from `agents/` into the
+agent directory supported by your tool, such as `~/.config/opencode/agents/`.
 
-All commands require the [GitHub CLI](https://cli.github.com/) (`gh`). Install it and run `gh auth login` before using anything that touches GitHub.
+GitHub skills require the [GitHub CLI](https://cli.github.com/) and an
+authenticated session:
 
----
+```bash
+gh auth login
+```
 
-## Commands
+## Skills
 
-### `/github-repo-cleanup`
-Full audit and cleanup of a GitHub repo to portfolio-ready standards. It checks repo description, topics, tracked clutter, `.gitignore`, README completeness, licence file, release tags, issue hygiene, branch state, then gives you a checklist report so you know what was done and what still needs input.
+### GitHub
 
-Use it when preparing a repo to show employers or making a side project public.
+- `github-fix-issue` — take an issue from investigation to an approved pull request
+- `github-issue-creator` — deduplicate and create labelled issues
+- `github-issue-sweep` — find codebase debt and turn approved findings into issues
+- `github-repo-cleanup` — prepare a repository for a public or portfolio release
+- `github-version-tag-release` — update versions, tag, and publish a release
 
----
+### Notes and analysis
 
-### `/github-version-tag-release`
-Walks you through tagging a release and writing proper release notes instead of just listing file changes. Finds the version number, confirms the target commit, writes notes from recent commits and open issues, then creates the git tag and GitHub release.
+- `analyse-logs` — classify noisy logs and issue an evidence-based verdict
+- `quick-read` — search and read focused Obsidian notes
+- `obsidian-save` — save and cross-link notes using PARA
+- `optimise-model-prompt` — test prompt changes against a named model
+- `security-audit` — audit a repository before public release
 
-Use it when shipping a version and want release notes that actually say something useful.
+### Design
 
----
-
-### `/github-issue-sweep`
-Scans your codebase for TODOs, FIXMEs, and deferred work, files them as GitHub Issues. Searches inline markers (`TODO`, `FIXME`, `HACK`, `XXX`), checks recent commits for hints of untracked debt, categorises findings by type, confirms the list with you, then files each one properly labelled.
-
-Use it when you know there's debt in the codebase but it's not tracked anywhere.
-
----
-
-### `/github-fix-issue`
-End-to-end workflow for fixing a GitHub issue: ask for issue number, create branch, investigate, plan, implement fix, test, confirm commit, confirm PR, open in browser. Every write gated by user approval.
-
-Use it when you want a structured, user-controlled path from issue to pull request.
-
----
-
-### `/github-create-pr`
-Creates a PR from current branch commits. Extracts issue references from commit messages, sanity-checks what's actually fixed vs just mentioned, confirms with you at every step, then creates PR and opens in browser.
-
-Use it when you have commits ready and need a PR created with proper issue linking.
-
----
-
-### `/obsidian-save`
-Saves notes, ideas, or summaries to your Obsidian vault using the PARA method. Auto-classifies into Projects/Areas/Resources/Archives, creates frontmatter with tags, and adds cross-links to related folder pages.
-
-Use it when you want to capture something to your knowledge base without manually choosing a location.
-
----
-
-### `/obsidian-read`
-Fast note reading and searching in your Obsidian vault. Returns only useful info or "nothing found" via subagent. Searches across folders, frontmatter tags, and content.
-
-Use it when you say "read this", "what do I have on [topic]", or "find notes about".
-
----
-
-### `/security-audit`
-Comprehensive pre-release security audit for code repositories. Checks for API key leaks, hardcoded secrets, insecure configurations, exposed credentials, missing `.gitignore` entries, personal/sensitive directory references (Obsidian vaults, iCloud drives, local data stores), and anything that looks bad for public release (profanity, unfinished work, outdated copyright years, sloppy folder names, etc.). Reports findings by severity (CRITICAL/WARNING/INFO) with exact remediation steps.
-
-Use it when you're about to release, deploy, or push anything publicly — especially portfolio projects or open-source repos.
-
----
+- `design` — general UI review and polish rules
+- `de-vibe-design` — remove generic AI styling and rebuild task-first interfaces
 
 ## Agents
 
-These are opencode agent definition files (`~/.config/opencode/agents/` or project-level). They define specialised AI assistant behaviour with specific tool access and constraints.
+- `n8n.md` — n8n workflow specialist
+- `obsidian-agent.md` — multi-folder Obsidian research
+- `read-only.md` — inspection without file changes
+- `web-research.md` — web research without editing the working tree
 
-### `n8n.md`
-N8N workflow automation specialist. The only agent in this repo with n8n tools (node search, templates, validation) and skills. Handles building, debugging, validating, and configuring n8n workflows, nodes, credentials, and MCP tool interactions.
+## Repository layout
 
-Use it for node configuration, workflow architecture, validation errors, expression syntax, or Code node patterns.
-
----
-
-### `read-only.md`
-A strictly read-only agent that inspects, searches, and analyzes code but never writes or modifies any files. It will explain what needs changing and give you exact commands to handle yourself.
-
-Use it when you need analysis or review but don't want the agent to touch any files.
-
----
-
-### `web-research.md`
-A web research agent that uses SearXNG MCP search plus Puppeteer screenshots. The usual place you'd open a browser, except done from the terminal.
-
-Use it for researching documentation, checking API behaviour, or gathering information about tools and services without editing files.
-
----
-
-### `obsidian-agent.md`
-Obsidian vault agent for browsing, searching, and exploring your Second Brain. Combines `obsidian-save` and `quick-read` skills with read/grep/glob/bash tools for cross-folder topic search, folder browsing, note counts, and cross-referencing connections.
-
-Use it for "find everything about X", multi-folder exploration, vault structure overview, or deep folder analysis. For single-note save/read, use the quick-save or quick-read commands instead.
-
----
-
-## How custom commands work
-
-Each `.md` file in your agent's commands directory becomes a slash command named after the file (without `.md`). When you type `/github-repo-cleanup` in your agent, it reads that file and follows the instructions for your current project.
-
-They are plain markdown. Open any of them, edit the instructions, and they change immediately. No rebuild. No restart.
-
-**Project-level commands** (only available in one repo) go in a `.commands/` or `.<agent>/commands/` folder inside that repo instead. Check your agent's documentation for where to put them.
-
----
+```text
+agents/
+  <agent>.md
+skills/
+  <skill-name>/
+    SKILL.md
+    agents/openai.yaml    # optional UI metadata
+    references/           # optional supporting material
+    scripts/              # optional reusable automation
+```
 
 ## Contributing
 
-PRs welcome. Keep each command self-contained in a single `.md` file. Commands should:
-- State clearly what they do and don't do
-- Confirm with the user before any destructive or irreversible action
-- Work across different tech stacks without hardcoded assumptions
-- Include a Ground rules section at the bottom
-
----
-
-## Known issues / Status
-
-- Commands are tested primarily with OpenCode; behaviour in Cursor and other agents may vary
-- No automated tests. Commands are prompt files, so validation is manual
-
----
+Keep each skill self-contained. Every skill requires valid YAML frontmatter
+with only `name` and `description`, followed by concise operational
+instructions. Keep standalone agent definitions in `agents/`.
 
 ## Licence
 

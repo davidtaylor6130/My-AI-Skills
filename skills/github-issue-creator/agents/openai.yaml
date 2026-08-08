@@ -1,0 +1,4 @@
+interface:
+  display_name: "GitHub Issue Creator"
+  short_description: "Create labeled GitHub issues safely"
+  default_prompt: "Use $github-issue-creator to turn this request into a GitHub issue."

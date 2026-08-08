@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bug Find Swarm"
+  short_description: "Find, prove, fix, and verify bugs in parallel"
+  default_prompt: "Use $bug-find-swarm to audit this codebase, prove bugs with tests, fix shared root causes, and verify the complete build."

@@ -1,3 +1,8 @@
+---
+name: design
+description: Review and improve application UI and UX using clear affordances, hierarchy, spacing, typography, restrained colour, interaction states, progressive disclosure, accessible overlays, and meaningful micro-interactions. Use when designing, styling, reviewing, or polishing any visual interface or component.
+---
+
 # Skill: Design Review & Polish
 
 Automatically review and improve the GUI/UX/UI of any app you're working on. Activates when the user mentions designing, styling, building UI, creating components, or working on any visual interface.

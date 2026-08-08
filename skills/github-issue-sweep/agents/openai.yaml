@@ -1,0 +1,4 @@
+interface:
+  display_name: "GitHub Issue Sweep"
+  short_description: "Audit code and file tracked issues"
+  default_prompt: "Use $github-issue-sweep to find and propose GitHub issues for this repository."

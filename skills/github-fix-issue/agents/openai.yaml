@@ -1,0 +1,4 @@
+interface:
+  display_name: "GitHub Fix Issue"
+  short_description: "Fix GitHub issues end to end"
+  default_prompt: "Use $github-fix-issue to investigate and fix this GitHub issue."

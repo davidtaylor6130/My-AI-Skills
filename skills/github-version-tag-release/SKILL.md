@@ -36,6 +36,19 @@ Suggest the next logical version number based on existing tags:
 
 Use `question` tool with version options to confirm — do not ask an open-ended question.
 
+### Version inventory gate
+
+Before choosing the target commit, scan every tracked file for product version declarations and the exact previous version:
+
+```bash
+git grep -nE 'project\([^)]*VERSION|kAppVersion|CFBundle(Short)?Version|MARKETING_VERSION|CURRENT_PROJECT_VERSION|"version"[[:space:]]*:|(^|[[:space:]])version[[:space:]]*=|latest stable.*v[0-9]+\.[0-9]+\.[0-9]+'
+git grep -nE '(V|v)?<previous-version-with-escaped-dots>'
+```
+
+Review every match. Update all product-owned version sources, including build metadata, application constants, package manifests and root lockfile entries, UI displays and tests, installer metadata, and current-version documentation. Do not alter dependency versions or intentionally historical release/changelog references.
+
+Run both searches again after editing. List and justify every remaining old-version match. Build or test enough to verify the packaged application and visible UI report the new version. Commit and merge the version bump before confirming the release target. Do not tag or publish while a stale product-version match remains.
+
 ---
 
 ## Step 2 — Confirm target commit
@@ -87,3 +100,4 @@ Show the release URL when done. If any command fails, show the exact output and 
 - Use `question` tool to confirm version number and target commit before tagging
 - Use `question` tool before any push — user must approve what will be tagged
 - Respect the user's preference for Co-Authored-By trailers — ask whether to include or omit them
+- Never tag a release before its version inventory update is committed and merged
