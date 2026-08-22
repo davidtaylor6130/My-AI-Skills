@@ -1,6 +1,15 @@
 ---
-name: design
-description: Review and improve application UI and UX using clear affordances, hierarchy, spacing, typography, restrained colour, interaction states, progressive disclosure, accessible overlays, and meaningful micro-interactions. Use when designing, styling, reviewing, or polishing any visual interface or component.
+uamVersion: 1
+title: "Design Review & Polish"
+maker: David Taylor
+review: "Review and improve application UI and UX using clear affordances, hierarchy, spacing, typography, restrained colour, interaction states, progressive disclosure, accessible overlays, and meaningful micro-interactions. Use when designing, styling, reviewing, or polishing any visual interface or component."
+dateCreated: 2026-08-20T21:57:36Z
+dateUpdated: 2026-08-20T21:57:36Z
+favorite: false
+sourceProvider: Standard Skill
+sourcePath: skills/Design/ui-design/ui-design.uam
+commandName: ui-design
+group: Design
 ---
 
 # Skill: Design Review & Polish

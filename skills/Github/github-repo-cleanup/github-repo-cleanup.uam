@@ -1,6 +1,15 @@
 ---
-name: github-repo-cleanup
-description: Clean up a GitHub repository to portfolio-ready standards — repo metadata, .gitignore, README audit, licence, release tagging, issue hygiene. Use when the user wants to clean up their GitHub repo for a portfolio or public audience. Requires a public or accessible GitHub repository and gh CLI with appropriate permissions.
+uamVersion: 1
+title: "Github Repo Cleanup — Clean Up & Polish a Repository"
+maker: David Taylor
+review: "Clean up a repository to portfolio-ready standards using git for repository work and gh only for GitHub-hosted metadata, issues, and releases. Use for README, metadata, ignore rules, licence, release readiness, and issue hygiene."
+dateCreated: 2026-08-20T21:57:36Z
+dateUpdated: 2026-08-20T21:57:36Z
+favorite: false
+sourceProvider: Standard Skill
+sourcePath: skills/Github/github-repo-cleanup/github-repo-cleanup.uam
+commandName: github-repo-cleanup
+group: Github
 ---
 
 # Github Repo Cleanup — Clean Up & Polish a Repository
@@ -14,19 +23,23 @@ Before any commit, push, tag, or release, use `question` tool for user approval.
 ## Step 0 — Gather context
 
 Run these in parallel before doing anything:
-- `gh auth status --show-token` — verify gh CLI is authenticated; if invalid/expired, stop and ask the user to run `gh auth login` before proceeding
-- If `gh` is not on PATH, locate it with `where gh` or check common install locations (`/usr/local/bin/gh`, `C:\Program Files\GitHub CLI\gh.exe`)
 - `git log --oneline -10` — understand the project history
 - `git remote get-url origin` — confirm the GitHub remote; if no remote URL exists, note this and skip all gh steps below — output manual commands where applicable
 - Read `README.md` if it exists
-- `gh repo view --json name,description,repositoryTopics,visibility,licenseInfo` — check GitHub metadata (skip if no remote)
 - `git ls-files` — spot tracked clutter
+
+Do not require `gh` for local audits or edits. Before the first GitHub-hosted operation, run
+`gh auth status`. If authentication is unavailable, skip only the remote metadata, issue, and release
+steps; finish the local cleanup and report what remains.
 
 ---
 
 ## Step 1 — Repo metadata (GitHub)
 
-Check and fix each item. Use `gh repo edit` to apply changes. Before running any `gh repo edit`, use `question` tool to show proposed changes and get approval. If gh fails at any point, output the exact command for the user to run manually rather than proceeding without it.
+If the remote is hosted on GitHub and `gh` is authenticated, inspect it with
+`gh repo view --json name,description,repositoryTopics,visibility,licenseInfo`. Use `gh repo edit` only
+to apply approved GitHub-hosted metadata changes. If `gh` is unavailable, skip this step without
+blocking local repository cleanup.
 
 **Description**
 - Must be a single clear sentence: what the project does, for whom, in what context.
@@ -135,7 +148,8 @@ If gh fails during this step, output the exact command for the user to run manua
 
 ## Step 8 — Branch state
 
-- Confirm `main` (or `master`) is the default branch and is clean
+- Confirm the current branch and working tree with `git status --short --branch`
+- Read the cached remote default with `git symbolic-ref --short refs/remotes/origin/HEAD` when available
 - List remote branches: `git branch -r` — flag any that look abandoned
 - Do NOT delete branches without asking the user
 
@@ -165,6 +179,8 @@ Be specific — "README updated: added architecture section and tech stack" not 
 ## Ground rules
 
 - Never commit, push, tag, or create releases without being asked
+- Use git for repository operations. Use `gh` only for GitHub-hosted metadata, issues, pull requests,
+  Actions, and releases.
 - Never delete files from disk — only untrack with `git rm --cached`
 - If a file might contain credentials or sensitive config, flag it and ask before touching it
 - Never fabricate screenshots, fake badges, or invented feature descriptions

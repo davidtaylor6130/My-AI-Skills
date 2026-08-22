@@ -99,14 +99,12 @@ Show user the result:
 - "Created: #N — Title (https://github.com/owner/repo/issues/N)"
 - "Skipped: Title — duplicate of #N (https://github.com/owner/repo/issues/N)"
 
-Open in browser for created issues:
-
-```bash
-gh issue view <number> --web
-```
+Return the URL printed by `gh issue create`. Do not make another `gh` call merely to open a browser;
+open that URL only if the user asks.
 
 ## Ground rules
 
+- Use `gh` only for GitHub-hosted issue and label operations; git cannot read or mutate them.
 - Requires `gh` CLI authenticated. Only for GitHub-hosted repos.
 - If no `gh`, stop and tell user. If not a GitHub repo, stop.
 - Duplicate detection is heuristic — always present results for user to confirm.

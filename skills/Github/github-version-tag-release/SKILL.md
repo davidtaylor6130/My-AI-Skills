@@ -14,17 +14,16 @@ Before any commit, push, tag, or release, show all proposed commands/text for us
 ## Step 0 — Gather context
 
 Run in parallel:
-- `gh auth status --show-token` — verify gh CLI is authenticated; if invalid/expired, stop and ask the user to run `gh auth login` before proceeding
 - `git tag -l` — existing tags
 - `git status --short` and `git log --oneline -5` — confirm the tree is clean and see where HEAD is
-- `git remote get-url origin` — confirm remote; if no remote exists, note this and skip all gh steps below — output manual commands where applicable
-- `gh issue list --state open --limit 100 --json number,title,labels` — open issues to include in release notes (skip if no remote)
+- `git remote get-url origin` — confirm the release destination
 - Read `AGENTS.md`, `CLAUDE.md`, `CHANGELOG.md`, or any notes file if present — extract known issues
 
 Then, once you know the most recent tag, get the full set of commits the release will cover:
 - `git log <last-tag>..HEAD --oneline` (or `git log --oneline` for a first release)
 
-If the tree is dirty, tell the user — uncommitted work won't be in the release. If gh fails at any point before Step 4, output the exact command for the user to run manually rather than proceeding without it.
+If the tree is dirty, tell the user — uncommitted work won't be in the release. Do not require `gh`
+while inspecting commits, tags, versions, or README content.
 
 ---
 
@@ -65,6 +64,10 @@ Read README.md. Check for stale version numbers, outdated feature lists, broken 
 
 ## Step 4 — Write release notes
 
+This is the first step that needs GitHub-hosted data. Run `gh auth status`, then
+`gh issue list --state open --limit 100 --json number,title,labels`. If authentication fails, finish
+drafting from local evidence and mark the GitHub issue inventory as blocked.
+
 Release notes must include:
 
 1. **What the project is** — one sentence for anyone landing here cold
@@ -97,6 +100,8 @@ Show the release URL when done. If any command fails, show the exact output and 
 
 ## Ground rules
 
+- Use git for status, history, version changes, commits, tags, and pushes. Use `gh` only to read
+  GitHub-hosted issues and create the GitHub Release.
 - Use `question` tool to confirm version number and target commit before tagging
 - Use `question` tool before any push — user must approve what will be tagged
 - Respect the user's preference for Co-Authored-By trailers — ask whether to include or omit them
