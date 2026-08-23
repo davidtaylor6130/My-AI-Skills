@@ -5,6 +5,10 @@ description: Apply TypeScript-specific modelling, boundary validation, narrowing
 
 # TypeScript best practices
 
+## Inputs
+
+The requested TypeScript change or review, repository conventions, compiler settings, schemas, callers, and focused test path.
+
 ## Workflow
 
 Inspect existing schemas, functions, types, compiler settings, and tests first. Use discriminated unions for real variants, `unknown` for external input, validation at boundaries, exhaustive switches, and `satisfies` where useful. Derive types from existing schemas/functions when practical. Avoid optional-field bags encoding impossible states. Brand primitives only when same-shaped values are realistically confused. Allow narrow documented casts after validation or unavoidable interop. Prefer real test primitives over excessive mocks and structured diagnostics in shipped code.

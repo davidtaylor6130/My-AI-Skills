@@ -5,4 +5,10 @@ description: Review authentication, authorisation, input validation, file handli
 
 # Application security review
 
-Map assets, trust boundaries, actors, inputs, privileged actions, and failure modes. Trace callers and effects, validate highest-risk assumptions with executable evidence when practical, and rank findings by exploitability and impact. Prefer platform security primitives and boundary validation. Do not exploit production, access unrelated data, rotate credentials, or apply consequential changes without authority. Report intended behaviour, evidence, findings, fixes, verification, and stopped evidence. Return `clean`, `findings`, or `blocked`.
+## Inputs and workflow
+
+Use the intended behaviour, relevant code/design, threat boundary, and permitted test surface. Map assets, trust boundaries, actors, inputs, privileged actions, and failure modes. Trace callers and effects, validate highest-risk assumptions with executable evidence when practical, and rank findings by exploitability and impact. Prefer platform security primitives and boundary validation. A single local reviewer is sufficient by default; add independent review only for high-risk uncertainty.
+
+## Verification, output, and safety
+
+Report intended behaviour, evidence, findings, fixes, verification, and where evidence stopped. Return `clean`, `findings`, or `blocked` with the missing access or artifact. Do not exploit production, access unrelated data, rotate credentials, or apply consequential changes without authority. No paid service is required.

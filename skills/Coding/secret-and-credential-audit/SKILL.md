@@ -5,4 +5,10 @@ description: Audit credentials, API keys, tokens, environment files, repository 
 
 # Secret and credential audit
 
-Inspect tracked and relevant untracked release content, history when authorised, ignore rules, configs, fixtures, logs, archives, and generated artifacts. Use existing scanners or local pattern checks; never print full secrets. Distinguish examples from live values and report path, line, type, exposure, and remediation. Verify removal and ignore coverage. Read-only by default; never revoke, rotate, rewrite history, publish, or contact a provider without explicit authority. Return `clean`, `findings`, or `blocked` with commands and redacted evidence.
+## Inputs and workflow
+
+Use the repository/publication boundary, tracked and relevant untracked files, ignore rules, configs, fixtures, logs, archives, and generated artifacts. Inspect history only when authorised. Run locally with one agent by default, using existing scanners or local pattern checks; never print full secrets. Distinguish examples from live values and report path, line, type, exposure, and remediation.
+
+## Verification, output, and safety
+
+Verify removal and ignore coverage. Return `clean`, `findings`, or `blocked` with commands, redacted evidence, and the exact unavailable input when blocked. Read-only by default; never revoke, rotate, rewrite history, publish, or contact a provider without explicit authority. No internet or paid service is required.

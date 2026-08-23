@@ -5,6 +5,10 @@ description: Maintain an append-only, reviewable decision and evidence log for l
 
 # Decision trail
 
+## Inputs
+
+The goal, current phase, reviewer needs, evidence locations, and local output path.
+
 ## Workflow
 
 Use CSV or TSV with `timestamp`, `phase`, `decision`, `reason`, `evidence`, and `result`. Append one meaningful decision or checkpoint per row. Evidence must resolve to a path, command output, commit, test, screenshot, trace, or artifact. Do not log trivial actions. Keep the trail local by default and commit it only when it is part of the deliverable. Single-writer operation is the baseline; separate files before concurrent writing.
