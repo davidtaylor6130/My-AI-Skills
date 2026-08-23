@@ -1,0 +1,14 @@
+---
+name: architect
+description: Design types, interfaces, ownership, state boundaries, lifecycle, and module structure before implementation. Use automatically for non-trivial changes crossing function, module, process, persistence, concurrency, worker-node, or public API boundaries; for explicit architecture decisions; and when repeated implementation friction suggests the design is wrong. Skip obvious local edits.
+---
+
+# Architect
+
+## Inputs and workflow
+
+Start with intended caller usage, then model domain data, public interfaces, ownership, lifecycle, state boundaries, failure/recovery, concurrency assumptions, and module/file map. For a new shared boundary make one sketch; for cross-subsystem ownership make at least two structurally distinct sketches; for concurrency, persistence, public API, remote worker, or one-way-door choices add independent review when available. Stop and redesign after repeated deviations of the same kind.
+
+## Verification and output
+
+Return alternatives, selected design and reason, trade-offs, and invalidating conditions. Validate sketches against real callers and failure paths. Do not implement unless requested, force panels, or invent abstractions for clear local code. Gate consequential actions separately.

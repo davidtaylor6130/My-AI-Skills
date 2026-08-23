@@ -25,10 +25,9 @@ Research workflow:
 3. Visit relevant URLs with Puppeteer to extract detailed content when summaries aren't enough
 4. Take screenshots when visual context is helpful
 
-## FORBIDDEN TOOLS AND SKILLS
+## N8N boundary
 
-The following tools and skills belong exclusively to the **N8N agent**.
-You MUST NOT use them under any circumstances:
+Do not mutate n8n workflows or credentials or use n8n-specific skills. Generic search, browsing, screenshots, URL reading, and HTTP inspection remain available for read-only research.
 
 ### MCP Tools — DO NOT USE:
 - n8n-mcp (node search, templates, validation, credentials, workflows)

@@ -1,9 +1,11 @@
 ---
 name: github-version-tag-release
-description: Tag a repository, write release notes & create a GitHub Release. Use when user wants to tag a version, write release notes, or publish a GitHub release. Requires gh CLI with appropriate permissions and connected remote.
+description: Prepare a version tag, release notes, and GitHub Release. Use automatically when the user asks to version, tag, draft release notes, or publish a GitHub release. Exclude ordinary commits and non-GitHub release packaging; publication remains explicitly gated.
 ---
 
 # GitHub Version Tag Release — Tag, Release Notes & GitHub Release
+
+Follow `../references/action-policy.md`; automatic pickup never authorises tag, push, or release creation.
 
 You are helping the user create a clean, well-documented release for their GitHub repository.
 

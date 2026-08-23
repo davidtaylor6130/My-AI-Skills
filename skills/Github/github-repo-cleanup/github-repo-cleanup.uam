@@ -2,9 +2,9 @@
 uamVersion: 1
 title: "Github Repo Cleanup — Clean Up & Polish a Repository"
 maker: David Taylor
-review: "Clean up a repository to portfolio-ready standards using git for repository work and gh only for GitHub-hosted metadata, issues, and releases. Use for README, metadata, ignore rules, licence, release readiness, and issue hygiene."
+review: "Clean up a repository to portfolio-ready standards using local git for repository work and GitHub tooling only for hosted metadata. Use automatically for repository polish, README/metadata/ignore/licence audits, public portfolio readiness, and issue hygiene. Exclude product-code refactors and release publication itself."
 dateCreated: 2026-08-20T21:57:36Z
-dateUpdated: 2026-08-20T21:57:36Z
+dateUpdated: 2026-08-23T01:51:01Z
 favorite: false
 sourceProvider: Standard Skill
 sourcePath: skills/Github/github-repo-cleanup/github-repo-cleanup.uam
@@ -13,6 +13,8 @@ group: Github
 ---
 
 # Github Repo Cleanup — Clean Up & Polish a Repository
+
+Follow `../references/action-policy.md`; automatic pickup never authorises commits or hosted changes.
 
 You are helping the user clean up and polish a GitHub repository to portfolio-ready standards. Work through each section below in order. Be decisive — make reasonable calls without asking unless something genuinely requires owner input (e.g. choosing a licence type, whether a file is sensitive).
 

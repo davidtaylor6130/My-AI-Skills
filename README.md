@@ -13,7 +13,7 @@
 
 I build tools that solve problems I encounter, then release the useful parts in case they help others. This repository applies that same philosophy to AI agents: a growing library of focused, composable skills and specialist roles I use daily across coding, design, repository management, Obsidian, and product releases.
 
-Each skill gives an agent a specific, battle-tested workflow without bloating every conversation with a massive permanent prompt. The repo has no application to build or service to run—it's pure Markdown instructions you can inspect, adapt, and install into any compatible agent framework.
+Each skill gives an agent a focused workflow without bloating every conversation with a massive permanent prompt. Models route normal requests automatically from each skill's frontmatter `description`: a narrow specialist wins over a domain skill, then the generic engineering router. Slash commands are optional, and skill selection never grants permission for external or irreversible actions.
 
 ---
 
@@ -33,10 +33,12 @@ My-AI-Skills/
 │   ├── Coding/
 │   │   ├── analyse-logs/                  # Classify noisy logs; issue evidence-based verdict
 │   │   ├── bug-find-swarm/                # Discover, reproduce, fix, verify bugs repo-wide
-│   │   └── security-audit/                # Pre-release security audit for public repos
+│   │   ├── engineering-workflow/          # Route non-trivial engineering work
+│   │   ├── application-security-review/   # Review application trust boundaries
+│   │   ├── secret-and-credential-audit/   # Detect credential exposure
+│   │   └── public-release-privacy-audit/  # Check public artifacts for private data
 │   ├── Design/
-│   │   ├── de-vibe-design/                # Strip generic AI styling; rebuild task-first UI
-│   │   └── ui-design/                     # General UI review and polish rules
+│   │   └── de-vibe-design/                # Task-first UI design, review, and polish
 │   ├── Github/
 │   │   ├── github-fix-issue/              # Issue → investigation → approved PR
 │   │   ├── github-issue-creator/          # Deduplicate & create labelled issues
@@ -113,7 +115,7 @@ Use either independently, or combine them when the task calls for it:
 ```text
 # Example: Security audit with read-only enforcement
 Agent: read-only.md
-Skill: skills/Coding/security-audit/
+Skills: skills/Coding/secret-and-credential-audit/ and skills/Coding/public-release-privacy-audit/
 ```
 
 ---

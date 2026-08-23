@@ -1,11 +1,13 @@
 ---
 name: de-vibe-design
-description: Audit, redesign, or build websites and application interfaces so they feel intentional, visually balanced, product-specific, and professionally designed instead of AI-generated or "vibe coded." Use for UI/UX work, visual polish, layout balance, dashboard or SaaS cleanup, design-system creation, interface simplification, card/container reduction, flow improvements, interaction design, accessibility states, or whenever a user says a design looks generic, AI-made, slop, template-like, over-carded, unbalanced, too busy, or vibe-coded.
+description: Design, audit, redesign, or polish websites, application interfaces, layouts, components, responsive behaviour, visual hierarchy, interaction states, and accessibility so they feel intentional and product-specific rather than AI-generated. Use automatically for UI/UX implementation or review and requests to improve styling, balance, flow, keyboard use, loading/error/empty/disabled states, overlays, motion, or generic, card-heavy, busy interfaces. Exclude non-visual code and tiny copy-only edits.
 ---
 
 # De-vibe Design
 
 Design the user’s task before styling the screen. Treat AI output as a first draft that must earn every element.
+
+Inputs are the current interface, user task, product constraints, representative content, and target widths. Work in one agent by default; use independent visual exploration only when materially distinct directions are open. Do not deploy or change production without explicit authority. If the live surface or screenshots are unavailable, report visual claims as `INCONCLUSIVE` rather than guessing.
 
 ## Required workflow
 

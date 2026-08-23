@@ -1,9 +1,11 @@
 ---
 name: github-issue-creator
-description: Create one or more GitHub issues from a description. Checks for existing duplicates first — if an issue with the same title/description already exists, reports back. If none found, creates the issue with `gh`. Use when user says "create issue", "file an issue", "make a github issue", "/create-issue", or describes a bug/feature they want tracked.
+description: Draft, deduplicate, and create one or more GitHub issues from a bug or feature description. Use automatically when the user asks to file, track, or create a GitHub issue. Exclude fixing an existing issue and passive bug discussion with no request to update GitHub.
 ---
 
 # GitHub Issue Creator
+
+Follow `../references/action-policy.md`; automatic pickup never authorises tracker mutation.
 
 Workflow: parse description → check duplicates → report existing or create.
 

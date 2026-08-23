@@ -1,4 +1,0 @@
-interface:
-  display_name: "Security Audit"
-  short_description: "Audit repositories before release"
-  default_prompt: "Use $security-audit to check this repository before public release."

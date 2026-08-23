@@ -1,0 +1,16 @@
+---
+name: metric-hillclimb
+description: Systematically improve one measurable metric through repeated one-change experiments, frozen measurement, keep-or-revert decisions, and a results log. Use automatically for sustained optimisation of performance, prompts, model settings, tool reliability, quality scores, latency, memory, throughput, or any explicit numerical target. Skip one-off fixes without a stable metric.
+---
+
+# Metric hillclimb
+
+## Inputs and workflow
+
+Define workload, one primary metric and direction, stop predicate, regression checks, and a repeatable measurement command. Prove it separates meaningfully different cases, freeze it, then record repeated baseline samples when noisy. Run one hypothesis per attempt; keep changes only beyond noise with regressions passing, otherwise revert completely.
+
+Append CSV or TSV rows: attempt ID, hypothesis, variable, before, after, delta, variance/samples, regression status, verdict, notes. Preserve accepted changes as ordered units. Use one model for cheap experiments; isolate workers only for independent hypotheses. For prompt, skill, reviewer, worker, or routing targets, also use engineering workflow's blinded evaluation playbook.
+
+## Verification and output
+
+Report baseline, final, delta, attempts, kept/reverted counts, and next best hypothesis. Do not change the metric after baseline or claim improvement inside noise. Gate commits and external actions under the current execution policy.

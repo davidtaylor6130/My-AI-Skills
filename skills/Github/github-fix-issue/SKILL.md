@@ -1,9 +1,11 @@
 ---
 name: github-fix-issue
-description: End-to-end GitHub issue fix workflow using git for repository work and gh only for GitHub issues and pull requests. Ask → Branch → Investigate → Plan → Approve → Fix → Test → Confirm Commit → Confirm PR.
+description: Fix a GitHub issue end to end using local git for repository work and GitHub tooling only for hosted issue and pull-request operations. Use automatically when a user asks to fix or implement a referenced GitHub issue. Exclude issue creation without implementation and routine local bugs with no GitHub issue.
 ---
 
 # GitHub Fix Issue
+
+Follow `../references/action-policy.md`; automatic pickup never authorises commit, push, or pull-request creation.
 
 Workflow: ask → branch → investigate → plan → approve → fix → test → confirm commit → confirm PR.
 

@@ -1,0 +1,31 @@
+---
+uamVersion: V1 Imported
+title: "Create project verification"
+maker: AutoImporter
+review: "Create a project-local way to launch and drive the real application, capture evidence, and verify user-facing behaviour. Use automatically when a repository lacks reliable end-to-end verification, when done cannot be proven on the real product, or before substantial UI, CLI, desktop, service, feature, or refactor work needing repeatable behavioural checks. Skip when an adequate project verification path already exists; maintain it instead."
+dateCreated: 2026-08-23T01:51:01Z
+dateUpdated: 2026-08-23T01:51:01Z
+favorite: false
+sourceProvider: Standard Skill
+sourcePath: skills/Coding/create-project-verification/create-project-verification.uam
+commandName: create-project-verification
+group: Coding
+---
+
+# Create project verification
+
+## Inputs
+
+Repository, product surfaces, existing scripts, one representative user journey, and isolation constraints.
+
+## Workflow
+
+1. Inspect before adding anything. Reuse existing browser, Electron debug, executable, PTY, HTTP health, or Compose harnesses.
+2. Create the smallest project-local verification skill with launch, readiness, doctor, drive, evidence, cleanup, isolation, and a user-facing feature map.
+3. Support only surfaces present: browser/React, Electron debug surface, native desktop process/log/screenshot/input, CLI/TUI PTY or direct command, HTTP service, or existing Compose commands.
+4. Define a machine-readable verdict: `VERIFIED`, `NOT_VERIFIED`, `INCONCLUSIVE`, or `BLOCKED`.
+5. Run one mapped journey end to end and preserve resolvable evidence through cleanup.
+
+## Verification and output
+
+Compilation, types, mocks, or summaries are not behavioural proof. Return the harness path, feature map, exact journey and evidence, cleanup result, and verdict. Never deploy, mutate production, or install a paid dependency. If the real surface cannot run, return `BLOCKED` with the failed readiness evidence.

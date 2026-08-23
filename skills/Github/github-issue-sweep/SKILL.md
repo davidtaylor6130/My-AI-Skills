@@ -1,9 +1,11 @@
 ---
 name: github-issue-sweep
-description: Audit codebase for problems (TODO/FIXME/HACK) and file GitHub Issues. Scans markers, reviews commit hints, categorises findings, confirms with user, then files via gh CLI.
+description: Audit a codebase for concrete debt markers and turn confirmed findings into deduplicated GitHub issues. Use automatically when the user asks for an issue sweep, backlog creation, or repository-wide debt tracking. Exclude ordinary code review and small fixes that should not create tracker items.
 ---
 
 # GitHub Issue Sweep — Audit Code and File GitHub Issues
+
+Follow `../references/action-policy.md`; automatic pickup never authorises issue creation.
 
 You are helping the user identify problems, gaps, and improvements in their codebase and turn them into well-written GitHub Issues.
 

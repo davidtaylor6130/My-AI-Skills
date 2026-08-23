@@ -2,9 +2,9 @@
 uamVersion: 1
 title: "GitHub Fix Issue"
 maker: David Taylor
-review: "End-to-end GitHub issue fix workflow using git for repository work and gh only for GitHub issues and pull requests. Ask → Branch → Investigate → Plan → Approve → Fix → Test → Confirm Commit → Confirm PR."
+review: "Fix a GitHub issue end to end using local git for repository work and GitHub tooling only for hosted issue and pull-request operations. Use automatically when a user asks to fix or implement a referenced GitHub issue. Exclude issue creation without implementation and routine local bugs with no GitHub issue."
 dateCreated: 2026-08-20T21:57:36Z
-dateUpdated: 2026-08-20T21:57:36Z
+dateUpdated: 2026-08-23T01:51:01Z
 favorite: false
 sourceProvider: Standard Skill
 sourcePath: skills/Github/github-fix-issue/github-fix-issue.uam
@@ -13,6 +13,8 @@ group: Github
 ---
 
 # GitHub Fix Issue
+
+Follow `../references/action-policy.md`; automatic pickup never authorises commit, push, or pull-request creation.
 
 Workflow: ask → branch → investigate → plan → approve → fix → test → confirm commit → confirm PR.
 

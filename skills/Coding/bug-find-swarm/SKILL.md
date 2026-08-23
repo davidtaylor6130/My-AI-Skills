@@ -1,6 +1,6 @@
 ---
 name: bug-find-swarm
-description: Coordinate a bounded swarm to discover, reproduce, test, fix, and verify bugs across an application or repository. Use when asked to debug broadly, find bugs beyond reported issues, run a bug bash, investigate UI and backend failures, review data flow and blast radius, improve reliability, or keep an issues-fixed.md ledger. Supports real subagents when available and a strict serial fallback for local models such as Qwen.
+description: Coordinate bounded, non-overlapping discovery, reproduction, fixes, and verification across many files or subsystems. Use automatically for broad bug bashes, repo-wide reliability investigations, or parallel cross-layer review where independent scopes exist. Skip small local defects, single-file changes, and requests that only need blast-radius tracing without a swarm; use a serial fallback when subagents are unavailable or costly.
 ---
 
 # Bug Find Swarm
@@ -51,6 +51,8 @@ For the failing value or event, identify:
 - tests that already cover adjacent behaviour.
 
 Prefer one fix in the shared invariant over guards in every caller.
+
+Name the critical safety assumption and prove the highest-risk one by running real code when practical. Label evidence as: assertion, code citation, traced impossibility, executable test/script, or running-product verification. State exactly where evidence stopped; do not replace an unproven assumption with a persuasive narrative.
 
 ## 3. Launch the swarm
 

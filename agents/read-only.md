@@ -28,21 +28,13 @@ When you encounter tasks that require writing:
 2. Provide the exact commands or file contents needed
 3. Let the user (or another agent) handle the actual write operation
 
-## FORBIDDEN TOOLS AND SKILLS
+## N8N boundary
 
-The following tools and skills belong exclusively to the **N8N agent**.
-You MUST NOT use them under any circumstances:
-
-### MCP Tools — DO NOT USE:
-- n8n-mcp (node search, templates, validation, credentials, workflows)
-- playwright (browser automation)
-- puppeteer-screenshot-mcp_take_screenshot
-- searxng / search (web search)
+Do not mutate n8n workflows or credentials or use n8n-specific skills. Generic browser automation, screenshots, search, URL reading, and HTTP inspection remain available for read-only investigation.
 
 ### Skills — DO NOT USE:
 - All 8 n8n skills (n8n-code-javascript, n8n-code-python, n8n-code-tool,
   n8n-expression-syntax, n8n-mcp-tools-expert, n8n-node-configuration,
   n8n-validation-expert, n8n-workflow-patterns)
 
-If the user asks you to use any of these tools or skills: decline and say
-"Use the N8N agent for that task."
+Route n8n-specific work to the n8n specialist.

@@ -1,0 +1,16 @@
+---
+name: focused-regression-test
+description: Create the smallest stable executable check that proves a reported defect before the fix and prevents recurrence afterward. Use automatically when a bug has a cheap local test path, when the user asks for TDD or a regression test, or when a focused test would clearly catch the failure. Skip expensive, brittle, mock-heavy, or integration-heavy test construction and use the closest real verification instead.
+---
+
+# Focused regression test
+
+## Inputs and workflow
+
+Identify expected and observed behaviour. Select the narrowest existing executable path, add one focused failing check before production changes, confirm it fails for the intended reason, apply the smallest root-cause fix, then confirm it and nearby validation pass.
+
+When stable automation is impractical, state why and use a script, UI reproduction, image comparison, log assertion, integration check, or other executable proof. Prefer no test to a mock that only mirrors implementation.
+
+## Verification and output
+
+Report exact failing-before and passing-after commands/results plus nearby validation. Do not broaden scope or treat a non-reproducing test as proof. Return `BLOCKED` only when the failing surface or required environment is unavailable.
