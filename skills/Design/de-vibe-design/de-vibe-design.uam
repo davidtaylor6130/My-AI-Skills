@@ -2,9 +2,9 @@
 uamVersion: 1
 title: "De-vibe Design"
 maker: David Taylor
-review: "Design, audit, redesign, or polish websites, application interfaces, layouts, components, responsive behaviour, visual hierarchy, interaction states, and accessibility so they feel intentional and product-specific rather than AI-generated. Use automatically for UI/UX implementation or review and requests to improve styling, balance, flow, keyboard use, loading/error/empty/disabled states, overlays, motion, or generic, card-heavy, busy interfaces. Exclude non-visual code and tiny copy-only edits."
+review: "Design, audit, redesign, or polish websites, application interfaces, layouts, components, responsive behaviour, visual hierarchy, interaction states, and accessibility so they feel intentional and product-specific rather than AI-generated. Use automatically for visual UI implementation or review and requests to improve styling, balance, layout, keyboard states, overlays, motion, or generic, card-heavy, busy interfaces. Apply user-experience-design first for the journey, progressive disclosure, and user guidance. Exclude non-visual code and tiny copy-only edits."
 dateCreated: 2026-08-20T21:57:36Z
-dateUpdated: 2026-08-23T01:51:01Z
+dateUpdated: 2026-08-23T02:12:00Z
 favorite: false
 sourceProvider: Standard Skill
 sourcePath: skills/Design/de-vibe-design/de-vibe-design.uam
@@ -17,6 +17,8 @@ group: Design
 Design the user’s task before styling the screen. Treat AI output as a first draft that must earn every element.
 
 Inputs are the current interface, user task, product constraints, representative content, and target widths. Work in one agent by default; use independent visual exploration only when materially distinct directions are open. Do not deploy or change production without explicit authority. If the live surface or screenshots are unavailable, report visual claims as `INCONCLUSIVE` rather than guessing.
+
+Before this visual workflow, invoke and follow `user-experience-design` to establish the user journey, progressive disclosure, guidance, recovery, and behavioural verification. Then use this skill for visual hierarchy and execution. This dependency is one-way: do not require the UX skill to invoke this one.
 
 ## Required workflow
 
@@ -85,8 +87,9 @@ Use the source catalogue below only when explaining or revising the skill.
 - Keep controls spatially stable. Motion must not delay reading or action.
 - Respect `prefers-reduced-motion` and never make motion the only status signal.
 
-### Progressive disclosure and checks
+### Apply the UX disclosure plan
 
+- Preserve the progressive-disclosure and guidance decisions produced by `user-experience-design`; do not expose hidden detail merely to fill the layout.
 - Show the next decision and its evidence first. Hide audit data, raw JSON, history, advanced settings, and complete-document views until requested.
 - Explain checks in user language: what was checked, how it was checked, the result, and what the user must do.
 - Separate deterministic facts from probabilistic interpretation.

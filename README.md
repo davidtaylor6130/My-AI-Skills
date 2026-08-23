@@ -38,7 +38,8 @@ My-AI-Skills/
 │   │   ├── secret-and-credential-audit/   # Detect credential exposure
 │   │   └── public-release-privacy-audit/  # Check public artifacts for private data
 │   ├── Design/
-│   │   └── de-vibe-design/                # Task-first UI design, review, and polish
+│   │   ├── user-experience-design/        # Journeys, disclosure, guidance, and recovery
+│   │   └── de-vibe-design/                # Visual UI design, review, and polish
 │   ├── Github/
 │   │   ├── github-fix-issue/              # Issue → investigation → approved PR
 │   │   ├── github-issue-creator/          # Deduplicate & create labelled issues
