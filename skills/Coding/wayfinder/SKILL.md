@@ -1,0 +1,86 @@
+---
+name: wayfinder
+description: Turn a large, ambiguous effort that cannot fit safely in one working session into a progressively disclosed map of precise investigation and decision questions, then resolve the actionable frontier until the route is clear. Use automatically when the destination is known but the path cannot yet be specified, major unknowns block planning, or work must survive several sessions or transfers. Skip implementation-ready work, ordinary architecture decisions, small investigations, and tasks already clear enough to plan directly.
+---
+
+# Wayfinder
+
+Find the route before building. The output is a resolved decision map, not the implementation.
+
+## Inputs
+
+The requested destination, known constraints, repository and product evidence, current decisions, unresolved uncertainty, completion boundary, and a local path for the map.
+
+## Start gate
+
+Use this skill only when all are true:
+
+- the effort is too large or uncertain for one normal working session;
+- a meaningful destination can be stated;
+- important questions prevent a trustworthy specification or implementation plan.
+
+Otherwise use `architect`, the engineering investigation playbook, or normal planning. Do not create a map merely because a task is large.
+
+## Local-first map
+
+Create one Markdown map in the repository's existing planning or evidence location. If none exists, use `wayfinder.md` at the repository root and keep it uncommitted unless requested.
+
+```markdown
+# Wayfinder: <effort>
+
+## Destination
+<observable state that means the route is clear>
+
+## Constraints
+- <fixed boundary>
+
+## Current frontier
+- [Q-001](#q-001-short-question)
+
+## Fog
+- <important uncertainty that cannot yet be phrased as a precise question>
+
+## Decisions
+### Q-001 — <one precise question>
+- Status: open | resolved | blocked | obsolete
+- Why now:
+- Blocked by:
+- Evidence:
+- Decision:
+- Consequences:
+- Revealed questions:
+```
+
+The map is an index. Store each fact or decision once and link to evidence instead of repeating it. Keep the map readable at low resolution: destination, frontier, fog, and decision titles first; load individual decision detail only when working it.
+
+## Workflow
+
+1. Inspect existing plans, architecture notes, issues, checkpoints, history, and current repository state. Reuse them instead of starting a competing map.
+2. Write one observable destination. If it cannot be stated, record that as the first question rather than inventing a plan.
+3. Record fixed constraints and explicit non-goals.
+4. Convert only precise, currently answerable unknowns into decision questions. Leave premature uncertainty in `Fog`.
+5. Add dependency edges. The frontier contains open questions with no unresolved blockers.
+6. Resolve one frontier question at a time using the smallest relevant evidence. A question resolves to a decision, rejected alternatives, consequences, and evidence, not a build task.
+7. Add newly revealed questions, merge duplicates, and mark questions obsolete when another decision removes them.
+8. Stop when the destination is precise enough to hand to a specification, architecture, or implementation workflow and no blocking decision remains.
+
+Independent frontier questions may be investigated separately when that reduces time and workers have non-overlapping evidence ownership. One local agent is the baseline. Do not assume subagents, parallelism, internet access, or a particular model.
+
+## Tracker mode
+
+Use the local Markdown map by default. Mirror it to an issue tracker only when the user or surrounding goal explicitly authorises tracker writes and the repository already has suitable conventions. Confirm the destination, issue set, labels, dependency representation, and exact proposed mutations immediately before writing. Never make issue creation, labels, comments, or status changes a prerequisite for wayfinding.
+
+Keep the same information model in either mode. Automatic skill selection does not authorise tracker updates, commits, pushes, pull requests, external messages, or destructive operations.
+
+## Verification and output
+
+Before declaring the route clear, verify:
+
+- the destination is observable and bounded;
+- every open question is either on the frontier or has an explicit blocker;
+- every resolved decision cites evidence and states consequences;
+- the fog contains no question precise enough to work now;
+- no blocking decision remains hidden in prose;
+- the next workflow and its exact input artifact are named.
+
+Return `ROUTE_CLEAR`, `IN_PROGRESS`, or `BLOCKED`, plus the map path, destination, frontier, resolved decisions, remaining fog, evidence limits, and next exact action. `ROUTE_CLEAR` means planning uncertainty is resolved; it never means the product has been implemented or verified.

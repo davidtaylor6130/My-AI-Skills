@@ -1,0 +1,41 @@
+---
+uamVersion: V1 Imported
+title: "Review Mobile App"
+maker: AutoImporter
+review: "Review an iOS or Android application on a real device, simulator, or emulator for user journeys, progressive disclosure, guidance, touch and navigation behaviour, accessibility, adaptive layout, permissions, offline and background behaviour, persistence, performance, installation, and updates. Use automatically for whole mobile-app reviews, store-readiness checks, or requests to find and prioritise mobile experience problems. Exclude responsive websites, desktop apps, narrow code review, and isolated visual edits."
+dateCreated: 2026-08-23T14:17:14Z
+dateUpdated: 2026-08-23T14:17:14Z
+favorite: false
+sourceProvider: Standard Skill
+sourcePath: skills/Review/review-mobile-app/review-mobile-app.uam
+commandName: review-mobile-app
+group: Review
+---
+
+# Review Mobile App
+
+Review the mobile experience users install, touch, interrupt, and resume.
+
+## Inputs
+
+Use the build or launch command, target platforms and versions, intended users and journeys, device classes, test data, and existing automation. Prefer a real device for hardware-dependent behaviour; otherwise state the simulator or emulator limit.
+
+## Workflow
+
+1. Map onboarding, the primary task, navigation, permissions, interruptions, recovery, persistence, and return use. Include install, update, deep links, and notifications only when relevant.
+2. Run the real app and record build, OS, device, orientation, text size, network, and data-isolation assumptions.
+3. Apply `user-experience-design` first. Check next-action clarity, progressive disclosure, contextual guidance, permission timing, back behaviour, cancellation, undo, recovery, and protection of user work.
+4. Apply `de-vibe-design` only when visual design or polish is in scope. Check safe areas, touch targets, keyboard avoidance, focus, screen readers, contrast, dynamic text, orientation, loading, empty, disabled, and error states.
+5. Exercise background/foreground, process restart, rotation where supported, offline/poor network, denied permissions, interruptions, retries, and small/large device layouts where relevant.
+6. Use platform accessibility inspection, logs, crash output, startup and interaction timings, and screenshots as supporting evidence.
+7. Rank findings by user harm and confidence. Separate product defects from device, build, account, backend, and harness limitations.
+
+Do not use production accounts, send real notifications, make purchases, publish builds, alter signing, or mutate external data without explicit authority. Use sandbox services and disposable accounts when supplied.
+
+## Verification
+
+Repeat affected journeys on the same device surface and, for high-impact adaptive or platform-specific changes, one meaningfully different device or OS when available. Preserve reproduction steps, build/device identity, screenshots, logs, and measurements.
+
+## Output
+
+Return `READY`, `NEEDS_WORK`, `INCONCLUSIVE`, or `BLOCKED`, plus tested journeys and devices, prioritised evidence-backed findings, strengths to preserve, coverage gaps, and the next highest-value check. A single agent is the baseline; add independent review only for broad or high-risk store readiness.

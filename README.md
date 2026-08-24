@@ -34,12 +34,18 @@ My-AI-Skills/
 │   │   ├── analyse-logs/                  # Classify noisy logs; issue evidence-based verdict
 │   │   ├── bug-find-swarm/                # Discover, reproduce, fix, verify bugs repo-wide
 │   │   ├── engineering-workflow/          # Route non-trivial engineering work
+│   │   ├── wayfinder/                     # Resolve fog before multi-session planning
 │   │   ├── application-security-review/   # Review application trust boundaries
 │   │   ├── secret-and-credential-audit/   # Detect credential exposure
 │   │   └── public-release-privacy-audit/  # Check public artifacts for private data
 │   ├── Design/
 │   │   ├── user-experience-design/        # Journeys, disclosure, guidance, and recovery
 │   │   └── de-vibe-design/                # Visual UI design, review, and polish
+│   ├── Review/
+│   │   ├── review-site/                   # Review a real website or browser app
+│   │   ├── review-desktop-app/            # Review a running desktop application
+│   │   ├── review-mobile-app/             # Review an app on a mobile device surface
+│   │   └── prototype/                     # Answer one design question with throwaway evidence
 │   ├── Github/
 │   │   ├── github-fix-issue/              # Issue → investigation → approved PR
 │   │   ├── github-issue-creator/          # Deduplicate & create labelled issues
