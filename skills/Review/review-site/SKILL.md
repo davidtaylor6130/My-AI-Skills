@@ -16,7 +16,7 @@ Use the URL or launch command, intended users and goals, supported viewports, ex
 1. Establish the main user journeys and success criteria from the product and repository. Start with the first visit, primary task, recovery path, and return visit.
 2. Launch the real site with its existing browser harness when available. Record environment, viewport, build, and any data assumptions.
 3. Apply `user-experience-design` to each journey first. Check that the next action is obvious, essential choices appear before advanced ones, guidance arrives at the point of need, and users can recover without losing work.
-4. Apply `de-vibe-design` only when visual design or polish is in scope. Review hierarchy, spacing, typography, responsive layout, states, controls, focus, keyboard use, overlays, contrast, and motion.
+4. Apply `design` only when visual design or polish is in scope. Review hierarchy, spacing, typography, responsive layout, states, controls, focus, keyboard use, overlays, contrast, and motion.
 5. Exercise loading, empty, error, disabled, slow-network, validation, refresh, back/forward, and narrow/wide viewport behaviour where relevant.
 6. Use available accessibility, console, network, and performance checks as supporting evidence. Do not let automated scores replace direct journey testing.
 7. Rank findings by user harm and confidence. Separate defects, usability friction, visual polish, content issues, and unverified risks.

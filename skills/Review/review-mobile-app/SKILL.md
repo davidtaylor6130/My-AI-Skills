@@ -16,7 +16,7 @@ Use the build or launch command, target platforms and versions, intended users a
 1. Map onboarding, the primary task, navigation, permissions, interruptions, recovery, persistence, and return use. Include install, update, deep links, and notifications only when relevant.
 2. Run the real app and record build, OS, device, orientation, text size, network, and data-isolation assumptions.
 3. Apply `user-experience-design` first. Check next-action clarity, progressive disclosure, contextual guidance, permission timing, back behaviour, cancellation, undo, recovery, and protection of user work.
-4. Apply `de-vibe-design` only when visual design or polish is in scope. Check safe areas, touch targets, keyboard avoidance, focus, screen readers, contrast, dynamic text, orientation, loading, empty, disabled, and error states.
+4. Apply `design` only when visual design or polish is in scope. Check safe areas, touch targets, keyboard avoidance, focus, screen readers, contrast, dynamic text, orientation, loading, empty, disabled, and error states.
 5. Exercise background/foreground, process restart, rotation where supported, offline/poor network, denied permissions, interruptions, retries, and small/large device layouts where relevant.
 6. Use platform accessibility inspection, logs, crash output, startup and interaction timings, and screenshots as supporting evidence.
 7. Rank findings by user harm and confidence. Separate product defects from device, build, account, backend, and harness limitations.

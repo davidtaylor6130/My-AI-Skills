@@ -13,7 +13,7 @@ Identify the question, the decision it unlocks, the minimum realistic inputs, th
 
 ## Choose the smallest branch
 
-- **Experience or visual question:** create meaningfully different variants on one isolated route or static artifact with an obvious switcher. Apply `user-experience-design` to journey and progressive disclosure; apply `de-vibe-design` when visual direction is being compared.
+- **Experience or visual question:** create meaningfully different variants on one isolated route or static artifact with an obvious switcher. Apply `user-experience-design` to journey and progressive disclosure; apply `design` when visual direction is being compared.
 - **State or logic question:** create a tiny interactive harness that exposes the complete relevant state after each action and includes awkward transitions, not only the happy path.
 - **Feasibility question:** create the smallest isolated spike that exercises the uncertain boundary and records observable success or failure.
 

@@ -1,58 +1,48 @@
 ---
 name: user-experience-design
-description: Design and review user journeys, task flows, information architecture, navigation, progressive disclosure, onboarding, in-product guidance, feedback, error prevention, and recovery. Use automatically when users may not know what to do next, a workflow feels confusing or overwhelming, important information appears at the wrong time, or a product needs clearer guidance through a multi-step task. Exclude purely visual styling, branding, spacing, colour, and small copy-only edits.
+description: Design or audit complete product experiences across websites, desktop software, mobile apps, games, and other interactive products. Use automatically for user journeys, task flows, information architecture, navigation, guidance, feedback, error prevention, and recovery. A broad UX request defaults to a full product experience audit; a named feature, screen, role, or journey stays scoped. Use Wayfinder only when a clear destination is too large or uncertain for one normal working session. Exclude purely visual styling and tiny copy-only edits.
 ---
 
 # User Experience Design
 
-Make the next useful action clear without forcing the user to understand the whole system first.
+Make meaningful journeys understandable, recoverable, and complete without forcing users to understand the whole system first.
 
-## Inputs
+## Scope
 
-The audience, their goal, entry point, current journey, required information, decisions, risks, product constraints, representative content, and available behavioural evidence.
+A broad UX request without a narrower area begins with a full product experience audit across its principal journeys, not a mechanical visit to every screen. Adapt coverage to the product and platform. Use a specialised site, desktop, or mobile review skill to operate the real surface when available; this skill owns the journey model and UX judgment.
 
-## Workflow
+A request naming a feature, screen, role, journey, or problem stays within that boundary. When this skill supports another task, inherit that task's scope rather than expanding it. If the product boundary, intended actors, destination, or available surface is materially unclear, ask before proceeding.
 
-1. State the user's goal in their language and map the shortest successful journey as actions.
-2. Identify what the user knows at entry, what the system knows, and what must be learned or decided at each step.
-3. Remove steps, choices, fields, explanations, and interruptions that do not help the current decision.
-4. Apply progressive disclosure using the rules below.
-5. Make the primary next action, its prerequisites, expected result, and consequence explicit.
-6. Design prevention and recovery for invalid input, interruption, cancellation, retry, undo, partial completion, and return visits.
-7. Add guidance only where the interface cannot make the action self-evident. Prefer labels, examples, defaults, and contextual help over tours or walls of instructions.
-8. Cover first use, empty, loading, error, blocked, success, and completed states without discarding user work.
-9. Exercise the journey with realistic users, content, and failure cases on the real product when practical.
+## Wayfinder
 
-## Progressive disclosure
+Use `wayfinder` only when all are true: the experience is too large or uncertain for one normal working session, a meaningful destination can be stated, and important questions prevent a trustworthy journey map or plan. A broad request is a reason to evaluate this gate, not proof that Wayfinder is needed. If one agent can handle the work honestly in one pass, do it directly.
 
-- Show only the information and controls needed for the current decision.
-- Keep the primary path visible; place advanced, rare, administrative, diagnostic, and historical detail behind clearly named disclosure.
-- Reveal prerequisites before an action becomes relevant, not after it fails.
-- Preserve context when revealing detail. Prefer inline expansion or a secondary region when leaving the page would disrupt the task.
-- Do not hide essential constraints, costs, uncertainty, destructive consequences, security implications, or information required for informed consent.
-- Do not use hover as the only route to necessary information.
-- Remember disclosure state only when doing so helps the user's next visit and does not conceal changed risk.
-- Let users inspect details before committing and return to the summary without losing work.
-- Use staged forms only when grouping reduces cognitive load; do not turn a short form into a needless wizard.
+Wayfinder resolves the blocking decisions; it does not perform the audit or implementation. Return to this skill when the route is clear. Do not use it merely because the product has many screens or stories.
 
-## User guidance
+## Journeys and feedback
 
-- Use the user's vocabulary and one consistent name per concept.
-- Explain what to do, why it matters only when non-obvious, and what happens next.
-- Put help beside the decision it supports and errors beside the field or action that caused them.
-- Prefer a realistic example or constrained default over a paragraph.
-- Empty states should explain the value, first action, and any prerequisite without pretending sample data is real.
-- Loading feedback should say what is happening and preserve the user's sense of progress; use determinate progress when available.
-- Success feedback should confirm the result and expose the next likely action without trapping the user in celebration screens.
+Build journeys from product evidence before making recommendations. For each materially different user or role, capture the actor, starting context, goal, key actions, and observable success. Cover the primary path, first use, interruption and recovery, and return use; add role, permission, input-method, accessibility, or platform-lifecycle variants only when they change the experience.
 
-## When not to use
+Use capability bands such as new, regular, and expert users when knowledge changes the journey. Do not invent names, biographies, demographics, or multiple personas that behave the same. Formal “As a user…” wording is optional; a story is useful only when it clarifies a distinct need.
 
-Skip isolated visual polish, token changes, straightforward CSS fixes, and tiny wording corrections. Do not add onboarding, tooltips, dialogs, steps, or documentation merely because the interface has space. A single agent and local inspection are the baseline; use research or additional reviewers only when the audience or evidence is genuinely uncertain.
+Treat inferred journeys as assumptions, not facts. When a misunderstanding could materially change the product, show the user a compact journey set and ask them to confirm the disputed intent before designing around it. Stakeholder confirmation establishes product intent; it does not replace evidence from actual users. Prefer observed behaviour, usability sessions, analytics, support reports, and existing research when available. Do not contact users or enable tracking without explicit authority.
+
+When genuinely different journeys are hard to judge in prose, use `prototype` to compare the smallest useful alternatives before implementation.
+
+## UX judgment
+
+- Make the next action, prerequisites, result, and consequence clear.
+- Show what is needed for the current decision; disclose advanced or rare detail without hiding risk, cost, or irreversible consequences.
+- Remove steps, choices, fields, explanations, and interruptions that do not help the user's goal.
+- Preserve context and user work through back, cancel, retry, undo, interruption, and return.
+- Add guidance only where labels, examples, defaults, and the interface itself cannot make the action clear.
+- Cover loading, empty, error, blocked, disabled, success, and completed states where relevant.
+- Use the user's vocabulary and put feedback or errors beside the action they concern.
 
 ## Verification and output
 
-Verify the real journey rather than individual screens alone. Check first use, normal completion, back/cancel, invalid input, interruption, retry, keyboard operation, and preservation of entered data where relevant. Report:
+Verify complete journeys on the real product with representative content, roles, permissions, failures, and platform lifecycle where practical. Static inspection or visual polish alone cannot verify comprehension.
 
-`[priority] [journey step] — [user obstacle] → [smallest flow or guidance change]`
+For a full audit, report the journey set, coverage and evidence, cross-journey problems, prioritised findings, strengths to preserve, and untested assumptions. For a scoped review, report only the affected journey. Use: `[priority] [journey step] — [user obstacle] → [smallest useful change]`.
 
-State tested paths, evidence, untested assumptions, and a verdict of `VERIFIED`, `INCONCLUSIVE`, or `BLOCKED`. Do not claim user comprehension from static metadata or visual polish. Never deploy, contact users, change production, or perform destructive actions without explicit authority. No subagent, internet connection, provider-specific feature, or paid service is required.
+Return `VERIFIED`, `INCONCLUSIVE`, or `BLOCKED`. Never deploy, change production, contact users, enable analytics, or perform destructive actions without explicit authority.

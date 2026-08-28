@@ -40,7 +40,7 @@ My-AI-Skills/
 │   │   └── public-release-privacy-audit/  # Check public artifacts for private data
 │   ├── Design/
 │   │   ├── user-experience-design/        # Journeys, disclosure, guidance, and recovery
-│   │   └── de-vibe-design/                # Visual UI design, review, and polish
+│   │   └── design/                        # Visual UI design, review, and polish
 │   ├── Review/
 │   │   ├── review-site/                   # Review a real website or browser app
 │   │   ├── review-desktop-app/            # Review a running desktop application

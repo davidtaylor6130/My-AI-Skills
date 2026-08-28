@@ -16,7 +16,7 @@ Use the executable or launch command, target operating systems, intended users a
 1. Map first launch, the primary task, interruptions, recovery, settings, persistence, and return use. Include install, update, and uninstall only when in scope.
 2. Launch the real app and record OS, build, window state, data location, and isolation assumptions.
 3. Apply `user-experience-design` first. Check orientation, next-action clarity, progressive disclosure, contextual guidance, undo, error recovery, and preservation of user work.
-4. Apply `de-vibe-design` only when visual design or polish is in scope. Check hierarchy, density, resizing, high-DPI behaviour, focus, keyboard navigation, menus, dialogs, shortcuts, contrast, loading, empty, disabled, and error states.
+4. Apply `design` only when visual design or polish is in scope. Check hierarchy, density, resizing, high-DPI behaviour, focus, keyboard navigation, menus, dialogs, shortcuts, contrast, loading, empty, disabled, and error states.
 5. Exercise multiple windows, minimise/restore, relaunch, interrupted work, corrupt or missing optional data, offline behaviour, and slow operations where relevant. For Electron, test the packaged app or its actual browser/debug surface rather than treating unit tests as proof.
 6. Inspect logs, process behaviour, startup/resource measurements, crashes, and accessibility tooling as evidence proportional to the review.
 7. Rank findings by user harm and confidence. Keep product defects distinct from harness or environment failures.
