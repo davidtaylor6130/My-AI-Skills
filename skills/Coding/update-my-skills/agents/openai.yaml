@@ -1,0 +1,4 @@
+interface:
+  display_name: "Update My Skills"
+  short_description: "Sync David’s skills and agent guidance"
+  default_prompt: "Use $update-my-skills to get my latest skills from GitHub."

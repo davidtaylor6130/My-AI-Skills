@@ -1,0 +1,21 @@
+---
+uamVersion: V1 Imported
+title: "Update my skills"
+maker: AutoImporter
+review: "Update David's personal AI skills and global agent instructions from the latest main branch of My-AI-Skills on GitHub. Use when David says 'update my skills from GitHub', 'get my latest skills', 'go get my latest skills', 'go into my latest skills', 'going to my latest skills', or asks to sync his skills across machines. Exclude updates to one unrelated skill, app dependencies, or GitHub repositories generally."
+dateCreated: 2026-08-29T00:00:00Z
+dateUpdated: 2026-08-29T00:00:00Z
+favorite: false
+sourceProvider: Standard Skill
+sourcePath: skills/Coding/update-my-skills/update-my-skills.uam
+commandName: update-my-skills
+group: Coding
+---
+
+# Update my skills
+
+Resolve `scripts/update_skills.py` relative to this `SKILL.md`, then run it with Python 3. The request that triggered this skill authorizes the script's scoped Git fetch and local skill/instruction installation; request tool approval only when the environment requires it.
+
+The script owns `~/.agents/repos/my-ai-skills` and symlinks every repository folder containing `SKILL.md` into `~/.agents/skills`. It prepends a marked copy of the repository's `agents/Agent.md` to `${CODEX_HOME:-~/.codex}/AGENTS.md` while preserving machine-local instructions, and also refreshes a non-empty `AGENTS.override.md` so the override cannot suppress David's guidance. It backs up changed local entries, removes only stale symlinks into its managed checkout, and refuses to overwrite a dirty managed checkout.
+
+Do not pull into the user's current project, edit skill contents, commit, push, delete unrelated local skills, or claim success after a partial run. Report the installed commit, skill count, backup path when present, removed stale links, and any blocker. Remind David to start a new Codex session so the refreshed `AGENTS.md` instruction chain is loaded.
