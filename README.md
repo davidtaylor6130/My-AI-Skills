@@ -1,155 +1,84 @@
 # My AI Skills
 
-> A curated collection of reusable skills and specialist agent definitions for AI-assisted development workflows.
+**Reusable AI skills and agent definitions for software development work.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-20%2B-brightgreen)](skills/)
-[![Agents](https://img.shields.io/badge/agents-5-blue)](agents/)
-[![Maintained](https://img.shields.io/badge/maintained-yes-success)](https://github.com/davidtaylor6130/My-AI-Skills/commits/main)
+[![Skills](https://img.shields.io/badge/skills-31-brightgreen)](skills/)
+[![Agents](https://img.shields.io/badge/agents-4-blue)](agents/)
 
----
+## What's included
 
-## Why this exists
+- Focused skills for coding, design, GitHub workflows, reviews, and technical writing
+- Specialist agents for general development, n8n, read-only analysis, and web research
+- Matching `SKILL.md` and `.uam` files for standard skill agents and Universal Agent Manager
+- A Python standard-library script that checks and synchronises both skill formats
 
-I build tools that solve problems I encounter, then release the useful parts in case they help others. This repository applies that same philosophy to AI agents: a growing library of focused, composable skills and specialist roles I use daily across coding, design, repository management, Obsidian, and product releases.
+## Repository structure
 
-Each skill gives an agent a focused workflow without bloating every conversation with a massive permanent prompt. Models route normal requests automatically from each skill's frontmatter `description`: a narrow specialist wins over a domain skill, then the generic engineering router. Slash commands are optional, and skill selection never grants permission for external or irreversible actions.
-
----
-
-## Repository Structure
+Public content lives in `agents/` and `skills/`. The `scripts/` directory contains only the format pairing tool.
 
 ```text
 My-AI-Skills/
 ├── agents/
-│   ├── Agent.md              # Base agent definition
-│   ├── n8n.md                # n8n workflow specialist
-│   ├── obsidian-agent.md     # Obsidian vault operations
-│   ├── read-only.md          # Non-mutating code review
-│   └── web-research.md       # Web search & synthesis
 ├── skills/
-│   ├── AI/
-│   │   └── optimise-model-prompt/         # Test prompt changes against a named model
 │   ├── Coding/
-│   │   ├── analyse-logs/                  # Classify noisy logs; issue evidence-based verdict
-│   │   ├── bug-find-swarm/                # Discover, reproduce, fix, verify bugs repo-wide
-│   │   ├── engineering-workflow/          # Route non-trivial engineering work
-│   │   ├── wayfinder/                     # Resolve fog before multi-session planning
-│   │   ├── application-security-review/   # Review application trust boundaries
-│   │   ├── secret-and-credential-audit/   # Detect credential exposure
-│   │   └── public-release-privacy-audit/  # Check public artifacts for private data
 │   ├── Design/
-│   │   ├── user-experience-design/        # Journeys, disclosure, guidance, and recovery
-│   │   └── design/                        # Visual UI design, review, and polish
-│   ├── Review/
-│   │   ├── review-site/                   # Review a real website or browser app
-│   │   ├── review-desktop-app/            # Review a running desktop application
-│   │   ├── review-mobile-app/             # Review an app on a mobile device surface
-│   │   └── prototype/                     # Answer one design question with throwaway evidence
+│   ├── Generic/
 │   ├── Github/
-│   │   ├── github-fix-issue/              # Issue → investigation → approved PR
-│   │   ├── github-issue-creator/          # Deduplicate & create labelled issues
-│   │   ├── github-issue-sweep/            # Find codebase debt → actionable issues
-│   │   ├── github-repo-cleanup/           # Portfolio-ready repo polish
-│   │   └── github-version-tag-release/    # Version, tag, publish releases
-│   └── Obsidian/
-│       ├── obsidian-save/                 # Save & cross-link notes using PARA
-│       └── quick-read/                    # Search & read focused Obsidian notes
+│   └── Review/
 ├── scripts/
-│   └── pair_skill_formats.py             # Sync SKILL.md ↔ .uam formats
+│   └── pair_skill_formats.py
 ├── LICENSE
 └── README.md
 ```
 
----
+## Formats
 
-## Quick Start
+Each skill directory contains:
 
-### For Codex / Standard Skill Agents
+| File | Used by |
+| --- | --- |
+| `SKILL.md` | Codex and compatible standard skill agents |
+| `<skill-name>.uam` | Universal Agent Manager |
+
+`SKILL.md` is the source of truth. The pairing script copies its instructions into the UAM file while preserving UAM metadata.
+
+## Tech stack
+
+- Markdown with YAML frontmatter for agent and skill definitions
+- UAM files for Universal Agent Manager
+- Python 3 standard library for format synchronisation
+
+## Install
+
+Clone the repository, then copy the skills or agents you want into the matching directory for your AI tool.
 
 ```bash
-# Install skills from this repository
-# In your agent config or instructions:
-Install the standard skills from https://github.com/davidtaylor6130/My-AI-Skills.
-Use the folders containing SKILL.md and ignore every .uam file.
+git clone https://github.com/davidtaylor6130/My-AI-Skills.git
 ```
 
-### For Universal Agent Manager (UAM)
+For Universal Agent Manager, import the `skills/` directory. For standard skill agents, use the directories containing `SKILL.md` and ignore the `.uam` files.
+
+## Maintain paired formats
+
+The script uses Python 3 and has no third-party dependencies.
 
 ```bash
-# Import the skills/ folder directly in UAM
-# It uses .uam files and preserves category structure
-# Imports are snapshots — use "Replace" when updating
-```
-
----
-
-## Skill Format
-
-| File | Purpose |
-|------|---------|
-| `SKILL.md` | Canonical source — works with Codex, OpenCode, and compatible agents |
-| `<skill-name>.uam` | Native UAM format — generated from `SKILL.md` via pairing script |
-
-**`SKILL.md` is the single source of truth.** The pairing script copies its instructions into the UAM file while preserving UAM metadata, so both formats stay in sync without manual duplication.
-
----
-
-## Keeping Formats in Sync
-
-After editing a `SKILL.md` or adding a new skill:
-
-```bash
-# Create/update UAM counterparts
-python3 scripts/pair_skill_formats.py --write
-
-# Verify every standard skill has a matching UAM file with identical content
+# Check every pair
 python3 scripts/pair_skill_formats.py
+
+# Create missing pairs and sync changed SKILL.md files
+python3 scripts/pair_skill_formats.py --write
 ```
 
-- Uses Python standard library only — no dependencies to install
-- Validates names, descriptions, paths, and instruction bodies match
+## How it works
 
----
+Agents define a working role. Skills provide narrower instructions that tools can select from their frontmatter descriptions. Keeping both formats beside each other makes each skill portable without maintaining two instruction bodies by hand.
 
-## Using Skills & Agents
+## Status
 
-**Agents** define a working role (e.g., "n8n specialist", "read-only reviewer").  
-**Skills** give that agent a specific workflow (e.g., "security audit", "bug find swarm").
-
-Use either independently, or combine them when the task calls for it:
-
-```text
-# Example: Security audit with read-only enforcement
-Agent: read-only.md
-Skills: skills/Coding/secret-and-credential-audit/ and skills/Coding/public-release-privacy-audit/
-```
-
----
-
-## Contributing
-
-1. **Keep skills self-contained** in the category that best describes them
-2. **Use lowercase folder names** matching the skill's `name` field
-3. **Keep supporting files inside the skill folder** — no scattered assets
-4. **No private paths, credentials, or machine-specific config** in public instructions
-5. **Agent definitions** belong in `agents/`
-6. **If a change affects both formats**, edit `SKILL.md` and run the pairing script — don't edit `.uam` files directly
-7. **AI working documents** created by a skill default to `.UAM/AINotes/`; create it on first write. Product deliverables and transient tool-input files keep their required locations.
-
----
-
-## Support & Issues
-
-- **Stale instructions, broken workflows, missing provider support** → [GitHub Issues](https://github.com/davidtaylor6130/My-AI-Skills/issues)
-- **Questions about a specific skill** → Open an issue with the skill name in the title
-
----
+The collection is maintained on the `main` branch. Report stale instructions or broken workflows through [GitHub Issues](https://github.com/davidtaylor6130/My-AI-Skills/issues).
 
 ## License
 
-[MIT License](LICENSE) — David Taylor
-
----
-
-*Built for developers who want their AI tools to be as composable and version-controlled as their code.*
+[MIT](LICENSE) © 2026 David Taylor

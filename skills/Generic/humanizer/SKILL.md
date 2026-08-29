@@ -1,0 +1,18 @@
+---
+name: humanizer
+description: Write or edit natural, clear, non-sycophantic human prose for documentation, issues, pull requests, release notes, marketing, messages, and other user-facing text. Use automatically when drafting, rewriting, polishing, shortening, clarifying, or removing AI-sounding language. Do not invoke for ordinary code generation or routine chat without a writing artifact.
+---
+
+# Humanizer
+
+## Inputs
+
+Destination, audience, facts, required tone, constraints, and source text.
+
+## Workflow
+
+Select a mode: technical documentation, GitHub issue, pull request, release notes, marketing, customer/internal message, or general rewrite. Preserve facts and justified uncertainty. Use plain concrete words, active voice where clearer, one name per concept, and real symbols, paths, numbers, and examples in technical prose. Remove sycophantic openers, filler, fabricated confidence, corporate or generic AI language, repetitive “not X, but Y” framing, fake drama, and em dashes. Match structure and tone to the destination without artificial messiness or rigid sentence limits.
+
+## Verification and output
+
+Return only the requested artifact unless commentary is requested. Check factual fidelity, audience fit, naming consistency, and that uncertainty was not erased. Do not publish or send text without explicit authority. If source facts conflict, mark the uncertainty instead of inventing confidence.

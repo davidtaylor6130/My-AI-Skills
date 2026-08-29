@@ -1,11 +1,33 @@
 .DS_Store
 *.log
+*.err
+*.bak
 .env
 .env.local
 .env.production
 node_modules/
+build/
+dist/
+.venv/
 *.pem
 *.key
-/scripts/__pycache__
-/tests
-/tests
+__pycache__/
+*.py[cod]
+
+# Local editor and AI working data
+.claude/
+.UAM/
+.vscode/
+
+# Private skills and agents
+skills/Marketing/
+skills/Obsidian/
+agents/obsidian-agent.md
+
+# Local conversations and routing checks
+chats/
+chat-summaries/
+emails/
+evals/
+tests/
+scripts/validate_skill_routing.py

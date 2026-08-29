@@ -104,60 +104,6 @@ def normalize_standard_folder(manifest: Path, write: bool) -> Path:
     return target / "SKILL.md"
 
 
-def migrate_uam_files(write: bool) -> dict[str, str]:
-    mapping: dict[str, str] = {}
-    for source in sorted((SKILLS / "Marketing").rglob("*.uam")):
-        header, _ = split_document(source)
-        name = fields(header).get("commandName", "")
-        if not SLUG.fullmatch(name):
-            raise ValueError(f"{source}: invalid commandName {name!r}")
-        if source.parent.name == name and (source.parent / "SKILL.md").exists():
-            continue
-        target = source.parent / name / f"{name}.uam"
-        if target.exists():
-            raise ValueError(f"Cannot move {source} over {target}")
-        old_relative = source.relative_to(SKILLS / "Marketing").as_posix()
-        new_relative = target.relative_to(SKILLS / "Marketing").as_posix()
-        mapping[old_relative] = new_relative
-        mapping[f"marketing/{old_relative}"] = f"skills/Marketing/{new_relative}"
-        mapping[f"skills/Marketing/{old_relative}"] = f"skills/Marketing/{new_relative}"
-        print(f"move {source.relative_to(ROOT)} -> {target.relative_to(ROOT)}")
-        if write:
-            target.parent.mkdir(parents=True, exist_ok=True)
-            source.rename(target)
-    return mapping
-
-
-def update_marketing_paths(mapping: dict[str, str], write: bool) -> None:
-    replacements = {
-        "~/Documents/GitHub/My AI Skills/marketing/": "~/Documents/GitHub/My AI Skills/skills/Marketing/",
-        "tree/main/marketing": "tree/main/skills/Marketing",
-        **mapping,
-    }
-    for path in sorted((SKILLS / "Marketing").rglob("*.uam")):
-        text = path.read_text(encoding="utf-8")
-        updated = text
-        for old, new in sorted(replacements.items(), key=lambda item: len(item[0]), reverse=True):
-            updated = updated.replace(old, new)
-        header, body = split_text(updated, path)
-        metadata = fields(header)
-        relative = path.relative_to(ROOT).as_posix()
-        updated = updated.replace(
-            f"sourcePath: {metadata.get('sourcePath', '')}", f"sourcePath: {relative}", 1
-        )
-        if updated != text:
-            print(f"update paths in {path.relative_to(ROOT)}")
-            if write:
-                path.write_text(updated, encoding="utf-8")
-
-
-def split_text(text: str, path: Path) -> tuple[str, str]:
-    if not text.startswith("---\n") or "\n---\n" not in text[4:]:
-        raise ValueError(f"{path}: missing YAML frontmatter")
-    header, body = text[4:].split("\n---\n", 1)
-    return header, body.lstrip("\n").rstrip() + "\n"
-
-
 def create_missing_pairs(write: bool) -> None:
     for manifest in sorted(SKILLS.rglob("SKILL.md")):
         header, body = split_document(manifest)
@@ -261,8 +207,6 @@ def main() -> int:
         manifests = list(SKILLS.rglob("SKILL.md"))
         for manifest in manifests:
             normalize_standard_folder(manifest, True)
-        mapping = migrate_uam_files(True)
-        update_marketing_paths(mapping, True)
         create_missing_pairs(True)
         sync_pairs(True)
 
