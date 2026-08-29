@@ -84,7 +84,7 @@ Reject guesses that you cannot support.
 ```
 
 If subagents are unavailable, run the same roles serially. Keep separate notes and do not
-claim parallel or independent validation.
+claim parallel or independent validation. Persisted discovery notes belong in `.UAM/AINotes/`.
 
 ## 4. Require finding cards
 
@@ -165,9 +165,9 @@ For UI work:
   relevant to the change;
 - check the real packaged app when the package can differ from development.
 
-## 8. Maintain `issues-fixed.md`
+## 8. Maintain `.UAM/AINotes/issues-fixed.md`
 
-Create the file if absent. Append one entry per confirmed and fixed root cause:
+Create `.UAM/AINotes/` and the file if absent. Append one entry per confirmed and fixed root cause:
 
 ```markdown
 ## BUG-NNN — Short title
@@ -210,7 +210,7 @@ Do not declare completion until every required item is true:
 - real UI or runtime check passes when applicable;
 - saved screenshots were actually inspected when visual claims are made;
 - `git diff --check` passes;
-- `issues-fixed.md` matches the work;
+- `.UAM/AINotes/issues-fixed.md` matches the work;
 - no accepted in-scope finding remains unresolved;
 - no unrequested external action occurred.
 

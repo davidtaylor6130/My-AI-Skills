@@ -1,6 +1,6 @@
 ---
 name: wayfinder
-description: Turn a large, ambiguous effort that cannot fit safely in one working session into a progressively disclosed map of precise investigation and decision questions, then resolve the actionable frontier until the route is clear. Use automatically when the destination is known but the path cannot yet be specified, major unknowns block planning, or work must survive several sessions or transfers. Skip implementation-ready work, ordinary architecture decisions, small investigations, and tasks already clear enough to plan directly.
+description: Map blocking unknowns in large, multi-session work. Use automatically when major decisions prevent a trustworthy plan. Skip implementation-ready work, ordinary architecture choices, and small investigations.
 ---
 
 # Wayfinder
@@ -23,7 +23,7 @@ Otherwise use `architect`, the engineering investigation playbook, or normal pla
 
 ## Local-first map
 
-Create one Markdown map in the repository's existing planning or evidence location. If none exists, use `wayfinder.md` at the repository root and keep it uncommitted unless requested.
+Create `.UAM/AINotes/` on first write and keep one map at `.UAM/AINotes/wayfinder-<effort>.md` unless the user names a path or an existing relevant map already exists. Keep it uncommitted unless requested.
 
 ```markdown
 # Wayfinder: <effort>

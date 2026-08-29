@@ -11,7 +11,7 @@ The goal, current phase, reviewer needs, evidence locations, and local output pa
 
 ## Workflow
 
-Use CSV or TSV with `timestamp`, `phase`, `decision`, `reason`, `evidence`, and `result`. Append one meaningful decision or checkpoint per row. Evidence must resolve to a path, command output, commit, test, screenshot, trace, or artifact. Do not log trivial actions. Keep the trail local by default and commit it only when it is part of the deliverable. Single-writer operation is the baseline; separate files before concurrent writing.
+Create `.UAM/AINotes/` on first write and keep the trail at `.UAM/AINotes/decision-trail-<goal>.tsv` unless the user names a path or an existing relevant trail already exists. Use CSV or TSV with `timestamp`, `phase`, `decision`, `reason`, `evidence`, and `result`. Append one meaningful decision or checkpoint per row. Evidence must resolve to a path, command output, commit, test, screenshot, trace, or artifact. Do not log trivial actions. Keep the trail local by default and commit it only when it is part of the deliverable. Single-writer operation is the baseline; separate files before concurrent writing.
 
 ## Verification and output
 

@@ -1,0 +1,27 @@
+---
+uamVersion: V1 Imported
+title: "Edge case guard"
+maker: AutoImporter
+review: "Keep edge cases in the implementation loop. Use automatically when implementing or changing behaviour, or when edge cases are mentioned. Cover relevant failure paths without a separate audit."
+dateCreated: 2026-08-29T08:34:19Z
+dateUpdated: 2026-08-29T08:35:26Z
+favorite: false
+sourceProvider: Standard Skill
+sourcePath: skills/Coding/edge-case-guard/edge-case-guard.uam
+commandName: edge-case-guard
+group: Coding
+---
+
+# Edge case guard
+
+Treat edge cases as part of implementation, not a separate deliverable.
+
+Before editing, trace `caller/input → shared boundary/state → persistence/dependency → consumer/output`. Inspect sibling callers and existing constraints so the change works beyond the locally named function or screen.
+
+Consider only relevant cases: invalid or boundary inputs; first, repeated, stale, completed, or reordered state; partial completion, timeout, cancellation, retry, rollback, and cleanup; concurrency and idempotence; access and ownership; dependency and environment failure; existing data and compatibility; loading, empty, error, offline, accessibility, and unsaved-work states.
+
+Skip cases already made impossible by a verified type, constraint, platform primitive, or shared invariant. Handle plausible consequential cases at the closest shared boundary and add the smallest stable verification for each non-trivial branch. Surface undefined product behaviour only when it blocks safe implementation.
+
+Do not create a standalone edge-case report unless requested. Any AI working document created during the task belongs in `.UAM/AINotes/`; create the directory on first write. Keep product deliverables and transient tool files in their required locations.
+
+Before completion, confirm relevant high-impact paths are handled, sibling callers remain correct, failures cannot silently corrupt or lose data, and residual decisions or accepted risks are reported. Never claim every possible edge case is eliminated.

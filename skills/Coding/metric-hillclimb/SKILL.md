@@ -9,7 +9,7 @@ description: Systematically improve one measurable metric through repeated one-c
 
 Define workload, one primary metric and direction, stop predicate, regression checks, and a repeatable measurement command. Prove it separates meaningfully different cases, freeze it, then record repeated baseline samples when noisy. Run one hypothesis per attempt; keep changes only beyond noise with regressions passing, otherwise revert completely.
 
-Append CSV or TSV rows: attempt ID, hypothesis, variable, before, after, delta, variance/samples, regression status, verdict, notes. Preserve accepted changes as ordered units. Use one model for cheap experiments; isolate workers only for independent hypotheses. For prompt, skill, reviewer, worker, or routing targets, also use engineering workflow's blinded evaluation playbook.
+Create `.UAM/AINotes/` on first write and append results to `.UAM/AINotes/metric-hillclimb-<metric>.tsv` unless the user names a path or an existing relevant log already exists. Record attempt ID, hypothesis, variable, before, after, delta, variance/samples, regression status, verdict, and notes. Preserve accepted changes as ordered units. Use one model for cheap experiments; isolate workers only for independent hypotheses. For prompt, skill, reviewer, worker, or routing targets, also use engineering workflow's blinded evaluation playbook.
 
 ## Verification and output
 

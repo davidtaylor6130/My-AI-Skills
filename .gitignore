@@ -6,3 +6,6 @@
 node_modules/
 *.pem
 *.key
+/scripts/__pycache__
+/tests
+/tests

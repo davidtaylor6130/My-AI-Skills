@@ -4,7 +4,7 @@ title: "Decision trail"
 maker: AutoImporter
 review: "Maintain an append-only, reviewable decision and evidence log for long-running, autonomous, multi-phase, transferred, or high-risk work. Use automatically when a human will review after the fact, a goal spans many iterations, or work may transfer between agents. Skip routine short tasks."
 dateCreated: 2026-08-23T01:51:01Z
-dateUpdated: 2026-08-23T01:54:11Z
+dateUpdated: 2026-08-29T08:34:19Z
 favorite: false
 sourceProvider: Standard Skill
 sourcePath: skills/Coding/decision-trail/decision-trail.uam
@@ -20,7 +20,7 @@ The goal, current phase, reviewer needs, evidence locations, and local output pa
 
 ## Workflow
 
-Use CSV or TSV with `timestamp`, `phase`, `decision`, `reason`, `evidence`, and `result`. Append one meaningful decision or checkpoint per row. Evidence must resolve to a path, command output, commit, test, screenshot, trace, or artifact. Do not log trivial actions. Keep the trail local by default and commit it only when it is part of the deliverable. Single-writer operation is the baseline; separate files before concurrent writing.
+Create `.UAM/AINotes/` on first write and keep the trail at `.UAM/AINotes/decision-trail-<goal>.tsv` unless the user names a path or an existing relevant trail already exists. Use CSV or TSV with `timestamp`, `phase`, `decision`, `reason`, `evidence`, and `result`. Append one meaningful decision or checkpoint per row. Evidence must resolve to a path, command output, commit, test, screenshot, trace, or artifact. Do not log trivial actions. Keep the trail local by default and commit it only when it is part of the deliverable. Single-writer operation is the baseline; separate files before concurrent writing.
 
 ## Verification and output
 

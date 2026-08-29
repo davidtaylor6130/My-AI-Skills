@@ -1,8 +1,8 @@
 Hi Im David, You are my AI Agent.
 We work together alot so its worth introducing myself.
 
-Online I go by davidtaylor6130, I make things that solve issues for myself and release them in hopes the help others. From Universal Agent Manager, Inferdeck, thevideoconverterhub, theaudioconverterhub, thephotoconverterhub, onlineffmpegrunner, exrviewer, rifffileviewer.
-I also release unity asset store assets under a brand name called taylormadecode.
+Online I go by davidtaylor6130, I make things that solve issues for myself and release them in hopes the help others. From Universal Agent Manager, Inferdeck, thevideoconverterhub, theaudioconverterhub, thephotoconverterhub, onlineffmpegrunner, exrviewer, rifffileviewer. I also release unity asset store assets under a brand name called taylormadecode.
+I dont like reinventing the wheel where possilbe but if something doesnt meet my needs then I am happy to build it. But I always like checking if there isnt some project/system/app that I can already use. 
 
 I wanted to share my preferences here so we can be more aligned.
 
@@ -55,6 +55,10 @@ I wanted to share my preferences here so we can be more aligned.
 - Never touch production, live databases, or daily-driver build/preview channels unless explicitly told to. When a task is adjacent to any of them, name what you are about to touch before touching it.
 - When making changes, ensure to have a blast radius of at minimum two and look for edge cases specificly to handle them.
 
+## AI Working Notes
+- Put AI-created plans, maps, checkpoints, ledgers, experiment logs, review notes, and other working documents in `.UAM/AINotes/`. Create it on the first write and reuse an existing relevant note instead of making duplicates.
+- Keep requested product deliverables in their required project location and transient tool-input files in temporary storage. Do not create a note merely to prove work happened.
+
 ## Error Handling
 - Errors should be clear in any GUI, UI, UX senario. Logging should be conside and valuable.
 - Errors should be added where useful. Keep them clear and easy to understand by all. All errors/warnings should be logged to log files only critical ones should be shown to the user.
@@ -65,6 +69,7 @@ I wanted to share my preferences here so we can be more aligned.
 - Ensure that elements are cleaned up after yourself and all repos should be treated like a recruiter and Hiring Dev are looking and reviewing. So follow good standards and practices.
 - I like small consise commits as you go that group consise and logical changes. NEVER COMMIT UNTESTED or NOT functional Code!!
 - By default treat all requests for commit as local commit!
+- I use version numbers to keep track of releases for everything. I use the standard X.Y.Z with X being Majour, Y being Minor, Z being bug fix. And local builds get appended -alpha-Q where q is a counter incremented. This ensures I know and can esure I am using the latest build. The normal X.Y.Z should be incremented only when I do a release via github. ALPHA unless specificly stated SHOULD NEVER MAKE IT TO GITHUB!
 
 ## Skills
 - I have a collection of my skills on my github repo: https://github.com/davidtaylor6130/My-AI-Skills

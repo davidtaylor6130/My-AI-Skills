@@ -4,7 +4,7 @@ title: "Resume work"
 maker: AutoImporter
 review: "Reconstruct and continue interrupted work from checkpoints, transcripts, branches, worktrees, goal state, and verification evidence without repeating completed investigation. Use automatically when resuming, taking over, transferring between worker nodes, recovering after restart or context compaction, or asking where a task was left. Skip fresh tasks with no prior work."
 dateCreated: 2026-08-23T01:51:01Z
-dateUpdated: 2026-08-23T01:51:01Z
+dateUpdated: 2026-08-29T08:34:19Z
 favorite: false
 sourceProvider: Standard Skill
 sourcePath: skills/Coding/resume-work/resume-work.uam
@@ -17,6 +17,8 @@ group: Coding
 ## Checkpoint contract
 
 Record goal ID; task/thread ID; worker node; model/runtime when known; repository; workspace/worktree; branch; HEAD; dirty files; phase; original done predicate; completed work; verified claims and evidence; failed approaches; open decisions; active processes/sessions; locks/ownership; next exact action.
+
+Store checkpoints at `.UAM/AINotes/resume-<task>.md`, creating `.UAM/AINotes/` on first write. Reuse the existing task checkpoint instead of creating dated duplicates; honour a user-specified or inherited checkpoint path.
 
 ## Workflow
 

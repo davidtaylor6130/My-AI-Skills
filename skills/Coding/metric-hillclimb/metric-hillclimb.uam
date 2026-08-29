@@ -4,7 +4,7 @@ title: "Metric hillclimb"
 maker: AutoImporter
 review: "Systematically improve one measurable metric through repeated one-change experiments, frozen measurement, keep-or-revert decisions, and a results log. Use automatically for sustained optimisation of performance, prompts, model settings, tool reliability, quality scores, latency, memory, throughput, or any explicit numerical target. Skip one-off fixes without a stable metric."
 dateCreated: 2026-08-23T01:51:01Z
-dateUpdated: 2026-08-23T01:51:01Z
+dateUpdated: 2026-08-29T08:34:19Z
 favorite: false
 sourceProvider: Standard Skill
 sourcePath: skills/Coding/metric-hillclimb/metric-hillclimb.uam
@@ -18,7 +18,7 @@ group: Coding
 
 Define workload, one primary metric and direction, stop predicate, regression checks, and a repeatable measurement command. Prove it separates meaningfully different cases, freeze it, then record repeated baseline samples when noisy. Run one hypothesis per attempt; keep changes only beyond noise with regressions passing, otherwise revert completely.
 
-Append CSV or TSV rows: attempt ID, hypothesis, variable, before, after, delta, variance/samples, regression status, verdict, notes. Preserve accepted changes as ordered units. Use one model for cheap experiments; isolate workers only for independent hypotheses. For prompt, skill, reviewer, worker, or routing targets, also use engineering workflow's blinded evaluation playbook.
+Create `.UAM/AINotes/` on first write and append results to `.UAM/AINotes/metric-hillclimb-<metric>.tsv` unless the user names a path or an existing relevant log already exists. Record attempt ID, hypothesis, variable, before, after, delta, variance/samples, regression status, verdict, and notes. Preserve accepted changes as ordered units. Use one model for cheap experiments; isolate workers only for independent hypotheses. For prompt, skill, reviewer, worker, or routing targets, also use engineering workflow's blinded evaluation playbook.
 
 ## Verification and output
 

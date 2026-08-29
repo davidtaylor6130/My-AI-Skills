@@ -4,7 +4,7 @@ title: "Bug Find Swarm"
 maker: David Taylor
 review: "Coordinate bounded, non-overlapping discovery, reproduction, fixes, and verification across many files or subsystems. Use automatically for broad bug bashes, repo-wide reliability investigations, or parallel cross-layer review where independent scopes exist. Skip small local defects, single-file changes, and requests that only need blast-radius tracing without a swarm; use a serial fallback when subagents are unavailable or costly."
 dateCreated: 2026-08-20T21:57:36Z
-dateUpdated: 2026-08-23T01:51:01Z
+dateUpdated: 2026-08-29T08:34:19Z
 favorite: false
 sourceProvider: Standard Skill
 sourcePath: skills/Coding/bug-find-swarm/bug-find-swarm.uam
@@ -93,7 +93,7 @@ Reject guesses that you cannot support.
 ```
 
 If subagents are unavailable, run the same roles serially. Keep separate notes and do not
-claim parallel or independent validation.
+claim parallel or independent validation. Persisted discovery notes belong in `.UAM/AINotes/`.
 
 ## 4. Require finding cards
 
@@ -174,9 +174,9 @@ For UI work:
   relevant to the change;
 - check the real packaged app when the package can differ from development.
 
-## 8. Maintain `issues-fixed.md`
+## 8. Maintain `.UAM/AINotes/issues-fixed.md`
 
-Create the file if absent. Append one entry per confirmed and fixed root cause:
+Create `.UAM/AINotes/` and the file if absent. Append one entry per confirmed and fixed root cause:
 
 ```markdown
 ## BUG-NNN — Short title
@@ -219,7 +219,7 @@ Do not declare completion until every required item is true:
 - real UI or runtime check passes when applicable;
 - saved screenshots were actually inspected when visual claims are made;
 - `git diff --check` passes;
-- `issues-fixed.md` matches the work;
+- `.UAM/AINotes/issues-fixed.md` matches the work;
 - no accepted in-scope finding remains unresolved;
 - no unrequested external action occurred.
 

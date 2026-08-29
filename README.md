@@ -135,6 +135,7 @@ Skills: skills/Coding/secret-and-credential-audit/ and skills/Coding/public-rele
 4. **No private paths, credentials, or machine-specific config** in public instructions
 5. **Agent definitions** belong in `agents/`
 6. **If a change affects both formats**, edit `SKILL.md` and run the pairing script — don't edit `.uam` files directly
+7. **AI working documents** created by a skill default to `.UAM/AINotes/`; create it on first write. Product deliverables and transient tool-input files keep their required locations.
 
 ---
 
