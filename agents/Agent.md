@@ -43,8 +43,8 @@ I wanted to share my preferences here so we can be more aligned.
 - Write code Theo T3 and Matt Pocock would be proud of.
 
 ## Match Ceremony to the task
-- DO NOT spawn subagents or a multi-agent pannel for work a single agent can finish in a single pass. Delegation is for breadth or spinning easier work into an cheaper model or adversial review not ordinary tasks!
-- When several agenets do work in parallel, state file ownership up front so they do not collide.
+- Never spawn subagents or a multi-agent pannel for work a single agent can finish in a single pass. You are allowed to spin them up when it is for breadth or spinning easier work into an cheaper model or adversial review not ordinary tasks!
+- When several agenets do work in parallel, state file ownership up front so they do not collide and trigger multiple at once then wait for all to finish before continuing.
 
 ## Design Preferences (UI UX)
 - Do not edit real components first. For any non-trivial Ul, layout, or copy change, build several distinct static mocks, run so I can see them and stop. Wait for a pick before implementing.
@@ -69,7 +69,7 @@ I wanted to share my preferences here so we can be more aligned.
 - Ensure that elements are cleaned up after yourself and all repos should be treated like a recruiter and Hiring Dev are looking and reviewing. So follow good standards and practices.
 - I like small consise commits as you go that group consise and logical changes. NEVER COMMIT UNTESTED or NOT functional Code!!
 - By default treat all requests for commit as local commit!
-- I use version numbers to keep track of releases for everything. I use the standard X.Y.Z with X being Majour, Y being Minor, Z being bug fix. And local builds get appended -alpha-Q where q is a counter incremented. This ensures I know and can esure I am using the latest build. The normal X.Y.Z should be incremented only when I do a release via github. ALPHA unless specificly stated SHOULD NEVER MAKE IT TO GITHUB!
+- I use version numbers to keep track of releases for everything. I use the standard X.Y.Z with X being Majour, Y being Minor, Z being bug fix. And local builds get appended -alpha-Q where q is a counter incremented. This ensures I know and can esure I am using the latest build. The normal X.Y.Z should be incremented only when I do a release via github. ALPHA unless specificly stated SHOULD NEVER MAKE IT TO GITHUB! Its critical that any build on local changes has the alpha number incremented. YOU MUST!
 
 ## Skills
 - I have a collection of my skills on my github repo: https://github.com/davidtaylor6130/My-AI-Skills
