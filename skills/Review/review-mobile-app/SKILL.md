@@ -7,6 +7,10 @@ description: "Review an iOS or Android application on a real device, simulator, 
 
 Review the mobile experience users install, touch, interrupt, and resume.
 
+## Execution role
+
+When coordinating this assessment in a parent thread, use `adversarial-review` to dispatch fresh independent `review` workers with this skill as their inspection method, then adjudicate their results. When already running as a delegated review worker, perform only the assigned inspection and return your individual verdict; do not dispatch reviewers or invoke the coordinator. The implementer's own assessment does not satisfy the independent review gate.
+
 ## Inputs
 
 Use the build or launch command, target platforms and versions, intended users and journeys, device classes, test data, and existing automation. Prefer a real device for hardware-dependent behaviour; otherwise state the simulator or emulator limit.
@@ -29,4 +33,4 @@ Repeat affected journeys on the same device surface and, for high-impact adaptiv
 
 ## Output
 
-Return `READY`, `NEEDS_WORK`, `INCONCLUSIVE`, or `BLOCKED`, plus tested journeys and devices, prioritised evidence-backed findings, strengths to preserve, coverage gaps, and the next highest-value check. A single agent is the baseline; add independent review only for broad or high-risk store readiness.
+Return `READY`, `NEEDS_WORK`, `INCONCLUSIVE`, or `BLOCKED`, plus tested journeys and devices, prioritised evidence-backed findings, strengths to preserve, coverage gaps, and the next highest-value check.
