@@ -1,180 +1,46 @@
 ---
 name: github-repo-cleanup
-description: Clean up a repository to portfolio-ready standards using local git for repository work and GitHub tooling only for hosted metadata. Use automatically for repository polish, README/metadata/ignore/licence audits, public portfolio readiness, and issue hygiene. Exclude product-code refactors and release publication itself.
+description: Audit and improve repository documentation, metadata, tracked files, ignore rules, licensing and issue hygiene using the project's native VCS and shared GitHub workflows. Use for repository cleanup or portfolio readiness. Exclude product-code refactors and release publication itself.
 ---
 
-# Github Repo Cleanup — Clean Up & Polish a Repository
+# GitHub Repository Cleanup
 
-Follow `../references/action-policy.md`; automatic pickup never authorises commits or hosted changes.
+Fetch [the live-reference entry guide](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/using-references.md), then follow its shared context
+and action policy. Use [the shared writing guide](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/writing-guide.md) for clear prose and factual
+evidence. Audit the requested repository without assuming its language, platform or VCS.
 
-You are helping the user clean up and polish a GitHub repository to portfolio-ready standards. Work through each section below in order. Be decisive — make reasonable calls without asking unless something genuinely requires owner input (e.g. choosing a licence type, whether a file is sensitive).
+## Review the relevant areas
 
-Before any commit, push, tag, or release, use `question` tool for user approval. Never execute irreversible actions without explicit confirmation via `question` tool.
+Scale the audit to the project and requested cleanup. Inspect:
 
----
+- **Hosted metadata:** description, topics, visibility and links. Propose accurate, project-specific
+  values. Do not assume public visibility or change it merely for portfolio presentation.
+- **Tracked files and ignore rules:** identify generated output, dependencies, editor artifacts,
+  accidental data and sensitive material using the actual stack. Explain each proposed removal or
+  untracking change; do not delete source/runtime assets or blanket-ignore all data/config files.
+- **README and docs:** verify purpose, actual capabilities, setup, supported environment, architecture
+  where useful, status and links against the repository. Keep its voice and established structure.
+  Use verified product visuals only when graphical/interaction behaviour benefits from them; do not
+  demand a logo, screenshots or a fixed number of bullets from every project.
+- **Licence:** identify what exists. If absent or unclear, ask David to choose/confirm the licence
+  and owner details before adding or replacing its text. Preserve the actual legal text.
+- **Issue/release/branch hygiene:** inspect only the hosted records or history needed for specific
+  findings. Recommend supported actions; do not infer that an old branch is disposable or an issue
+  is fixed merely from a commit message.
 
-## Step 0 — Gather context
+Prepare reversible local cleanup within scope and validate the changed documentation/configuration
+against the actual project. Preserve unrelated edits and do not automatically stage every finding.
 
-Run these in parallel before doing anything:
-- `git log --oneline -10` — understand the project history
-- `git remote get-url origin` — confirm the GitHub remote; if no remote URL exists, note this and skip all gh steps below — output manual commands where applicable
-- Read `README.md` if it exists
-- `git ls-files` — spot tracked clutter
+## Reuse the shared workflows
 
-Do not require `gh` for local audits or edits. Before the first GitHub-hosted operation, run
-`gh auth status`. If authentication is unavailable, skip only the remote metadata, issue, and release
-steps; finish the local cleanup and report what remains.
+- New reports or report changes use [the issue workflow](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/issue-workflow.md), including its labels
+  and duplicate checks; a broad backlog/discovery review uses [Issue Sweep](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/github-issue-sweep/SKILL.md).
+- Commit preparation uses [the commit workflow](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/commits.md).
+- A cleanup PR uses [Create PR](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/github-create-pr/SKILL.md), including its shared format.
+- Version/tag/release work uses [Version Tag Release](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/github-version-tag-release/SKILL.md),
+  including David's versioning rules and [the release-notes format](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/release-format.md).
+- Any remote metadata, tracker, branch or publication change uses the action policy and
+  [publishing workflow](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/publishing.md). A cleanup request alone does not authorise them.
 
----
-
-## Step 1 — Repo metadata (GitHub)
-
-If the remote is hosted on GitHub and `gh` is authenticated, inspect it with
-`gh repo view --json name,description,repositoryTopics,visibility,licenseInfo`. Use `gh repo edit` only
-to apply approved GitHub-hosted metadata changes. If `gh` is unavailable, skip this step without
-blocking local repository cleanup.
-
-**Description**
-- Must be a single clear sentence: what the project does, for whom, in what context.
-- No jargon, no filler ("just a", "simple", "my project").
-- Max ~120 characters.
-
-**Topics / tags**
-- Must include the primary language (`cpp`, `python`, `typescript`, `go`, etc.)
-- Must include the platform/OS if relevant (`windows`, `linux`, `macos`, `cross-platform`)
-- Must include the domain (`ai`, `llm`, `game-dev`, `web`, `cli`, `devtools`, etc.)
-- Must include key dependencies or tech that someone would search for
-- Remove generic noise topics that add no search value (e.g. 'hello-world', 'first-repo', 'learning-project', 'work-in-progress')
-- Aim for 6–12 topics total
-
-**Visibility**
-- Confirm the repo is public (or ask if it should be before proceeding)
-
----
-
-## Step 2 — Tracked clutter audit
-
-Run `git ls-files` and flag any of the following that are tracked:
-- Compiled binaries: `*.exe`, `*.dll`, `*.so`, `*.dylib`, `*.obj`, `*.o`, `*.lib`, `*.a`
-- Build output: `build/`, `dist/`, `out/`, `bin/`, `obj/`
-- Dependencies: `node_modules/`, `vendor/`, `.venv/`, `__pycache__/`, `.gradle/`
-- Logs and debug files: `*.log`, `*.err`, `stderr.txt`, `stdout.txt`, `logs/`
-- Editor junk: `.vs/`, `.idea/`, `*.user`, `*.suo`
-- Credentials or secrets: `.env`, `*.pem`, `*.key`, `secrets.*`, `credentials.*`
-- Debug one-off scripts: `test_*.json`, `debug_*`, `compile_debug.*`, `test_fix.*`
-- Backup files: `*.bak`, `*.orig`, `*.tmp`
-- Large unintentional media: images >1 MB that are not deliberate assets
-
-For each hit: `git rm --cached <file>` (use `-r` for directories — removes from tracking, keeps everything on disk) and add the pattern to `.gitignore`. This stages the removal; per the ground rules, leave it staged and let the user commit. Do NOT delete files from disk without confirming with the user first.
-
----
-
-## Step 3 — .gitignore
-
-Check `.gitignore` exists and covers the project's tech stack. If missing or thin, add patterns for the detected languages and tools. Always include at minimum:
-
-```
-*.log
-*.err
-build/
-dist/
-.env
-node_modules/
-```
-
-Do not over-ignore: runtime assets, config files, and data folders that belong tracked should not be blanket-ignored.
-
----
-
-## Step 4 — README audit
-
-Read the existing README carefully. A portfolio README must have all of the following — add or rewrite any that are missing or weak:
-
-1. **Banner / logo** — a header image at the top (check `assets/`, `docs/`, root; wire it up if found; note it as missing if not, but do not fabricate one)
-2. **One-liner** — a bold sentence under the banner: what it does, for whom
-3. **Feature list** — 4–8 bullets of what makes this technically interesting to a reviewer
-4. **Tech stack** — explicit list: language, key libraries, platform, hardware if relevant
-5. **Architecture / how it works** — 2–5 sentences explaining the non-obvious design decisions; this is what impresses technical reviewers
-6. **Getting started** — prerequisites, build/install steps, run command; verify these against the actual repo (CMakeLists, package.json, Makefile, etc.) before writing
-7. **Screenshots or demo** — embed existing assets if available; note where to find them otherwise
-8. **Known issues / status** — link to GitHub Issues or list the top 2–3 known gaps; shows honesty
-9. **Licence badge + section** — see Step 5
-10. **No stale content** — remove references to deleted files, old version numbers, or features that no longer exist
-
-Write in the user's existing voice — match the tone of what's already there. No fluff.
-
----
-
-## Step 5 — Licence
-
-Check `git ls-files LICENSE*`.
-
-- If missing: ask the user which licence to use. Suggest MIT for general open-source portfolio work, Apache 2.0 if there are patent concerns, GPL if they want copyleft. Pick one based on the project type and ask to confirm.
-- Once decided: draft the full `LICENSE` text with the correct year and the user's name, present it to the user for review, and do not write it until explicitly confirmed.
-- Add a licence badge to the README header.
-
----
-
-## Step 6 — Release / tag
-
-Check `git tag -l`.
-
-- If no tags exist: suggest creating `v0.1.0` (or appropriate first version) on the latest commit on main, with release notes covering what the project is and current known issues.
-- If a tag exists but has no GitHub Release: suggest creating one with `gh release create`.
-- Release notes must include: what the project is, any version numbering rationale if non-standard, and a known issues section.
-
-Tagging and releasing push to the remote — always confirm with the user before doing either (see ground rules). If gh fails during this step, output the exact command for the user to run manually rather than proceeding without it. Release tagging is handled separately by `github-version-tag-release` when needed — skip this step unless you're releasing outside that flow.
-
----
-
-## Step 7 — GitHub Issues hygiene
-
-Run `gh issue list --state open --limit 100 --json number,title,labels`.
-
-- Confirm known bugs and missing features are tracked as issues
-- Issues should have labels (`bug`, `enhancement`, `question`, `documentation`)
-- Flag any issues that evidence in recent commits shows may be resolved to the user with commit references. Do not auto-close — let the user decide.
-
-If gh fails during this step, output the exact command for the user to run manually rather than proceeding without it.
-
----
-
-## Step 8 — Branch state
-
-- Confirm the current branch and working tree with `git status --short --branch`
-- Read the cached remote default with `git symbolic-ref --short refs/remotes/origin/HEAD` when available
-- List remote branches: `git branch -r` — flag any that look abandoned
-- Do NOT delete branches without asking the user
-
----
-
-## Step 9 — Final report
-
-Output a checklist of everything done, everything that needs the user's input, and anything skipped with a reason:
-
-```
-## Github Repo Cleanup Report — <repo name>
-
-### Done
-- [x] ...
-
-### Needs your input
-- [ ] ...
-
-### Skipped
-- [ ] ... (reason)
-```
-
-Be specific — "README updated: added architecture section and tech stack" not "README improved".
-
----
-
-## Ground rules
-
-- Never commit, push, tag, or create releases without being asked
-- Use git for repository operations. Use `gh` only for GitHub-hosted metadata, issues, pull requests,
-  Actions, and releases.
-- Never delete files from disk — only untrack with `git rm --cached`
-- If a file might contain credentials or sensitive config, flag it and ask before touching it
-- Never fabricate screenshots, fake badges, or invented feature descriptions
-- Match the user's existing writing style in any text you produce
+Report concrete local changes and validation, ready-to-review remote proposals, unresolved owner
+choices and skipped items with reasons. Do not claim unused audits, independent review or publishing.

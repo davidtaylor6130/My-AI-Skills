@@ -1,0 +1,119 @@
+# Publishing text and visual evidence
+
+Read [the action policy](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/action-policy.md)
+before any remote write, including attachment upload. Prepare the complete text and files locally
+first. These mechanics apply to issues, PRs, comments and release notes; they do not grant approval.
+
+## Markdown and exact text
+
+Write the proposed UTF-8 Markdown to a unique temporary file with real newlines. Show David the
+actual text and applicable metadata. Use a file-writing tool or a quoted heredoc rather than a
+double-quoted shell string containing literal `\n`, backticks or command substitutions.
+
+After approval, pass `--body-file <file>` for supported issue/PR/comment operations, or
+`--notes-file <file>` for release notes. For example, with the confirmed repository and existing labels:
+
+```bash
+gh issue create --repo <owner/repo> --title '<approved-title>' --body-file <body-file> --label '<approved-label>'
+```
+
+Do not replace approved text with generated fill options or assume a command's dry-run mode is
+side-effect-free. For a connector or browser, submit the same approved text through its supported
+fields. Keep the prepared file until the published result has been checked.
+
+## Draft and publication state
+
+Show the intended state as part of the proposed artifact. For PRs, an approved draft maps to
+`gh pr create --draft` or the connector's draft field; create a ready PR only when that state was
+approved. Promoting a draft with `gh pr ready` or its equivalent is a separate remote action under
+the action policy.
+
+For releases, approval to create a draft does not approve publication. Use `--draft` unless David
+has explicitly approved immediate publication of the exact candidate. With `gh`, creation must use
+`--verify-tag` so a missing remote tag causes failure rather than automatic creation at the default
+branch. That flag checks existence; the release workflow must also verify the tag's target revision.
+After draft approval and that target check, for example:
+
+```bash
+gh release create <approved-tag> --repo <owner/repo> --verify-tag --draft --title '<approved-title>' --notes-file <notes-file>
+```
+
+Pass only the approved asset files. Release creation with assets involves separate draft, upload
+and publication requests; without `--draft`, the CLI proceeds to publication. When preparing a
+draft, verify its complete assets before a separately approved publication:
+
+```bash
+gh release edit <approved-tag> --repo <owner/repo> --verify-tag --draft=false
+```
+
+Recheck the remote tag target before publishing an existing draft. For a prerelease exception,
+follow [the versioning confirmations](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/versioning.md),
+including the separate final publication confirmation. Connector/browser operations must enforce
+the same approved state and existing-tag/target checks. See the
+[release create manual](https://cli.github.com/manual/gh_release_create) and
+[release edit manual](https://cli.github.com/manual/gh_release_edit).
+
+## Images and recordings
+
+A filesystem path or `file://` URL in posted Markdown is not an uploaded attachment. Select actual
+product evidence, verify what each image shows and prepare meaningful alt text/state labels. Show
+David the selected files and destination before uploading; attaching in a browser uploads the file
+immediately, even if the issue/comment is not yet submitted.
+
+### Native CLI when supported
+
+Check the installed version and the exact command's help for `--attach`; do not assume the flag
+exists. GitHub [introduced native attachments in `gh` 2.99.0](https://github.blog/changelog/2026-09-01-github-cli-media-in-issues-pull-requests-and-comments/). Confirm current host, token and repository
+permission support using [GitHub's CLI attachment guide](https://docs.github.com/en/github-cli/github-cli/attaching-files-with-github-cli)
+and the [command manual](https://cli.github.com/manual/gh_issue_create). Do not silently upgrade
+software or request broader credentials as part of filing a report.
+
+In the body file, place the image where it belongs:
+
+```markdown
+![Observed error state](/absolute/path/repro.png)
+```
+
+After approval, include the same path as an attachment:
+
+```bash
+gh issue create --repo <owner/repo> --title '<approved-title>' --body-file <body-file> --label '<approved-label>' --attach /absolute/path/repro.png
+```
+
+Repeat `--attach` for multiple files. The CLI replaces matching local Markdown references with
+uploaded URLs; an attachment not referenced in the body is appended. Prefer absolute paths so a
+body file in a temporary directory cannot change relative-path resolution. Do not combine attachment
+creation with `--web`, or use PR `--dry-run` as an upload preview.
+
+### Supported fallback
+
+If a connector explicitly supports native attachment upload, use its documented operation. A tool
+that merely writes the body or downloads images is not an uploader. Otherwise, use GitHub's
+authenticated browser editor: after upload approval, attach the file, wait for upload completion and
+retain the generated URL/Markdown. Submit the approved artifact or place those real URLs into the
+body file for the approved API/CLI submission. Check the final rendered placement.
+
+If authenticated upload is unavailable, keep the local evidence ready and report the upload gap.
+Ask David to attach it or choose a supported route; do not publish broken local-path images. Do not
+work around the gap by pushing an attachments branch, creating a release/gist, uploading to a third
+party or using undocumented endpoints without a specifically reviewed plan and approval.
+
+Uploaded public-repository files are publicly accessible. Check current file-type/size limits and
+browser instructions in [GitHub's attachment documentation](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/attaching-files).
+Do not claim an upload was tested merely because these instructions were read.
+
+## Verification and partial failures
+
+Verify the resulting URL, repository, title/body, labels, refs or tag as applicable. Inspect rendered
+Markdown and each media asset as an intended reader; there must be no unresolved local paths or
+incomplete upload placeholders. Preserve factual preparing/opening/publishing attribution.
+
+A non-zero exit does not prove nothing was written. In particular, `gh` can create an issue/PR with
+successful uploads and print its URL even when later attachments fail. Inspect that URL and remote
+state before retrying. Identify exactly which assets or fields are missing and prepare an approved
+repair of the existing artifact instead of creating a duplicate. Reuse approval only for the same
+reviewed action and scope; material repairs need renewed review under the action policy.
+
+For a failed release command, inspect the existing tag, draft/published state and uploaded assets
+before retrying. Keep an incomplete draft unpublished and prepare the missing-asset repair for
+approval. Do not publish, recreate the release or move its tag as an automatic recovery step.
