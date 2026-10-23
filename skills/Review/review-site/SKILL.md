@@ -7,6 +7,10 @@ description: "Review a website or browser application on its real rendered surfa
 
 Review the experience a visitor can actually use, not only its source code.
 
+## Execution role
+
+When coordinating this assessment in a parent thread, use `adversarial-review` to dispatch fresh independent `review` workers with this skill as their inspection method, then adjudicate their results. When already running as a delegated review worker, perform only the assigned inspection and return your individual verdict; do not dispatch reviewers or invoke the coordinator. The implementer's own assessment does not satisfy the independent review gate.
+
 ## Inputs
 
 Use the URL or launch command, intended users and goals, supported viewports, existing requirements, and any authenticated test account the user has supplied. Do not request credentials unless the journey genuinely requires them.
@@ -37,4 +41,4 @@ Return:
 - what worked well and should be preserved;
 - evidence limits and the next highest-value check.
 
-If the site cannot run, report the exact failing command, missing prerequisite, and what static review could and could not establish. A single agent is sufficient; use independent review only for a broad or high-risk release audit.
+If the site cannot run, report the exact failing command, missing prerequisite, and what static review could and could not establish.

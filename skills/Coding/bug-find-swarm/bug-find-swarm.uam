@@ -4,7 +4,7 @@ title: "Bug Find Swarm"
 maker: David Taylor
 review: "Coordinate bounded, non-overlapping discovery, reproduction, fixes, and verification across many files or subsystems. Use automatically for broad bug bashes, repo-wide reliability investigations, or parallel cross-layer review where independent scopes exist. Skip small local defects, single-file changes, and requests that only need blast-radius tracing without a swarm; use a serial fallback when subagents are unavailable or costly."
 dateCreated: 2026-08-20T21:57:36Z
-dateUpdated: 2026-08-29T08:34:19Z
+dateUpdated: 2026-10-23T21:30:09Z
 favorite: false
 sourceProvider: Standard Skill
 sourcePath: skills/Coding/bug-find-swarm/bug-find-swarm.uam
@@ -173,6 +173,8 @@ For UI work:
 - verify loading, empty, error, success, keyboard, reduced-motion, and dense-content states
   relevant to the change;
 - check the real packaged app when the package can differ from development.
+
+The parent must also run the `adversarial-review` gate before declaring fixes complete. Serial discovery, implementer checks, and a scoped diff inspection do not replace fresh independent reviewers. Delegated implementers return their evidence to the parent; review workers never start another panel.
 
 ## 8. Maintain `.UAM/AINotes/issues-fixed.md`
 
