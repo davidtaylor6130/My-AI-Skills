@@ -26,3 +26,20 @@ Keep a short record of the relevant repository, revision/workspace, environment,
 contributor metadata. Reuse it for evidence and attribution rather than reconstructing facts later.
 Use [the action policy](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/action-policy.md)
 for all approval decisions.
+
+## GitHub publication prerequisite
+
+On a human-triggered PR invocation, verify that the intended GitHub repository and root/base
+branch or required base revision exist and are accessible at the agreed destination. Do not
+mistake the local checkout's existence for an available GitHub root. If access fails, distinguish
+confirmed absence from an authentication/permission gap; do not claim a private repository is
+missing solely from an unauthorised response.
+
+If the repository or intended root/base is absent, keep the candidate and PR draft local in an
+awaiting-root state. Report exactly what is missing and wait for a human to re-trigger after it
+is on GitHub. Do not poll, schedule checks or resume automatically for this condition. Do not
+create the repository, push the missing root/base, change visibility or retarget the PR as a
+workaround. The separately approved task-head push can proceed only once this prerequisite is met.
+
+When the human re-triggers, check the destination, base and candidate again before continuing.
+This human-triggered wait is distinct from automatic resumption after a reviewer's usage reset.

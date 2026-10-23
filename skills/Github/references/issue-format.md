@@ -35,8 +35,9 @@ title type is separate from labels; use the shared issue workflow's repository-o
 5. **Acceptance criteria, when useful.** List observable outcomes that would resolve the report or
    satisfy the request. Keep future checks unchecked. Do not turn a preferred implementation into
    a requirement unless agreed.
-6. **Review.** Record actual triage/review, reviewers/models, rounds, verdicts and unresolved
-   questions. Distinguish reviewing a report from reproducing a bug or reviewing a fix.
+6. **Review.** Use [the review workflow](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/review-workflow.md)'s compact counts and per-agent lines when
+   independent report review occurred. Otherwise state the actual triage/self-review status.
+   Distinguish reviewing a report from reproducing a bug or reviewing a fix.
 7. **Preparation and filing.** Name the actual model drafting/filing on behalf of David Taylor,
    with the actual host app and harness. Keep the original reporter distinct. Combine roles when
    they match; record separate models/environments when they differ.
@@ -67,7 +68,7 @@ Replace placeholders with facts and remove inapplicable parts:
 
 - [ ] <Observable outcome, if useful.>
 
-**Review:** <Actual triage/review and its limits, or review history not recorded.>
+**Review:** <Actual triage/self-review status; for independent review use the shared agent/iteration block.>
 
 **Prepared by:** <Drafting model> in <actual host app> (<actual harness>), on behalf of David Taylor.
 <If a different model files it, add Filed by with that model and its actual environment.>

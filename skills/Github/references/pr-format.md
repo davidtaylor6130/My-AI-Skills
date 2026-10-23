@@ -26,12 +26,12 @@ Examples: `fix(parser): reject incomplete configuration records` and
    failing before the fix and passing after it. Performance claims need measured before/after values
    for the same workload and budgets. State relevant failures or unrun checks; link detailed evidence
    rather than pasting logs. A compact metrics table belongs here when useful.
-4. **Review.** Give actual reviewers/models, recorded rounds, verdicts, significant findings and their
-   resolution, plus outstanding objections. Apply the shared guide's distinction between self-review,
-   independent review, pending review and missing history.
+4. **Review.** Use [the review workflow](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/review-workflow.md)'s compact agent/iteration summary and one
+   line per reviewer with actual suggestion/implementation counts. Keep detailed findings in the
+   review records. Required review must be complete before publication.
 5. **Creation and submission.** Name the actual implementation model/environment and the model
    preparing/opening the PR on behalf of David Taylor. Include each role's host app and harness;
-   combine only when the roles and environments match.
+   use one line when the model and environment match, and separate role lines only when they differ.
 
 Keep unresolved checks or dependencies beside the relevant proof/review statement. Link related
 issues or task identifiers where useful. Do not turn this into an empty checklist for every PR.
@@ -47,12 +47,23 @@ Replace the explanatory placeholders with verified facts and remove inapplicable
 
 **Proof:** <Actual checks, regression evidence and results; relevant unrun checks or limitations.>
 
-**Review:** <Actual reviewers/models, recorded rounds, verdict and disposition of findings.>
+**Review:** Reviewed by <N> agents over <M> iterations.
 
-**Created with:** <Implementation model> in <actual host app> (<actual harness>).
-**Opened by:** <PR-opening model> in <actual host app> (<actual harness>), on behalf of David Taylor.
+- Agent 1: <exact model ID> — suggested <X>; implemented <Y>.
+- Agent 2: <exact model ID> — suggested <X>; implemented <Y>.
+
+**Created with:** <Model for implementation and PR> in <actual host app> (<actual harness>), on behalf of David Taylor.
 ```
 
-For a draft, use `Prepared by` in place of `Opened by`. When all roles and environments match, the
-attribution can read `Created and opened by <actual model> in <actual app> (<actual harness>), on
-behalf of David Taylor.` Follow the shared guide for standalone CLIs and facts that are not recorded.
+Use only the reviewer lines that actually apply; this pattern does not prescribe two reviewers.
+Record any rejected/out-of-scope suggestions briefly rather than implying they were implemented.
+
+The single attribution line is the default when the roles match. When they differ, replace it with:
+
+```markdown
+**Created with:** <Implementation model> in <actual host app> (<actual harness>).
+**PR prepared by:** <PR-preparing model> in <actual host app> (<actual harness>), on behalf of David Taylor.
+```
+
+Use `PR opened by` once the PR is opened, even when it is a GitHub draft. Follow the shared guide
+for standalone CLIs and facts that are not recorded. Do not append inherited-work disclaimers.

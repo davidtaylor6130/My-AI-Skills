@@ -12,12 +12,15 @@ to be installed separately.
 ## Establish the candidate
 
 Confirm the task workspace, intended base/head and the actual diff/commits proposed for that base.
+Apply [the GitHub repository/root prerequisite](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/repository-context.md#github-publication-prerequisite): a missing repository or intended
+root/base leaves a local draft awaiting a human re-trigger, without automatic availability checks.
 Keep uncommitted work distinct from the revision a pushed PR would contain. For isolated batches,
 follow [the worktree guide](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/worktrees.md): one PR per task worktree by default, with dependencies
 recorded. Opening PRs does not require combining worktrees first.
 
 Inspect the relevant implementation and existing check/review evidence. Give actionable feedback
-on defects or missing checks before calling the candidate ready. If a commit is needed, use
+on defects or missing checks before calling the candidate ready. Follow [the review workflow](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/review-workflow.md)
+for reviewer selection, iterations and required-review completion before publication. If a commit is needed, use
 [the shared commit workflow](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/commits.md); PR preparation does not require an automatic commit.
 
 ## Prepare the PR
@@ -39,6 +42,8 @@ on it starts, or a new PR immediately after creation; report linking failures ho
 Use [the shared publishing workflow](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/publishing.md) and action policy for the exact title/body,
 base/head, draft/ready status, pushes, attachment selection, approval, submission and verification.
 
-Choose a draft when implementation or required checks remain incomplete, with those gaps recorded.
+Required review and validation must complete before any PR is created, including a draft. Keep a
+local draft while a required reviewer is pending; follow the review workflow's wait/resume handling
+for usage limits. After those gates pass, use the draft/ready state David approved.
 Return the verified URL and current readiness. Follow host linking requirements, including a final
 linked-PR check where available. Opening a PR does not approve its merge or product acceptance.

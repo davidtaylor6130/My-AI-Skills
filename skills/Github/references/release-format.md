@@ -18,8 +18,9 @@ Release notes must cover:
 6. **Proof.** Record actual validation and results for the selected release revision, including
    version consistency, packaging/runtime checks when performed, and material failures or unrun
    checks. Linked PR checks establish only what they tested; do not relabel them as release checks.
-7. **Review.** Give recorded reviewers/models, rounds, verdicts and outstanding findings. Distinguish
-   review of individual changes from review of the release candidate or the release notes.
+7. **Review.** Use [the review workflow](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/review-workflow.md)'s compact agent/iteration summary and per-agent
+   suggestion/implementation counts. Distinguish review of individual changes from review of this
+   release candidate or its notes; complete required coverage before publication.
 8. **Creation and publication.** Record implementation contributors/models and environments where
    known without attributing the whole release to the notes writer. Name the actual notes-preparing
    and publishing model, with each role's app/harness, on behalf of David Taylor. Combine matching
