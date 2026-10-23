@@ -1,84 +1,40 @@
 ---
 name: github-fix-issue
-description: Fix a GitHub issue end to end using local git for repository work and GitHub tooling only for hosted issue and pull-request operations. Use automatically when a user asks to fix or implement a referenced GitHub issue. Exclude issue creation without implementation and routine local bugs with no GitHub issue.
+description: Investigate and fix a referenced GitHub issue using the project's native version-control tools, isolated implementation work and shared commit/PR workflows. Use when asked to fix or implement a GitHub issue. Exclude issue creation without implementation and local bugs with no GitHub issue.
 ---
 
 # GitHub Fix Issue
 
-Follow `../references/action-policy.md`; automatic pickup never authorises commit, push, or pull-request creation.
+Fetch [the live-reference entry guide](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/using-references.md) and follow its shared context and
+action policy. Use native repository tools for the detected VCS and GitHub tools for hosted records.
 
-Workflow: ask → branch → investigate → plan → approve → fix → test → confirm commit → confirm PR.
+## Understand and isolate
 
----
+Resolve the issue number/URL; ask only if it is missing. Read the report, relevant comments,
+acceptance expectations and linked work. Keep reported behaviour, reproduction results and suspected
+causes distinct. Inspect the relevant implementation and tests before settling on the cause.
 
-## Step 0 — Ask for issue
+Use [the worktree guide](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/worktrees.md). For a new Git task, prefer an isolated worktree and
+branch; reuse the correctly bound task checkout and preserve existing edits when already in one.
+Do not switch a shared working copy to a new branch by default or abandon uncommitted task work.
 
-If user did NOT provide issue number/URL, ask: "Which issue(s) to fix? Number, URL, or list."
+## Plan, fix and verify
 
-## Step 1 — Branch
+Explain the proposed scope, approach and material edge cases. Resolve decisions that affect the
+requested behaviour, then implement within the agreed scope using the project's existing patterns.
+Use the repository's actual build/test guidance and checks appropriate to the change. Capture a
+meaningful regression where practical; use a justified alternative when no automated test applies.
+Report actual outcomes and gaps rather than requiring an invented test command.
 
-```bash
-git switch -c fix/issue-<number>-<slug>
-```
+Use [the shared writing guide](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/writing-guide.md) when recording proof and actual contributor
+or review metadata. Editing the issue report itself is separate scope; if requested, use
+[the issue workflow](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/issue-workflow.md).
 
-Use git for all branch, status, diff, staging, commit, fetch, and push operations. Do not use
-`gh issue develop`; creating a local branch does not require GitHub's API.
+## Commit and PR handoff
 
-## Step 2 — Investigate
+Use [the shared commit workflow](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/commits.md) for commit preparation and approval. Then fetch
+and follow [Create PR](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/github-create-pr/SKILL.md) for PR drafting, issue-resolution links,
+approval, publication and verification.
 
-Read issue body + comments:
-```bash
-gh issue view <number> --json title,body,comments,labels
-```
-
-This is the first step that requires an authenticated `gh` session. If it is unavailable, ask the
-user to authenticate before reading the GitHub-hosted issue; do not block local git checks.
-
-Search codebase for relevant code. Look at related tests. Understand the root cause.
-
-## Step 3 — Plan
-
-Present structured plan: what files change, approach, edge cases. Use `question` tool with approval options:
-- "Approve — proceed with fix"
-- "Adjust plan — describe changes"
-- "Cancel"
-
-Wait for user response before proceeding.
-
-## Step 4 — Fix
-
-Implement changes per approved plan. Keep minimal. Reuse existing patterns.
-
-## Step 5 — Test
-
-Find project test command (package.json, CMakeLists, etc.) and run it. If none found, ask user. If tests fail, fix and retry. Report results.
-
-## Step 6 — Confirm Commit
-
-Inspect `git status` and stage only the confirmed files with `git add -- <paths>`. Show the staged diff
-summary. Present the proposed commit title and description in Conventional Commits format. Commit only
-after the user confirms.
-
-## Step 7 — Confirm PR
-
-Draft the PR title and body, including `Closes #<number>`, then show both to the user. Ask approval:
-- "Approve — push branch and create PR"
-- "Edit title/body"
-- "Cancel"
-
-Only after approval:
-
-```bash
-git push -u origin <branch>
-gh pr create --title "<title>" --body-file <temp-file>
-```
-
-Write the body to a temporary file with real newlines. Return the URL printed by `gh pr create`; do not
-make another `gh` call merely to open a browser. The user reviews and merges the PR themselves.
-
-## Ground rules
-
-- Use git for every repository operation. Use `gh` only to read the GitHub issue and create the PR.
-- No commit, push, or PR creation until the user approves the relevant files and wording.
-- Requires authenticated `gh` only when the workflow reaches a GitHub-hosted operation.
-- If not a GitHub repo, stop
+If approval is absent, leave a concrete local diff, evidence and prepared next step. Do not push,
+comment on or close the issue merely because the local fix is complete.

@@ -1,0 +1,53 @@
+---
+uamVersion: V1 Imported
+title: "GitHub Create PR"
+maker: AutoImporter
+review: "Draft, review, create, or update a GitHub pull request from a branch or isolated task worktree, with a scoped title, proof, review history, and factual model and harness attribution. Use when the user asks to prepare or open a PR or improve its description. Exclude issue-only tracking and release notes without a PR."
+dateCreated: 2026-10-23T20:22:56Z
+dateUpdated: 2026-10-23T22:01:05Z
+favorite: false
+sourceProvider: Standard Skill
+sourcePath: skills/Github/github-create-pr/github-create-pr.uam
+commandName: github-create-pr
+group: Github
+---
+
+# GitHub Create PR
+
+Fetch [the live-reference entry guide](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/using-references.md), then follow its shared context and
+action policy. Read [the PR format](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/pr-format.md) before drafting. Linked workflows do not need
+to be installed separately.
+
+## Establish the candidate
+
+Confirm the task workspace, intended base/head and the actual diff/commits proposed for that base.
+Keep uncommitted work distinct from the revision a pushed PR would contain. For isolated batches,
+follow [the worktree guide](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/worktrees.md): one PR per task worktree by default, with dependencies
+recorded. Opening PRs does not require combining worktrees first.
+
+Inspect the relevant implementation and existing check/review evidence. Give actionable feedback
+on defects or missing checks before calling the candidate ready. If a commit is needed, use
+[the shared commit workflow](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/commits.md); PR preparation does not require an automatic commit.
+
+## Prepare the PR
+
+Use the PR format's title, short explanation, conditional visuals, Proof, Review and factual
+model/app/harness attribution. Refresh the whole description when scope changes. Describe the final
+candidate for a reviewer who has not read this conversation.
+
+Read any issue before claiming its resolution. Use `Closes #<number>` only for a resolved issue;
+use `Related to #<number>` for partial work or remaining acceptance. A commit's issue reference
+is not proof of a fix, and a PR need not have an issue.
+
+Search for an existing PR for the same head/base and inspect its scope. Prepare an edit when the
+PR already exists. When the host provides PR-linking tools, register an existing PR as soon as work
+on it starts, or a new PR immediately after creation; report linking failures honestly.
+
+## Publication handoff
+
+Use [the shared publishing workflow](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/publishing.md) and action policy for the exact title/body,
+base/head, draft/ready status, pushes, attachment selection, approval, submission and verification.
+
+Choose a draft when implementation or required checks remain incomplete, with those gaps recorded.
+Return the verified URL and current readiness. Follow host linking requirements, including a final
+linked-PR check where available. Opening a PR does not approve its merge or product acceptance.

@@ -4,7 +4,7 @@ title: "GitHub Version Tag Release — Tag, Release Notes & GitHub Release"
 maker: David Taylor
 review: "Prepare a version tag, release notes, and GitHub Release. Use automatically when the user asks to version, tag, draft release notes, or publish a GitHub release. Exclude ordinary commits and non-GitHub release packaging; publication remains explicitly gated."
 dateCreated: 2026-08-20T21:57:36Z
-dateUpdated: 2026-08-23T01:51:01Z
+dateUpdated: 2026-10-23T21:32:50Z
 favorite: false
 sourceProvider: Standard Skill
 sourcePath: skills/Github/github-version-tag-release/github-version-tag-release.uam
@@ -12,108 +12,50 @@ commandName: github-version-tag-release
 group: Github
 ---
 
-# GitHub Version Tag Release — Tag, Release Notes & GitHub Release
+# GitHub Version Tag Release
 
-Follow `../references/action-policy.md`; automatic pickup never authorises tag, push, or release creation.
+Fetch [the live-reference entry guide](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/using-references.md), then follow its shared context
+and action policy. A request to prepare a release does not approve a tag push or publication.
 
-You are helping the user create a clean, well-documented release for their GitHub repository.
+## Version and target
 
-Before any commit, push, tag, or release, show all proposed commands/text for user review. Do not execute irreversible actions without explicit confirmation.
+Read [David's versioning rules](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/versioning.md). Assess the actual proposed changes and agree
+the exact `X.Y.Z` candidate, local alpha/beta build identifiers and intended public identifier.
+Follow that reference's inventory checks and exceptional prerelease confirmations; do not substitute
+generic semantic-version assumptions or automatically publish a development suffix.
 
----
+If version/README/package edits are needed, prepare and verify them locally. Use [the commit
+workflow](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/commits.md) and [Create PR](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/github-create-pr/SKILL.md) when integration needs a PR.
+Wait for the approved integrated revision. Confirm the final release branch/revision, previous tag
+and actual change range after those edits; neither uncommitted work nor an unmerged bump is included
+in a release candidate by assumption. Verify the target is available on the intended remote.
 
-## Step 0 — Gather context
+## Write the release notes
 
-Run in parallel:
-- `git tag -l` — existing tags
-- `git status --short` and `git log --oneline -5` — confirm the tree is clean and see where HEAD is
-- `git remote get-url origin` — confirm the release destination
-- Read `AGENTS.md`, `CLAUDE.md`, `CHANGELOG.md`, or any notes file if present — extract known issues
+Follow [the release-notes format](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/release-format.md) for the short project explanation, changes,
+known issues, environment, actual Proof/Review and model/app/harness attribution. Read relevant open
+issues and linked change evidence; state any unavailable or incomplete inventory. Verify the notes
+against the selected release revision and [the shared writing guide](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/writing-guide.md).
 
-Then, once you know the most recent tag, get the full set of commits the release will cover:
-- `git log <last-tag>..HEAD --oneline` (or `git log --oneline` for a first release)
+Keep the project's existing changelog format when adding an entry. A new changelog/README edit
+changes the candidate; return through commit/integration and revision validation before tagging.
+Select actual release assets and check their filenames, embedded/package versions and validation;
+a plain tag does not make an alpha/beta binary a stable release.
 
-If the tree is dirty, tell the user — uncommitted work won't be in the release. Do not require `gh`
-while inspecting commits, tags, versions, or README content.
+## Review and publication
 
----
+Use [the shared publishing workflow](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/publishing.md) for exact notes files, remote approval,
+verification and retry recovery. Show the exact tag, target revision, title, notes, assets and
+planned draft/published/prerelease state for David's review. Preserve the repository's agreed tag
+scheme and use an annotated tag when creating a new one.
 
-## Step 1 — Determine version number
+Check existing local/remote tags and releases before creating anything. Do not overwrite, move or
+recreate them to bypass a conflict. Create any approved annotated tag at the exact approved revision,
+then perform only the approved tag push. Before release creation, verify that the remote tag exists
+and resolves to that same commit; for an annotated tag, compare its peeled commit rather than its
+tag-object ID. Stop if the push fails or the remote tag is missing or points elsewhere.
 
-Suggest the next logical version number based on existing tags:
-- No tags yet → suggest `v0.1.0`
-- Existing tags → suggest the next logical increment (semver, date-based, or custom scheme)
-
-Use `question` tool with version options to confirm — do not ask an open-ended question.
-
-### Version inventory gate
-
-Before choosing the target commit, scan every tracked file for product version declarations and the exact previous version:
-
-```bash
-git grep -nE 'project\([^)]*VERSION|kAppVersion|CFBundle(Short)?Version|MARKETING_VERSION|CURRENT_PROJECT_VERSION|"version"[[:space:]]*:|(^|[[:space:]])version[[:space:]]*=|latest stable.*v[0-9]+\.[0-9]+\.[0-9]+'
-git grep -nE '(V|v)?<previous-version-with-escaped-dots>'
-```
-
-Review every match. Update all product-owned version sources, including build metadata, application constants, package manifests and root lockfile entries, UI displays and tests, installer metadata, and current-version documentation. Do not alter dependency versions or intentionally historical release/changelog references.
-
-Run both searches again after editing. List and justify every remaining old-version match. Build or test enough to verify the packaged application and visible UI report the new version. Commit and merge the version bump before confirming the release target. Do not tag or publish while a stale product-version match remains.
-
----
-
-## Step 2 — Confirm target commit
-
-Default to the latest commit on the current branch. Use `question` tool to confirm target commit — show hash and message, offer option to pick a different commit.
-
-Check the commit has been pushed (`git branch -r --contains <commit>`). If it only exists locally, confirm with the user before pushing the branch — a GitHub release pointing at an unpushed commit is the most common way this flow fails.
-
----
-
-## Step 3 — Audit README
-
-Read README.md. Check for stale version numbers, outdated feature lists, broken badges, or missing changes since last release. Use `question` tool to propose README updates. If changes needed, apply and commit before proceeding.
-
-## Step 4 — Write release notes
-
-This is the first step that needs GitHub-hosted data. Run `gh auth status`, then
-`gh issue list --state open --limit 100 --json number,title,labels`. If authentication fails, finish
-drafting from local evidence and mark the GitHub issue inventory as blocked.
-
-Release notes must include:
-
-1. **What the project is** — one sentence for anyone landing here cold
-2. **Version numbering note** — if the scheme is non-standard, explain it briefly
-3. **What's in this release** — summarise the meaningful commits since the last tag (or all commits if first release); group by: new features, fixes, removed/cleaned up
-4. **Known issues** — pulled from open GitHub Issues; link each by number; be honest
-5. **Platform / environment** — OS, hardware, key dependencies if relevant
-
-Do not pad. Short and accurate beats long and vague.
-
-If a `CHANGELOG.md` exists, append an entry for this release using the project's existing format. Show it to the user for review.
-
----
-
-## Step 5 — Create tag and GitHub release
-
-Show user the release notes. Use `question` tool to approve or edit. Ask whether to include or omit `Co-Authored-By` trailers.
-
-Use `question` tool to confirm tag, push, and release before running any of these:
-
-1. `git tag -a <version> <commit> -m "<version> — <short title>"` — annotated, so the tag records who/when
-2. `git push origin <version>`
-3. Default to publishing immediately: `gh release create <version> --verify-tag --title "<version> — <short title>" --notes-file <temp file>`
-
-Write the notes to a temp file rather than inline `--notes` to avoid shell quoting problems. Only use `--draft` if the user explicitly requests a pre-review on GitHub first.
-
-Show the release URL when done. If any command fails, show the exact output and suggest the next step: re-auth (`gh auth login`), retry after a delay, or fall back to creating the release manually on GitHub.
-
----
-
-## Ground rules
-
-- Use git for status, history, version changes, commits, tags, and pushes. Use `gh` only to read
-  GitHub-hosted issues and create the GitHub Release.
-- Use `question` tool to confirm version number and target commit before tagging
-- Use `question` tool before any push — user must approve what will be tagged
-- Respect the user's preference for Co-Authored-By trailers — ask whether to include or omit them
-- Never tag a release before its version inventory update is committed and merged
+Use the shared publishing workflow's existing-tag and draft-state safeguards for release creation
+and later publication. Those are distinct effects governed by the action policy; perform only the
+approved stages. Recheck the remote target, release fields and downloadable assets, then return the
+verified URL and remaining gaps. Do not merge or push other branches as an implicit step.

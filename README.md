@@ -3,7 +3,7 @@
 **Reusable AI skills and agent definitions for software development work.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-31-brightgreen)](skills/)
+[![Skills](https://img.shields.io/badge/skills-32-brightgreen)](skills/)
 [![Agents](https://img.shields.io/badge/agents-4-blue)](agents/)
 
 ## What's included
@@ -58,6 +58,13 @@ git clone https://github.com/davidtaylor6130/My-AI-Skills.git
 ```
 
 For Universal Agent Manager, import the `skills/` directory. For standard skill agents, use the directories containing `SKILL.md` and ignore the `.uam` files.
+
+## Live GitHub workflow guidance
+
+The GitHub skills fetch shared guidance from this public repository's `main` branch. Install only
+those skills you need; linked workflows and references do not need separate installation. After the
+updated entry points are installed once, reviewed changes to shared references take effect when
+published here, without reinstalling every skill. Entry-point changes still need an update/sync.
 
 ## Maintain paired formats
 
