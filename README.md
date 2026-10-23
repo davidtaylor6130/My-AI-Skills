@@ -3,7 +3,7 @@
 **Reusable AI skills and agent definitions for software development work.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-31-brightgreen)](skills/)
+[![Skills](https://img.shields.io/badge/skills-32-brightgreen)](skills/)
 [![Agents](https://img.shields.io/badge/agents-5-blue)](agents/)
 
 ## What's included
@@ -71,9 +71,16 @@ The five files in `agents/` use UAM's native agent schema: `version`, `name`, `d
 
 Copy the set into the `agents/` directory under UAM's configured data root for global use, or into a project's `.uam/agents/` directory for workspace use. Keep the filenames as supplied. Declared delegates must be present in UAM's catalog; remove references to agents you choose not to install. Read-only, web research, and n8n use `mode: both` so they can be selected directly or called as delegates. The Review Agent is `subagent` only; the general agent is `primary`.
 
-The `skills` lists are allowlists for UAM-control, not just installation hints. Each skill or delegate list accepts at most 16 IDs; swap entries rather than appending beyond that limit. The general agent includes the five GitHub workflows, and the Review Agent includes release-exposure audits. Other specialised skills must be approved in the relevant role before using them through UAM-control. Install listed skills through UAM's Library or Central Setup; the instruction text selects which to use. The n8n agent's eight specialist skills and n8n connection are separate prerequisites and are not included in this repository.
+The `skills` lists are allowlists for UAM-control, not just installation hints. Each skill or delegate list accepts at most 16 IDs; swap entries rather than appending beyond that limit. The general agent includes five of the six GitHub workflows; `github-create-pr` is available by following its linked live instructions. To invoke it directly through UAM-control, swap it into the allowlist. The Review Agent includes release-exposure audits. Other specialised skills must be approved in the relevant role before using them through UAM-control. Install listed skills through UAM's Library or Central Setup; the instruction text selects which to use. The n8n agent's eight specialist skills and n8n connection are separate prerequisites and are not included in this repository.
 
 Specialists do not automatically inherit `Agent.md`. To share David's preferences across roles, supply its Markdown instruction body through UAM's central instructions as well as installing the agent. Its shared-guidance clause preserves each selected specialist's narrower role and access boundary. The skills-sync script also copies only that body into global Codex instructions.
+
+## Live GitHub workflow guidance
+
+The GitHub skills fetch shared guidance from this public repository's `main` branch. Install only
+those skills you need; linked workflows and references do not need separate installation. After the
+updated entry points are installed once, reviewed changes to shared references take effect when
+published here, without reinstalling every skill. Entry-point changes still need an update/sync.
 
 ## Maintain paired formats
 
