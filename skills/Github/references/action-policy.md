@@ -25,6 +25,9 @@ scope, destination, files or effects require renewed review. A generic goal, "fi
 or an old approved template is not approval of a new unseen artifact. Approval for one stage does
 not authorise later merges, publication or acceptance.
 
+Approval does not complete a missing required review. Apply [the review workflow](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/review-workflow.md)'s publication
+gate, including its wait/resume rules, before approved publication or merge actions.
+
 Finish all authorised preparation and validation before asking for approval. State what is ready,
 what remains unverified and which exact remote action is proposed. If approval is denied or absent,
 keep the local draft and report the unperformed action. Do not interpret silence as consent.

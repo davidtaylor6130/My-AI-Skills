@@ -3,6 +3,10 @@
 Read [the action policy](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/action-policy.md)
 before any remote write, including attachment upload. Prepare the complete text and files locally
 first. These mechanics apply to issues, PRs, comments and release notes; they do not grant approval.
+For a PR, first satisfy [the GitHub repository/root prerequisite](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/repository-context.md#github-publication-prerequisite); confirmed absence waits for a human
+re-trigger, rather than automatic checks or publication of the missing root.
+Complete the task's required reviews under [the review workflow](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/review-workflow.md) before publication effects.
+Review blocked by usage limits stays pending; draft status does not bypass it.
 
 ## Markdown and exact text
 
@@ -26,7 +30,8 @@ fields. Keep the prepared file until the published result has been checked.
 
 Show the intended state as part of the proposed artifact. For PRs, an approved draft maps to
 `gh pr create --draft` or the connector's draft field; create a ready PR only when that state was
-approved. Promoting a draft with `gh pr ready` or its equivalent is a separate remote action under
+approved. Required review and validation must already be complete in either state. Promoting a
+draft with `gh pr ready` or its equivalent is a separate remote action under
 the action policy.
 
 For releases, approval to create a draft does not approve publication. Use `--draft` unless David
@@ -61,6 +66,28 @@ product evidence, verify what each image shows and prepare meaningful alt text/s
 David the selected files and destination before uploading; attaching in a browser uploads the file
 immediately, even if the issue/comment is not yet submitted.
 
+### Required media preflight
+
+Keep the local preview, upload input and published body distinct. Before approval, record the
+selected files, their actual contents/checksums, alt text and intended body positions. A local
+preview may display those local files, but label it as a preview awaiting upload. It is not a
+GitHub-ready body. Do not treat opening that preview on this computer as remote image verification.
+
+Before submission, inspect every Markdown image/link destination and HTML `src`/`href`, including
+reference-style definitions. Each media reference must be either:
+
+- An actual hosted URL that the intended GitHub reader can access; or
+- A local image/video in a native CLI upload input, with that exact file also passed through the
+  supported `--attach` operation described below.
+
+Stop for any unmatched local reference. This includes `file://`, absolute home/volume/temp paths,
+`~/...`, relative screenshot paths, sandbox/editor URLs and invented upload URLs. A relative path
+is acceptable only when it deliberately identifies an existing tracked asset at the reviewed
+GitHub revision and its rendered destination has been verified; never infer this from a local file.
+Do not send local media references to a body-only connector or API: writing Markdown does not
+upload files. Choose the attachment-capable CLI/browser route even when a body-only connector is
+otherwise available.
+
 ### Native CLI when supported
 
 Check the installed version and the exact command's help for `--attach`; do not assume the flag
@@ -69,22 +96,30 @@ permission support using [GitHub's CLI attachment guide](https://docs.github.com
 and the [command manual](https://cli.github.com/manual/gh_issue_create). Do not silently upgrade
 software or request broader credentials as part of filing a report.
 
-In the body file, place the image where it belongs:
+Use a dedicated upload-input Markdown file, for example `body-upload-input.md`, with the local
+image in its intended position:
 
 ```markdown
 ![Observed error state](/absolute/path/repro.png)
 ```
 
-After approval, include the same path as an attachment:
+After review completion and approval of the body, files and destination, include that exact path
+as an attachment. For a PR, for example:
 
 ```bash
-gh issue create --repo <owner/repo> --title '<approved-title>' --body-file <body-file> --label '<approved-label>' --attach /absolute/path/repro.png
+gh pr create --repo <owner/repo> --base <approved-base> --head <approved-head> --draft --title '<approved-title>' --body-file <upload-input-file> --attach /absolute/path/repro.png
 ```
 
 Repeat `--attach` for multiple files. The CLI replaces matching local Markdown references with
 uploaded URLs; an attachment not referenced in the body is appended. Prefer absolute paths so a
 body file in a temporary directory cannot change relative-path resolution. Do not combine attachment
 creation with `--web`, or use PR `--dry-run` as an upload preview.
+
+This same-file pairing is required for every local image, not merely one example attachment. Use
+the approved draft/ready state (`--draft` above is illustrative). Recheck the command's file/count
+limits and supported media types. Attachments and reviewed text must remain the approved content;
+substitution of the corresponding real upload URLs is the expected publication transformation.
+Do not assume the CLI rewrites the local input file.
 
 ### Supported fallback
 
@@ -93,6 +128,10 @@ that merely writes the body or downloads images is not an uploader. Otherwise, u
 authenticated browser editor: after upload approval, attach the file, wait for upload completion and
 retain the generated URL/Markdown. Submit the approved artifact or place those real URLs into the
 body file for the approved API/CLI submission. Check the final rendered placement.
+
+Wait until every selected upload has completed; an uploading placeholder is not a usable URL.
+Save a final publication Markdown file containing the generated hosted URLs before a body-only
+API/connector submission. Never substitute a guessed URL or the source's local path.
 
 If authenticated upload is unavailable, keep the local evidence ready and report the upload gap.
 Ask David to attach it or choose a supported route; do not publish broken local-path images. Do not
@@ -108,6 +147,14 @@ Do not claim an upload was tested merely because these instructions were read.
 Verify the resulting URL, repository, title/body, labels, refs or tag as applicable. Inspect rendered
 Markdown and each media asset as an intended reader; there must be no unresolved local paths or
 incomplete upload placeholders. Preserve factual preparing/opening/publishing attribution.
+
+Fetch the actual published body and save it locally as `published-body.md`, containing the hosted
+URLs. Compare its text and image ordering against the approved body and file mapping; allow only
+the expected attachment URL substitutions. Inspect the rendered images and open each uploaded
+asset with the access expected of a reader (without authentication for a public repository).
+Validate the final destinations, not just a filename or an HTTP success page. Do not report
+completion while an asset is broken, missing, reordered incorrectly or still points to this
+computer. If a tool cannot verify rendering/access, keep that verification pending.
 
 A non-zero exit does not prove nothing was written. In particular, `gh` can create an issue/PR with
 successful uploads and print its URL even when later attachments fail. Inspect that URL and remote

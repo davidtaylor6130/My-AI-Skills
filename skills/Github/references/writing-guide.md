@@ -24,9 +24,9 @@ metadata, topics or licence text; preserve established README and changelog stru
   performance measurements, acceptance or independent validation.
 - Keep synthetic checks, real runtime/platform checks and user acceptance distinct. Passing tests
   do not establish independent review or David's acceptance.
-- Name actual reviewers or reviewing models, recorded rounds, verdicts and how significant findings
-  were handled. Label self-review as self-review. Pending review stays pending. If review history
-  is unavailable, say `not recorded`; say no review occurred only when that fact is known.
+- Use [the review workflow](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/review-workflow.md) for agent/iteration counts, per-agent
+  suggestions and implemented changes, reviewer selection, follow-up rounds and usage-limit waits.
+  Keep self-review separate. Missing required review blocks publication; it is not just a body caveat.
 - Use visual evidence only for graphical or visible interaction behaviour when it helps assess
   the report or change. Use actual product captures, label states and give GitHub readers accessible
   assets. Identify user-supplied captures. Never present a mockup or style reference as product
@@ -50,9 +50,16 @@ Record roles separately when contributors or environments differ:
 
 For each model's environment, name the actual host app when applicable and the harness. For a
 standalone CLI with no host app, write `using <actual harness>`; do not invent an app. If only some
-facts are known, name those and mark the missing facts `not recorded`. When roles and environments
-match, combine them into one accurate line. For a draft use `Prepared by`; use `Opened by`,
-`Filed by` or `Published by` only when that action occurs. Preserve factual implementation and
+facts are known, name those and mark the missing facts `not recorded` in the applicable field.
+Scope attribution to this change. Omit commentary about inherited/shared base work, ownership
+exclusions or why another task's work is not attributed; it does not belong in the artifact.
+
+When the model, host app and harness match across implementation and PR preparation/opening, use
+one `Created with` line for both roles, on behalf of David Taylor. Do not repeat the same identity
+under another heading. When they differ, use `Created with` for implementation and a separate
+`PR prepared by` or `PR opened by` line for the actual PR role. A local draft is prepared; a GitHub
+draft PR has still been opened. Likewise combine matching preparation/filing or notes/publication
+roles; use `Filed by` or `Published by` only after the action. Preserve actual task contributor and
 review history when another model later edits the description.
 
 Keep attribution in these role lines. Do not add a separate `Generated with` or tools-used footer.
