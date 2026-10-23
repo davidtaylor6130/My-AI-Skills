@@ -22,9 +22,9 @@ on defects or missing checks before calling the candidate ready. If a commit is 
 
 ## Prepare the PR
 
-Use the PR format's title, short explanation, conditional visuals, Proof, Review, factual
-model/app/harness attribution and Generated with footer. Refresh the whole description when scope
-changes. Describe the final candidate for a reviewer who has not read this conversation.
+Use the PR format's title, short explanation, conditional visuals, Proof, Review and factual
+model/app/harness attribution. Refresh the whole description when scope changes. Describe the final
+candidate for a reviewer who has not read this conversation.
 
 Read any issue before claiming its resolution. Use `Closes #<number>` only for a resolved issue;
 use `Related to #<number>` for partial work or remaining acceptance. A commit's issue reference

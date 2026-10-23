@@ -40,7 +40,6 @@ title type is separate from labels; use the shared issue workflow's repository-o
 7. **Preparation and filing.** Name the actual model drafting/filing on behalf of David Taylor,
    with the actual host app and harness. Keep the original reporter distinct. Combine roles when
    they match; record separate models/environments when they differ.
-8. **Generated with.** End with the tools actually used for the issue.
 
 Scale the structure to the report. Combine short fields; omit inapplicable sections. If essential
 details are missing, record the gap or ask a focused question. Do not fabricate facts to fill a
@@ -72,8 +71,6 @@ Replace placeholders with facts and remove inapplicable parts:
 
 **Prepared by:** <Drafting model> in <actual host app> (<actual harness>), on behalf of David Taylor.
 <If a different model files it, add Filed by with that model and its actual environment.>
-
-🤖 Generated with <tools actually used, with verified links when available>.
 ```
 
 For the same model/environment, change `Prepared by` to `Prepared and filed by` only when filing.

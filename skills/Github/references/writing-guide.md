@@ -12,7 +12,7 @@ promotional claims, dramatic punctuation, canned transitions and closing thanks 
 Use bullets or a table only when they make distinct facts easier to assess. Omit empty sections.
 
 Apply this prose style to cleanup reports and README edits while respecting the project's voice.
-Do not impose issue/PR titles, attribution blocks or generation footers on short repository
+Do not impose issue/PR titles or attribution blocks on short repository
 metadata, topics or licence text; preserve established README and changelog structures.
 
 ## Evidence and review
@@ -55,9 +55,7 @@ match, combine them into one accurate line. For a draft use `Prepared by`; use `
 `Filed by` or `Published by` only when that action occurs. Preserve factual implementation and
 review history when another model later edits the description.
 
-End issues, PRs and release notes with a short `🤖 Generated with ...` line naming the tools actually
-used for the artifact. Link tool names only when the product links are verified. This footer does
-not replace model/app/harness attribution and must not imply the current tools made earlier work.
+Keep attribution in these role lines. Do not add a separate `Generated with` or tools-used footer.
 
 ## Publication mechanics
 

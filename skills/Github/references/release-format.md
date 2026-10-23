@@ -24,7 +24,6 @@ Release notes must cover:
    known without attributing the whole release to the notes writer. Name the actual notes-preparing
    and publishing model, with each role's app/harness, on behalf of David Taylor. Combine matching
    roles; use `Prepared by` until publishing and mark unavailable history `not recorded`.
-9. **Generated with.** End with the tools actually used for these notes/publication.
 
 Keep the notes proportionate. Link detailed validation and provenance when available rather than
 copying every PR body. Preserve an existing `CHANGELOG.md` format when adding the release entry;

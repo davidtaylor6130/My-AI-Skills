@@ -7,7 +7,8 @@ first. These mechanics apply to issues, PRs, comments and release notes; they do
 ## Markdown and exact text
 
 Write the proposed UTF-8 Markdown to a unique temporary file with real newlines. Show David the
-actual text and applicable metadata. Use a file-writing tool or a quoted heredoc rather than a
+actual text and applicable metadata. Keep submission metadata and local handoff notes separate from
+the body. Use a file-writing tool or a quoted heredoc rather than a
 double-quoted shell string containing literal `\n`, backticks or command substitutions.
 
 After approval, pass `--body-file <file>` for supported issue/PR/comment operations, or

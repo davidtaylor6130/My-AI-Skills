@@ -32,7 +32,6 @@ Examples: `fix(parser): reject incomplete configuration records` and
 5. **Creation and submission.** Name the actual implementation model/environment and the model
    preparing/opening the PR on behalf of David Taylor. Include each role's host app and harness;
    combine only when the roles and environments match.
-6. **Generated with.** End with the tools actually used for this artifact.
 
 Keep unresolved checks or dependencies beside the relevant proof/review statement. Link related
 issues or task identifiers where useful. Do not turn this into an empty checklist for every PR.
@@ -52,8 +51,6 @@ Replace the explanatory placeholders with verified facts and remove inapplicable
 
 **Created with:** <Implementation model> in <actual host app> (<actual harness>).
 **Opened by:** <PR-opening model> in <actual host app> (<actual harness>), on behalf of David Taylor.
-
-🤖 Generated with <tools actually used, with verified links when available>.
 ```
 
 For a draft, use `Prepared by` in place of `Opened by`. When all roles and environments match, the
