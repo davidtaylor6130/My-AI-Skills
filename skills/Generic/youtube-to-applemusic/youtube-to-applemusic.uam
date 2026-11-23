@@ -2,9 +2,9 @@
 uamVersion: V1
 title: "YouTube to Apple Music"
 maker: opencode
-review: "Take a YouTube video URL and turn it into a working single in Apple Music: grabs the audio, grabs the thumbnail as cover art, tags it (title, artist, album = its own title so it's a single, not a combined album), embeds the cover, and opens it in Apple Music. Use when the user gives a YouTube link and wants the song/audio added to Apple Music, or wants the audio + album art grabbed from a YouTube video."
+review: "Take a YouTube video URL and turn it into a working single in Apple Music:\ngrabs the audio, grabs the thumbnail as cover art, tags it (title, artist,\nalbum = its own title so it's a single, not a combined album), embeds the\ncover, and opens it in Apple Music. Use when the user gives a YouTube link\nand wants the song/audio added to Apple Music, or wants the audio + album art\ngrabbed from a YouTube video."
 dateCreated: 2026-11-03T23:00:41Z
-dateUpdated: 2026-11-03T23:00:41Z
+dateUpdated: 2026-11-23T09:52:42Z
 favorite: false
 sourceProvider: Standard Skill
 sourcePath: skills/Generic/youtube-to-applemusic/youtube-to-applemusic.uam
