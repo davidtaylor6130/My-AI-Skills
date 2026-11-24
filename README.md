@@ -3,7 +3,7 @@
 **Reusable AI skills and agent definitions for software development work.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-32-brightgreen)](skills/)
+[![Skills](https://img.shields.io/badge/skills-33-brightgreen)](skills/)
 [![Agents](https://img.shields.io/badge/agents-5-blue)](agents/)
 
 ## What's included

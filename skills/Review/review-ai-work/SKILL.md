@@ -1,0 +1,41 @@
+---
+name: review-ai-work
+description: "Turn AI-made code changes into a GitHub-style HTML review the user can finish in 30 minutes and answer per file. Use when the user asks to review, walk through, or sign off AI work, or hands back a review feedback JSON. Exclude bug hunts with no human sign-off (use adversarial-review) and whole-app experience reviews."
+---
+
+# Review AI work
+
+One static HTML page per branch: the real diff for each file, why it changed, what was checked, an honest verdict, and a reply box. The user exports replies as JSON and hands them back.
+
+## Build the review
+
+1. Run `python3 <skill-dir>/build_review.py skeleton --base <base-branch>`. It writes `.UAM/AINotes/review-<branch>.json` with one entry per changed file. Diffs come from git; never type one.
+2. The author fills the top-level `title`, and `title` and `why` for each file.
+3. A reviewer fills everything else. Use a fresh subagent given only the repo and the JSON path, which edits nothing but that JSON, and set `reviewer` to `independent`. If you cannot spawn one, review it yourself and set `reviewer` to `author`.
+4. Run `python3 <skill-dir>/build_review.py build <json>`. It validates, writes the `.html` beside the JSON, and prints the path. Fix every error it lists. Do not edit the HTML or `template.html`.
+5. Open the HTML in a browser or the UAM HTML view, then stop and wait for feedback.
+
+## Reviewer rules
+
+Every file needs both checks below. Each check has a `verdict` (`pass`, `concern`, `fail`), a `note` of one or two sentences, and `evidence` (`file:line` or the command run).
+
+- **Knock-on:** find every caller or user of each changed function, type, signature, config key, or file, then what depends on those. Read them. State how many there are and which ones break or change behaviour.
+- **Conventions:** read at least two neighbouring files or functions. Compare naming, structure, error handling, and comments against the change.
+
+Add other checks (`Tests`, `Scope`, `Security`) only when the change needs them.
+
+- `review`: lead with what is wrong, weak, or unrequested. Write "Nothing to flag." only when that is true.
+- `risk`: `high` when a concern or fail touches user-visible behaviour or data, `low` for mechanical changes, otherwise `medium`.
+- `summary`: what changed and the worst finding. `unchecked`: everything not run or not verified.
+- Report what you verified, not what you expect. Do not soften a finding because you wrote the code.
+- Use numbers and names, not adjectives. No filler.
+
+## Handle feedback
+
+The user sends `<review>-feedback.json` or pastes its contents. Act per file on `decision`:
+
+- `change`: do what the comment says.
+- `question`: answer it and change nothing.
+- `approve` or `undecided`: leave the file alone.
+
+In a comment, `L<n>:` cites new line n of that file and `L-<n>:` cites removed old line n. Afterwards repeat steps 1 to 5. For each file whose diff changed, the skeleton prints `STALE` and clears its review fields; update its `why` and review it again.

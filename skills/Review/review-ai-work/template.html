@@ -1,0 +1,347 @@
+<!doctype html>
+<!-- Filled by build_review.py, which replaces the review-data block. Do not hand-edit generated copies. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI work review</title>
+<style>
+:root
+{
+	--bg:#fff; --fg:#1f2328; --muted:#59636e; --line:#d1d9e0; --tint:#f6f8fa; --accent:#0969da;
+	--ok:#1a7f37; --warn:#9a6700; --bad:#cf222e;
+	--add:#e6ffec; --addn:#ccffd8; --del:#ffebe9; --deln:#ffd7d5; --hunk:#ddf4ff;
+	--mono:ui-monospace,"SF Mono",Menlo,monospace;
+}
+@media (prefers-color-scheme:dark)
+{
+	:root
+	{
+		--bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --line:#30363d; --tint:#151b23; --accent:#4493f8;
+		--ok:#3fb950; --warn:#d29922; --bad:#f85149;
+		--add:rgba(46,160,67,.15); --addn:rgba(46,160,67,.3); --del:rgba(248,81,73,.15); --deln:rgba(248,81,73,.3); --hunk:rgba(56,139,253,.12);
+	}
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--fg);font:13px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;display:flex;flex-direction:column}
+button,textarea{font:inherit;color:inherit}
+button{background:none;border:1px solid var(--line);border-radius:6px;padding:3px 10px;cursor:pointer;transition:background .15s,border-color .15s,transform .15s}
+button:hover{background:var(--tint)}
+button:active{transform:scale(.97)}
+button:focus-visible,textarea:focus-visible,nav a:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+code,.mono{font-family:var(--mono);font-size:12px}
+.muted{color:var(--muted)}
+.ok{color:var(--ok)} .warn{color:var(--warn)} .bad{color:var(--bad)}
+
+#bar{display:flex;align-items:center;gap:14px;height:44px;padding:0 16px;border-bottom:1px solid var(--line);flex:none}
+#bar h1{font-size:14px;margin:0;white-space:nowrap}
+#bar .grow{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#save{background:var(--ok);border-color:var(--ok);color:#fff;font-weight:600}
+
+#app{flex:1;display:flex;min-height:0}
+nav{width:280px;flex:none;border-right:1px solid var(--line);overflow:auto;padding:8px}
+nav a{display:grid;grid-template-columns:1fr auto;gap:0 8px;padding:6px 8px;border-radius:6px;color:inherit;text-decoration:none}
+nav a:hover{background:var(--tint)}
+nav a.active{background:var(--tint);box-shadow:inset 0 0 0 1px var(--line)}
+nav a b{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+nav a code{color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;direction:rtl;text-align:left}
+nav a span{font-size:11px;font-weight:600;text-align:right}
+main{flex:1;min-width:0;overflow:auto;padding:16px 24px 80px}
+@media (max-width:800px){nav{display:none}}
+
+.change{margin:0 auto 32px;max-width:1100px;scroll-margin-top:16px}
+.change>header{display:flex;align-items:baseline;gap:10px;padding-bottom:8px}
+.change h2{font-size:15px;margin:0}
+.change>header code{color:var(--muted);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.risk{font-size:11px;font-weight:700;letter-spacing:.02em}
+.diff{border:1px solid var(--line);border-radius:6px;overflow:auto}
+.diff table{border-collapse:collapse;width:100%;font:12px/20px var(--mono)}
+.diff td{padding:0 10px;white-space:pre}
+.diff td.n{width:1%;min-width:40px;text-align:right;color:var(--muted);user-select:none;cursor:pointer}
+.diff tr.add td{background:var(--add)} .diff tr.add td.n{background:var(--addn)}
+.diff tr.del td{background:var(--del)} .diff tr.del td.n{background:var(--deln)}
+.diff tr.hunk td{background:var(--hunk);color:var(--muted)}
+.diff tr:not(.hunk):hover td.n{color:var(--accent)}
+
+.thread{padding-top:12px}
+.thread dl{display:grid;grid-template-columns:96px 1fr;gap:6px 12px;margin:0}
+.thread dt{color:var(--muted);font-weight:600}
+.thread dd{margin:0;max-width:78ch}
+.thread dd b{font-size:11px;letter-spacing:.02em;margin-right:6px}
+.thread dd code{color:var(--muted)}
+.reply{display:grid;grid-template-columns:96px 1fr;gap:8px 12px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.reply label{color:var(--muted);font-weight:600;padding-top:4px}
+.reply textarea{width:100%;max-width:78ch;min-height:56px;resize:vertical;background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:6px 8px}
+.seg{display:flex}
+.seg button{border-radius:0;margin-left:-1px}
+.seg button:first-child{border-radius:6px 0 0 6px;margin-left:0}
+.seg button:last-child{border-radius:0 6px 6px 0}
+.seg button[aria-pressed=true]{color:#fff;position:relative}
+.seg button[aria-pressed=true][data-d=approve]{background:var(--ok);border-color:var(--ok)}
+.seg button[aria-pressed=true][data-d=change]{background:var(--bad);border-color:var(--bad)}
+.seg button[aria-pressed=true][data-d=question]{background:var(--warn);border-color:var(--warn)}
+
+dialog{border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg);width:min(640px,90vw)}
+dialog textarea{width:100%;height:300px;font:12px var(--mono);background:var(--tint);border:1px solid var(--line);border-radius:6px}
+#keys{position:fixed;right:16px;bottom:10px;font-size:11px;color:var(--muted);background:var(--bg);padding:2px 6px}
+</style>
+</head>
+<body>
+
+<div id="bar">
+	<h1 id="title">AI work review</h1>
+	<span class="mono muted grow" id="branch"></span>
+	<span id="progress"></span>
+	<button id="copy">Copy JSON</button>
+	<button id="save">Save JSON</button>
+</div>
+<div id="app"><nav id="nav"></nav><main id="main"></main></div>
+<div id="keys" class="mono">j k move &nbsp; a approve &nbsp; c change &nbsp; q question</div>
+<dialog id="dlg"><p>Clipboard blocked. Copy this:</p><textarea readonly></textarea><p><button onclick="this.closest('dialog').close()">Close</button></p></dialog>
+
+<script type="application/json" id="review-data">__REVIEW_DATA__</script>
+<script>
+const g_oVerdictClass = { pass: "ok", concern: "warn", fail: "bad" };
+const g_oRiskClass = { low: "muted", medium: "warn", high: "bad" };
+const g_oDecisionClass = { approve: "ok", change: "bad", question: "warn" };
+const g_oReviewerText = { independent: "Independent agent", author: "Author of the change (self-review)" };
+let g_oData = null;
+let g_sStoreKey = "";
+let g_oState = { decisions: {}, overall: "" };
+let g_sActive = "overall";
+
+/// <summary>Escapes text for safe insertion as HTML.</summary>
+function fnEsc(p_sText)
+{
+	return String(p_sText ?? "").replace(/[&<>"]/g, (sChar) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[sChar]));
+}
+
+/// <summary>Renders a unified diff as a table with old and new line numbers. Returns html plus +/- counts.</summary>
+function fnDiff(p_sDiff)
+{
+	let iOld = 0, iNew = 0, iAdd = 0, iDel = 0, bInHunk = false, sRows = "";
+	for (const sLine of p_sDiff.split("\n"))
+	{
+		const aHunk = sLine.match(/^@@ -(\d+)(?:,\d+)? \+(\d+)/);
+		if (aHunk)
+		{
+			iOld = +aHunk[1]; iNew = +aHunk[2]; bInHunk = true;
+			sRows += `<tr class="hunk"><td colspan="3">${fnEsc(sLine)}</td></tr>`;
+		}
+		else if (!bInHunk || sLine[0] === "\\")
+		{
+			// Binary notices, mode changes and "\ No newline at end of file".
+			sRows += `<tr class="hunk"><td colspan="3">${fnEsc(sLine)}</td></tr>`;
+		}
+		else if (sLine[0] === "+")
+		{
+			iAdd++;
+			sRows += `<tr class="add" data-line="${iNew}"><td class="n"></td><td class="n">${iNew++}</td><td>${fnEsc(sLine)}</td></tr>`;
+		}
+		else if (sLine[0] === "-")
+		{
+			iDel++;
+			sRows += `<tr class="del" data-line="-${iOld}"><td class="n">${iOld++}</td><td class="n"></td><td>${fnEsc(sLine)}</td></tr>`;
+		}
+		else
+		{
+			sRows += `<tr data-line="${iNew}"><td class="n">${iOld++}</td><td class="n">${iNew++}</td><td>${fnEsc(sLine)}</td></tr>`;
+		}
+	}
+	return { html: `<table>${sRows}</table>`, add: iAdd, del: iDel };
+}
+
+/// <summary>Builds the sidebar and every change section once. Later updates go through fnSync.</summary>
+function fnRender()
+{
+	document.title = g_oData.title;
+	document.getElementById("title").textContent = g_oData.title;
+	document.getElementById("branch").textContent = `${g_oData.branch} into ${g_oData.base}`;
+
+	let sNav = "", sMain = "";
+	g_oData.changes.forEach((oChange, iIndex) =>
+	{
+		const oDiff = fnDiff(oChange.diff);
+		const sRisk = `class="${g_oRiskClass[oChange.risk] ?? ""}">${fnEsc(oChange.risk).toUpperCase()}`;
+		const sChecks = oChange.checks.map((oCheck) =>
+			`<dt>${fnEsc(oCheck.kind)}</dt><dd><b class="${g_oVerdictClass[oCheck.verdict] ?? ""}">${fnEsc(oCheck.verdict).toUpperCase()}</b>${fnEsc(oCheck.note)} <code>${fnEsc(oCheck.evidence)}</code></dd>`).join("");
+
+		sNav += `<a href="#" data-go="${oChange.id}"><b>${iIndex + 1}. ${fnEsc(oChange.title)}</b><span data-mark="${oChange.id}"></span><code>${fnEsc(oChange.file)}</code><span ${sRisk}</span></a>`;
+		sMain += `<section class="change" id="${oChange.id}">
+			<header><h2>${iIndex + 1}. ${fnEsc(oChange.title)}</h2><code>${fnEsc(oChange.file)}</code>
+				<span class="mono"><span class="ok">+${oDiff.add}</span> <span class="bad">-${oDiff.del}</span></span>
+				<span ${sRisk.replace('class="', 'class="risk ')} RISK</span></header>
+			<div class="diff">${oDiff.html}</div>
+			<div class="thread">
+				<dl><dt>Why</dt><dd>${fnEsc(oChange.why)}</dd>${sChecks}<dt>Review</dt><dd>${fnEsc(oChange.review)}</dd></dl>
+				<div class="reply"><label>You</label>
+					<div><div class="seg"><button data-d="approve">Approve</button><button data-d="change">Change</button><button data-d="question">Question</button></div></div>
+					<span></span><textarea data-comment="${oChange.id}" placeholder="Reply. Click a line number to cite it."></textarea>
+				</div>
+			</div></section>`;
+	});
+
+	sNav += `<a href="#" data-go="overall"><b>Overall</b><span></span></a>`;
+	sMain += `<section class="change" id="overall"><header><h2>Overall</h2></header>
+		<div class="thread"><dl><dt>Summary</dt><dd>${fnEsc(g_oData.summary)}</dd><dt>Not checked</dt><dd>${fnEsc(g_oData.unchecked)}</dd>
+			<dt>Reviewer</dt><dd>${fnEsc(g_oReviewerText[g_oData.reviewer] ?? g_oData.reviewer)}</dd></dl>
+		<div class="reply"><label>You</label><textarea data-comment="overall" placeholder="Anything that applies to the whole change."></textarea></div></div></section>`;
+
+	document.getElementById("nav").innerHTML = sNav;
+	document.getElementById("main").innerHTML = sMain;
+}
+
+/// <summary>Pushes g_oState and g_sActive into the DOM and persists state. Called after every interaction.</summary>
+function fnSync()
+{
+	let iDecided = 0;
+	for (const oChange of g_oData.changes)
+	{
+		const sDecision = g_oState.decisions[oChange.id]?.decision ?? "";
+		iDecided += sDecision ? 1 : 0;
+		document.getElementById(oChange.id).querySelectorAll("[data-d]").forEach((elButton) => elButton.setAttribute("aria-pressed", elButton.dataset.d === sDecision));
+		const elMark = document.querySelector(`[data-mark="${oChange.id}"]`);
+		elMark.textContent = sDecision.toUpperCase();
+		elMark.className = g_oDecisionClass[sDecision] ?? "";
+	}
+	document.getElementById("progress").textContent = `${iDecided} of ${g_oData.changes.length} decided`;
+	document.querySelectorAll(".active").forEach((elNode) => elNode.classList.remove("active"));
+	document.getElementById(g_sActive).classList.add("active");
+	document.querySelector(`[data-go="${g_sActive}"]`).classList.add("active");
+	try { localStorage.setItem(g_sStoreKey, JSON.stringify(g_oState)); } catch (oError) { /* sandboxed view: export still works */ }
+}
+
+/// <summary>Makes a change active and scrolls it into view.</summary>
+function fnGo(p_sId)
+{
+	g_sActive = p_sId;
+	fnSync();
+	document.getElementById(p_sId).scrollIntoView({ block: "start" });
+}
+
+/// <summary>Sets the decision on a change. The same decision twice clears it.</summary>
+function fnDecide(p_sId, p_sDecision)
+{
+	const oEntry = g_oState.decisions[p_sId] ??= { decision: "", comment: "" };
+	oEntry.decision = oEntry.decision === p_sDecision ? "" : p_sDecision;
+	g_sActive = p_sId;
+	fnSync();
+}
+
+/// <summary>The feedback JSON the user hands back to the AI.</summary>
+function fnExport()
+{
+	return JSON.stringify(
+	{
+		review: g_oData.id,
+		exported: new Date().toISOString(),
+		overall: g_oState.overall,
+		changes: g_oData.changes.map((oChange) => (
+		{
+			file: oChange.file, title: oChange.title,
+			decision: g_oState.decisions[oChange.id]?.decision || "undecided",
+			comment: g_oState.decisions[oChange.id]?.comment ?? ""
+		}))
+	}, null, 2);
+}
+
+/// <summary>Wires clicks, typing, keyboard shortcuts and the two export buttons.</summary>
+function fnBind()
+{
+	document.addEventListener("click", (oEvent) =>
+	{
+		const elTarget = oEvent.target;
+		const elGo = elTarget.closest("[data-go]");
+		const elLine = elTarget.closest("tr[data-line]");
+		if (elGo) { oEvent.preventDefault(); fnGo(elGo.dataset.go); }
+		else if (elTarget.dataset.d) { fnDecide(elTarget.closest(".change").id, elTarget.dataset.d); }
+		else if (elLine && elTarget.classList.contains("n"))
+		{
+			const elBox = elLine.closest(".change").querySelector("textarea");
+			elBox.value += `${elBox.value && !elBox.value.endsWith("\n") ? "\n" : ""}L${elLine.dataset.line}: `;
+			elBox.focus();
+			elBox.dispatchEvent(new Event("input", { bubbles: true }));
+		}
+	});
+
+	document.addEventListener("input", (oEvent) =>
+	{
+		const sId = oEvent.target.dataset.comment;
+		if (!sId) { return; }
+		if (sId === "overall") { g_oState.overall = oEvent.target.value; }
+		else { (g_oState.decisions[sId] ??= { decision: "", comment: "" }).comment = oEvent.target.value; }
+		g_sActive = sId;
+		fnSync();
+	});
+
+	document.addEventListener("keydown", (oEvent) =>
+	{
+		if (oEvent.target.tagName === "TEXTAREA" || oEvent.metaKey || oEvent.ctrlKey || oEvent.altKey) { return; }
+		const aIds = [...g_oData.changes.map((oChange) => oChange.id), "overall"];
+		const iAt = aIds.indexOf(g_sActive);
+		const oDecisionKeys = { a: "approve", c: "change", q: "question" };
+		if (oEvent.key === "j" && iAt < aIds.length - 1) { fnGo(aIds[iAt + 1]); }
+		else if (oEvent.key === "k" && iAt > 0) { fnGo(aIds[iAt - 1]); }
+		else if (oDecisionKeys[oEvent.key] && g_sActive !== "overall") { fnDecide(g_sActive, oDecisionKeys[oEvent.key]); }
+	});
+
+	document.getElementById("save").addEventListener("click", () =>
+	{
+		const elLink = document.createElement("a");
+		elLink.href = URL.createObjectURL(new Blob([fnExport()], { type: "application/json" }));
+		elLink.download = `${g_oData.id}-feedback.json`;
+		elLink.click();
+		// Revoking in the same tick cancels the download in some browsers.
+		setTimeout(() => URL.revokeObjectURL(elLink.href), 1000);
+	});
+
+	document.getElementById("copy").addEventListener("click", async (oEvent) =>
+	{
+		try
+		{
+			await navigator.clipboard.writeText(fnExport());
+			oEvent.target.textContent = "Copied";
+			setTimeout(() => { oEvent.target.textContent = "Copy JSON"; }, 1200);
+		}
+		catch (oError)
+		{
+			const elDialog = document.getElementById("dlg");
+			elDialog.querySelector("textarea").value = fnExport();
+			elDialog.showModal();
+			elDialog.querySelector("textarea").select();
+		}
+	});
+}
+
+/// <summary>Entry point. Loads the injected review, restores saved replies, renders.</summary>
+function fnStart()
+{
+	try { g_oData = JSON.parse(document.getElementById("review-data").textContent); }
+	catch (oError)
+	{
+		document.getElementById("main").textContent = "No review data. Generate this page with build_review.py instead of opening template.html.";
+		return;
+	}
+	g_sStoreKey = "ai-review:" + g_oData.id;
+	g_sActive = g_oData.changes[0]?.id ?? "overall";
+	fnRender();
+	// Change ids hash the diff, so replies survive a rebuild only for files that did not change.
+	try
+	{
+		const oSaved = JSON.parse(localStorage.getItem(g_sStoreKey));
+		if (oSaved?.decisions) { g_oState = { overall: "", ...oSaved }; }
+	}
+	catch (oError) { /* no stored state */ }
+	document.querySelectorAll("[data-comment]").forEach((elBox) =>
+	{
+		elBox.value = elBox.dataset.comment === "overall" ? g_oState.overall : g_oState.decisions[elBox.dataset.comment]?.comment ?? "";
+	});
+	fnBind();
+	fnSync();
+}
+
+fnStart();
+</script>
+</body>
+</html>
