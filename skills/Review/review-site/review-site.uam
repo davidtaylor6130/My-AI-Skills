@@ -4,7 +4,7 @@ title: "Review Site"
 maker: AutoImporter
 review: "Review a website or browser application on its real rendered surface for user journeys, progressive disclosure, guidance, responsive behaviour, accessibility, visual quality, content, failures, and performance. Use automatically for whole-site reviews, launch-readiness audits, or requests to find and prioritise web experience problems even when the skill is not named. Exclude isolated copy or style edits, native desktop or mobile apps, and security-only reviews."
 dateCreated: 2026-08-23T14:17:14Z
-dateUpdated: 2026-08-28T20:52:29Z
+dateUpdated: 2026-10-23T21:30:09Z
 favorite: false
 sourceProvider: Standard Skill
 sourcePath: skills/Review/review-site/review-site.uam
@@ -15,6 +15,10 @@ group: Review
 # Review Site
 
 Review the experience a visitor can actually use, not only its source code.
+
+## Execution role
+
+When coordinating this assessment in a parent thread, use `adversarial-review` to dispatch fresh independent `review` workers with this skill as their inspection method, then adjudicate their results. When already running as a delegated review worker, perform only the assigned inspection and return your individual verdict; do not dispatch reviewers or invoke the coordinator. The implementer's own assessment does not satisfy the independent review gate.
 
 ## Inputs
 
@@ -46,4 +50,4 @@ Return:
 - what worked well and should be preserved;
 - evidence limits and the next highest-value check.
 
-If the site cannot run, report the exact failing command, missing prerequisite, and what static review could and could not establish. A single agent is sufficient; use independent review only for a broad or high-risk release audit.
+If the site cannot run, report the exact failing command, missing prerequisite, and what static review could and could not establish.

@@ -7,6 +7,10 @@ description: "Review a native or Electron desktop application on the real runnin
 
 Judge the application users launch and operate, not a test summary or screenshot alone.
 
+## Execution role
+
+When coordinating this assessment in a parent thread, use `adversarial-review` to dispatch fresh independent `review` workers with this skill as their inspection method, then adjudicate their results. When already running as a delegated review worker, perform only the assigned inspection and return your individual verdict; do not dispatch reviewers or invoke the coordinator. The implementer's own assessment does not satisfy the independent review gate.
+
 ## Inputs
 
 Use the executable or launch command, target operating systems, intended users and journeys, build identity, test data, and existing verification harness. Prefer an installed or packaged build when release behaviour matters.
@@ -29,4 +33,4 @@ Repeat affected journeys in the same real application surface and confirm persis
 
 ## Output
 
-Return `READY`, `NEEDS_WORK`, `INCONCLUSIVE`, or `BLOCKED`, plus tested journeys and environment, prioritised evidence-backed findings, strengths to preserve, untested areas, and the next highest-value check. If launch fails, give the exact command and failure evidence. A single agent is the baseline; add independent review only for a broad or high-risk release candidate.
+Return `READY`, `NEEDS_WORK`, `INCONCLUSIVE`, or `BLOCKED`, plus tested journeys and environment, prioritised evidence-backed findings, strengths to preserve, untested areas, and the next highest-value check. If launch fails, give the exact command and failure evidence.

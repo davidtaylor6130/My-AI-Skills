@@ -1,0 +1,4 @@
+interface:
+  display_name: "GitHub Create PR"
+  short_description: "Create PRs with proof and model attribution"
+  default_prompt: "Use $github-create-pr to prepare a PR with proof, review history and accurate model and harness attribution."

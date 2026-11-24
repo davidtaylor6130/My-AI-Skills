@@ -81,8 +81,29 @@ def link(source: Path, target: Path, backup: Path) -> bool:
     return True
 
 
-def install_agent(source: Path, target: Path, backup: Path) -> bool:
-    block = f"{AGENT_BEGIN}\n{source.read_text(encoding='utf-8').strip()}\n{AGENT_END}"
+def read_agent_instructions(source: Path) -> str:
+    instructions = source.read_text(encoding="utf-8")
+    if instructions.startswith("---\n"):
+        header, separator, instructions = instructions[4:].partition("\n---\n")
+        if not separator:
+            raise RuntimeError(f"Unclosed agent frontmatter: {source}")
+        fields: dict[str, str] = {}
+        expected = {"version", "name", "description", "mode", "workspaceAccess", "skills", "delegates"}
+        for line in header.splitlines():
+            match = re.fullmatch(r"([A-Za-z][A-Za-z0-9]*):[ \t]*(.*)", line)
+            if not match or match[1] not in expected or match[1] in fields:
+                raise RuntimeError(f"Malformed UAM agent frontmatter: {source}")
+            fields[match[1]] = match[2]
+        if set(fields) != expected:
+            raise RuntimeError(f"Malformed UAM agent frontmatter: {source}")
+    instructions = instructions.strip()
+    if not instructions:
+        raise RuntimeError(f"Missing or empty agent instructions: {source}")
+    return instructions
+
+
+def install_agent(instructions: str, target: Path, backup: Path) -> bool:
+    block = f"{AGENT_BEGIN}\n{instructions}\n{AGENT_END}"
     existing = target.read_text(encoding="utf-8") if target.exists() else ""
     start = existing.find(AGENT_BEGIN)
     end = existing.find(AGENT_END)
@@ -112,8 +133,9 @@ def install(checkout: Path) -> tuple[int, list[str], Path | None, bool]:
 
     skills = discover_skills(checkout)
     agent_source = checkout / "agents" / "Agent.md"
-    if not agent_source.is_file() or not agent_source.read_text(encoding="utf-8").strip():
+    if not agent_source.is_file():
         raise RuntimeError(f"Missing or empty agent instructions: {agent_source}")
+    instructions = read_agent_instructions(agent_source)
 
     for name, source in skills.items():
         link(source, skills_home / name, backup_root / "skills" / name)
@@ -127,13 +149,13 @@ def install(checkout: Path) -> tuple[int, list[str], Path | None, bool]:
                 target.unlink()
                 removed.append(target.name)
 
-    install_agent(agent_source, codex_home / "AGENTS.md", backup_root / "codex" / "AGENTS.md")
+    install_agent(instructions, codex_home / "AGENTS.md", backup_root / "codex" / "AGENTS.md")
 
     override = codex_home / "AGENTS.override.md"
     override_updated = False
     if override.is_file() and override.read_text(encoding="utf-8").strip():
         override_updated = install_agent(
-            agent_source, override, backup_root / "codex" / "AGENTS.override.md"
+            instructions, override, backup_root / "codex" / "AGENTS.override.md"
         )
 
     backup = backup_root if backup_root.exists() else None

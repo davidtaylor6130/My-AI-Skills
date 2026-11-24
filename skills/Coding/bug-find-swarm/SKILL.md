@@ -165,6 +165,8 @@ For UI work:
   relevant to the change;
 - check the real packaged app when the package can differ from development.
 
+The parent must also run the `adversarial-review` gate before declaring fixes complete. Serial discovery, implementer checks, and a scoped diff inspection do not replace fresh independent reviewers. Delegated implementers return their evidence to the parent; review workers never start another panel.
+
 ## 8. Maintain `.UAM/AINotes/issues-fixed.md`
 
 Create `.UAM/AINotes/` and the file if absent. Append one entry per confirmed and fixed root cause:

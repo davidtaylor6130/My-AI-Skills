@@ -1,10 +1,10 @@
 ---
 uamVersion: 1
-title: "GitHub Issue Sweep — Audit Code and File GitHub Issues"
+title: "GitHub Issue Sweep"
 maker: David Taylor
-review: "Audit a codebase for concrete debt markers and turn confirmed findings into deduplicated GitHub issues. Use automatically when the user asks for an issue sweep, backlog creation, or repository-wide debt tracking. Exclude ordinary code review and small fixes that should not create tracker items."
+review: "Triage a scoped GitHub backlog or investigate untracked product problems, then prepare evidence-based, deduplicated issue proposals. Use for issue sweeps, backlog review and repository issue discovery. Exclude implementation and automatic tracker cleanup."
 dateCreated: 2026-08-20T21:57:36Z
-dateUpdated: 2026-08-23T01:51:01Z
+dateUpdated: 2026-10-23T21:32:50Z
 favorite: false
 sourceProvider: Standard Skill
 sourcePath: skills/Github/github-issue-sweep/github-issue-sweep.uam
@@ -12,105 +12,45 @@ commandName: github-issue-sweep
 group: Github
 ---
 
-# GitHub Issue Sweep — Audit Code and File GitHub Issues
+# GitHub Issue Sweep
 
-Follow `../references/action-policy.md`; automatic pickup never authorises issue creation.
+Fetch [the live-reference entry guide](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/using-references.md), then follow its shared context
+and action policy. Use [the shared issue workflow](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/issue-workflow.md) for evidence, duplicates,
+repository-owned labels and any proposed tracker changes.
 
-You are helping the user identify problems, gaps, and improvements in their codebase and turn them into well-written GitHub Issues.
+## Choose the useful scope
 
----
+Use the user's requested area, journeys, reports or backlog query to define a bounded sweep.
+Distinguish triaging existing reports from discovering untracked problems. If the request is broad,
+state a useful first area and the coverage limit; ask only when a missing choice blocks useful work.
+Do not start by collecting an arbitrary last N commits, every issue or a fixed list of code markers.
 
-## Step 0 — Gather context
+## Investigate and triage
 
-Run in parallel:
-- `git log --oneline -20`
-- `gh issue list --state all --limit 200 --json number,title,state` — avoid duplicating open issues or re-filing ones already closed
-- Read `AGENTS.md`, `CLAUDE.md`, or any known-issues docs (check your agent's conventions)
+For an existing backlog, read the selected reports and relevant comments/linked work, assess whether
+they are actionable, try appropriate safe reproduction, and check whether current evidence supports
+the stated impact. Query/paginate the relevant subset; do not treat a truncated list as the whole
+tracker or lack of reproduction as proof that a report is false.
 
----
+For untracked problems, follow the selected product behaviour through current code, tests, docs
+and safe runtime checks. Investigate concrete failures, missing agreed behaviour and consequential
+maintenance problems. Use history when it answers a specific question. Comments can be leads;
+a marker or stylistic preference alone is not an issue. Do not change the working tree as part of
+this sweep; hand an implementation request to [Fix Issue](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/github-fix-issue/SKILL.md) instead.
 
-## Step 1 — Scan for inline flags
+For each candidate, record the affected area, user impact, evidence source, reproduction status,
+confidence and the next useful action. Separate confirmed defects, reported failures, feature
+requests and unanswered questions. Search likely open/closed matches before proposing a new issue.
+Recommend missing information, a related issue, a focused new report or a supported resolution;
+do not automatically close stale reports, post comments, change labels or assign people.
 
-Search the codebase for markers that indicate known problems or deferred work. Use your built-in search tool (Grep) with a word-bounded pattern so `BUG` doesn't match `DEBUG` and `XXX` doesn't match hex strings:
+## Present a reviewable result
 
-```
-\b(TODO|FIXME|HACK|XXX|WORKAROUND|KLUDGE)\b
-```
+Show a concise candidate list with evidence links, duplicate decisions and proposed next actions.
+For new issues, prepare full bodies using [the issue format](https://raw.githubusercontent.com/davidtaylor6130/My-AI-Skills/main/skills/Github/references/issue-format.md). For edits or
+comments, show the exact proposed changes. Apply the shared issue/publishing approval workflow to
+only the items David selects. Return the real URLs, skipped items and coverage/reproduction limits.
 
-Restrict to source files for the project's language(s) and skip build output, vendored dependencies, and lockfiles. List every genuine hit with file and line number; discard false positives (variable names, third-party code, strings that merely contain a marker word).
-
----
-
-## Step 2 — Review recent commits for hints
-
-Look at commit messages for phrases like "fix later", "temporary", "broken", "skip", "disable", "workaround" — these often indicate debt that didn't get an issue:
-
-```
-git log -50 -i --grep="fix later" --grep="temporar" --grep="workaround" --grep="broken" --grep="disable" --oneline
-```
-
----
-
-## Step 3 — Categorise findings
-
-Group everything found into:
-- **Bugs** — incorrect behaviour, crashes, data loss risk
-- **Enhancements** — missing features, incomplete implementations
-- **Refactors** — code quality issues that affect maintainability
-- **Documentation** — missing or wrong docs, stale comments
-- **Questions / decisions** — unresolved design choices
-
----
-
-## Step 4 — Confirm before filing
-
-Show the user the full list grouped by category. Use `question` tool with approval options:
-- Which issues to file (default: all bugs, then user decides on the rest)
-- Any to skip or merge together
-
----
-
-## Step 5 — File the issues
-
-First run `gh label list` — `gh issue create` fails if you pass a label that doesn't exist in the repo. Only use labels that exist (or create missing standard ones with `gh label create` after asking). **Every issue MUST get at least one label** — never file an unlabeled issue.
-
-For each confirmed issue, draft title + body and use `question` tool to get user approval before filing.
-
-Once approved, use `gh issue create --title "..." --body-file <temp>` with a body written to a temp file to avoid shell quoting problems. Show each URL as it's created.
-
-> [!CRITICAL]
-> The temp file MUST contain **real newlines**, never the literal two characters `\n`. In a bash double-quoted string `"...\n..."`, `\n` is NOT turned into a newline — `gh` stores the literal text `Problem\n\n...` and GitHub renders it as one mangled line with no Markdown formatting. Write the body with the Write tool or `printf` to a file, then pass `--body-file`. Same rule applies to `gh issue edit --body-file` and `gh pr create --body-file`.
-
----
-
-## Humaniser rules
-
-Issue titles and bodies must read as if a developer filed them, not a language model. Apply these rules to all output:
-
-**Banned punctuation**
-- No em dashes (—). Use a comma, a full stop, or rewrite.
-- No mid-sentence colons as dramatic pauses.
-
-**Banned words and phrases**
-- delve, leverage, utilise (use "use"), empower, facilitate, foster
-- robust, seamless, cutting-edge, comprehensive
-- it's worth noting, it's important to note, please note that
-- in order to (use "to"), additionally / furthermore / moreover as openers
-- certainly, absolutely (as response openers)
-- any variation of "as an AI" — never reference being an agent or model
-
-**Style rules**
-- Issue titles: plain statement of the problem, no full stop. "Config path breaks on Windows" not "The configuration path is broken on Windows systems."
-- Issue bodies: describe what's wrong, where it is, and what the expected behaviour is. One short paragraph or a few bullets — not an essay.
-- Active voice. Short sentences.
-- No closing line that summarises or thanks anyone.
-
----
-
-## Ground rules
-
-- Never file duplicate issues — check existing issues first
-- One issue per distinct problem — do not bundle unrelated things
-- Do not exaggerate severity — label bugs as bugs, enhancements as enhancements
-- Show the user the list before filing anything
-- Do not commit anything as part of this workflow — github-issue-sweep is read-only on the working tree; if you find something worth fixing, file the issue and stop
+This evidence-first triage approach draws on [GitHub CLI's triage guide](https://github.com/cli/cli/blob/trunk/docs/triage.md)
+and [Python's triage guide](https://devguide.python.org/triage/triaging/index.html). Their project-specific
+labels, bots, inactivity deadlines and automatic actions are not defaults for David's repositories.

@@ -1,6 +1,6 @@
 ---
 name: engineering-workflow
-description: Route non-trivial software-engineering work to the smallest relevant workflow: investigation, bug fix, feature, refactor, performance, prototype, visual parity, or evaluation. Use automatically when a coding task needs multiple steps, evidence, design, or behavioural verification and no narrower specialist skill is an obvious direct match. Skip trivial edits and questions already covered by a more specific skill.
+description: "Route non-trivial software-engineering work to the smallest relevant workflow: investigation, bug fix, feature, refactor, performance, prototype, visual parity, or evaluation. Use automatically when a coding task needs multiple steps, evidence, design, or behavioural verification and no narrower specialist skill is an obvious direct match. Skip trivial edits and questions already covered by a more specific skill."
 ---
 
 # Engineering workflow
@@ -13,9 +13,9 @@ The request, repository instructions, current state, risk, and done predicate.
 
 1. Prefer a narrowly matched specialist, then an existing domain skill, then this router, then base instructions.
 2. Classify the task and load exactly one playbook: `references/investigation.md`, `bug-fix.md`, `feature.md`, `refactoring.md`, `performance.md`, `prototype.md`, `visual-parity.md`, or `skill-or-prompt-evaluation.md`.
-3. Add architect, project verification, adversarial review, or a bounded swarm only when boundaries, product proof, risk, or breadth justify it. Single-agent execution is the baseline.
+3. Add architect, project verification, or a bounded implementation swarm when boundaries, product proof, or breadth justify it. Implementation may use one agent; the independent completion review is a separate required gate.
 4. Scale ceremony to risk. Proceed on reversible local work; gate irreversible or external actions.
-5. Finish with evidence from the affected product surface.
+5. Finish implementation with evidence from the affected product surface, then run the parent-owned `adversarial-review` gate before declaring the change complete. A delegated implementer returns the candidate and checks to its parent with review pending; review workers do not start another gate.
 
 ## Verification and output
 

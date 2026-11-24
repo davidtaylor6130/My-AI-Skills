@@ -5,9 +5,13 @@ description: Review authentication, authorisation, input validation, file handli
 
 # Application security review
 
+## Execution role
+
+When coordinating this assessment in a parent thread, use `adversarial-review` to dispatch fresh independent `review` workers with this skill as their inspection method, then adjudicate their results. When already running as a delegated review worker, perform only the assigned inspection and return your individual verdict; do not dispatch reviewers or invoke the coordinator. The implementer's own assessment does not satisfy the independent review gate.
+
 ## Inputs and workflow
 
-Use the intended behaviour, relevant code/design, threat boundary, and permitted test surface. Map assets, trust boundaries, actors, inputs, privileged actions, and failure modes. Trace callers and effects, validate highest-risk assumptions with executable evidence when practical, and rank findings by exploitability and impact. Prefer platform security primitives and boundary validation. A single local reviewer is sufficient by default; add independent review only for high-risk uncertainty.
+Use the intended behaviour, relevant code/design, threat boundary, and permitted test surface. Map assets, trust boundaries, actors, inputs, privileged actions, and failure modes. Trace callers and effects, validate highest-risk assumptions with executable evidence when practical, and rank findings by exploitability and impact. Prefer platform security primitives and boundary validation.
 
 ## Verification, output, and safety
 

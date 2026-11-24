@@ -1,4 +1,4 @@
 interface:
   display_name: "GitHub Version Tag Release"
-  short_description: "Tag and publish GitHub releases"
-  default_prompt: "Use $github-version-tag-release to prepare and publish the next release."
+  short_description: "Prepare version tags and release notes"
+  default_prompt: "Use $github-version-tag-release to prepare the next release for review."
